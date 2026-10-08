@@ -1,6 +1,6 @@
 # HUB - Projeto FrontEnd
 
-Website desenvolvido como parte das avaliações do curso de Engenharia de Software do IBMEC com o objetivo de juntar as informações sobre a PKZ Lab e One To One em um lugar só.
+Website desenvolvido como parte das avaliações da disciplina de Projeto FrontEnd do IBMEC, com o objetivo de juntar as informações sobre a PKZ Lab e One To One em um lugar só.
 
 Este projeto será desenvolvido utilizando **HTML**, **CSS** e **JavaScript Vanilla**, sem o uso de frameworks ou bibliotecas JavaScript. Ele representa uma primeira versão do projeto, que posteriormente será evoluída para uma aplicação utilizando React.
 
