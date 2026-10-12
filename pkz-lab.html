@@ -11,28 +11,22 @@
 </head>
 
 <body>
-    <!--Header PKZ LAB-->
+    <!--Header da página PKZ LAB-->
     <header>
-        <h1>PKZ Lab</h1>
-        <nav>
+        <a href="pkz-lab.html" aria-label="Voltar para a página inicial da PKZ Lab">
+            <img src="https://placehold.co/140x40" alt="Logo da PKZ Lab">
+        </a>
+        <nav aria-label="Menu de navegação principal">
             <ul>
-                <li>
-                    <a href="index.html">Inicio</a>
-                </li>
-                <li>
-                    <a href="pkz-lab.html">PKZ LAB</a>
-                </li>
-                <li>
-                    <a href="one-to-one.html">One to One</a>
-                </li>
-                <li>
-                    <a href="contato.html">Contato</a>
-                </li>
-                <li>
-                    <a href="pkz-agendamento">Agendamento</a>
-                </li>
+                <li><a href="index.html">Inicio Hub</a></li>
+                <li><a href="pkz-lab.html" aria-current="page">PKZ LAB</a></li>
+                <li><a href="one-to-one.html">One to One</a></li>
+                <li><a href="contato-pkz-lab.html">Contato</a></li>
             </ul>
         </nav>
+        <div class="btn-agendamento">
+            <a href="agendamento-pkz-lab.html">Agendamento</a>
+        </div>
     </header>
 
     <main>
@@ -247,9 +241,23 @@
         </section>
     </main>
 
-    <!--Footer-->
+    <!--Footer padronizado-->
     <footer>
-       
-    </footer>
+        <section aria-labelledby="titulo-footer-hub">
+            <img src="https://placehold.co/80x28" alt="Hub" />
+            <p>O Hub reúne PKZ Lab e One to One em um só espaço digital: duas metodologias, um só compromisso com performance.</p>
+        </section>
+        <section aria-labelledby="titulo-redes">
+            <h2 id="titulo-redes">Redes sociais</h2>
+            <ul>
+            <li><a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram do Hub">Instagram</a></li>
+            <li><a href="mailto:contato@hub.com" aria-label="Enviar e-mail para o Hub">E-mail</a></li>
+            </ul>
+        </section>
+        <hr />
+        <p><small>&copy; 2026 - Hub PKZ Lab &amp; One to One - Todos os direitos reservados.</small></p>
+        <p><small>Site institucional — PKZ Lab &amp; One to One</small></p>
+    </footer>       
 </body>
+
 </html>
