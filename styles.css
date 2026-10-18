@@ -52,7 +52,28 @@ header li a {
   background-color: var(--cor-azul-900);
 }
 
-/* PKZ Lab */
+/*===============================================
+PKZ Lab 
+================================================*/
+.pkz-header {
+  background-color: var(--cor-azul-700);
+}
+
+.pkz-hero {
+  padding: 64px;
+}
+
+.pkz-sobre {
+  padding: 64px;
+}
+
+.pkz-caracteristicas {
+  padding: 64px;
+}
+
+.pkz-planos {
+  padding: 64px;
+}
 
 /* One To One */
 
