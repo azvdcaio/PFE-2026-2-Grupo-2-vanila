@@ -16,13 +16,18 @@
 html,
 body {
   min-height: 100vh;
+  background-color: var(--cor-cinza-100);
 }
 
 header {
+  background-color: var(--cor-cinza-100);
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
-  padding: 8px 64px;
   align-items: center;
+  padding: 8px 64px;
 }
 
 header ul {
@@ -38,9 +43,14 @@ header li {
 
 header li a {
   text-decoration: none;
+  color: var(--cor-cinza-100);
 }
 
 /* Index.html */
+
+.header__hub {
+  background-color: var(--cor-azul-900);
+}
 
 /* PKZ Lab */
 
