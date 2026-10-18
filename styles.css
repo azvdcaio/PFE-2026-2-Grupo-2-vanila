@@ -13,6 +13,33 @@
   --cor-cinza-100: #fbfbfb;
 }
 
+html,
+body {
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 64px;
+  align-items: center;
+}
+
+header ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+header li {
+  list-style: none;
+  text-decoration: none;
+}
+
+header li a {
+  text-decoration: none;
+}
+
 /* Index.html */
 
 /* PKZ Lab */
