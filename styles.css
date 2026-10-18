@@ -63,9 +63,50 @@ PKZ Lab
   padding: 64px;
 }
 
+/*PKZ - QUEM SOMOS NÓS*/
 .pkz-sobre {
   padding: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
 }
+
+.descricao-sobre {
+    display:flex;
+    flex-direction: column;
+    max-width: 50%;
+    gap: 24px;
+    flex:1; /*Toda parte de texto ocupa metade da seção Sobre Nós*/
+}
+.cabecalho-sobre {
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+}
+.cabecalho-sobre span {
+  color: var(--cor-azul-700);
+  font-weight:bold;
+}
+.p-sobre{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.conteiner-imagem-sobre{
+  flex:1;
+  max-width: 50%;
+  width: 100%;
+}
+
+.conteiner-imagem-sobre img{
+  width: 100%;
+  height: auto; /*mantem a proporção*/
+  object-fit: cover;
+}
+
+/*PKZ caracteristicas*/
 
 .pkz-caracteristicas {
   padding: 64px;
