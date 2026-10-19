@@ -75,8 +75,26 @@ PKZ Lab
   display:flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  gap: 80px;
   min-height: calc(100vh - 60px);
+}
+
+.pkz-hero h1{
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+.pkz-hero p{
+  font-size: 32px;
+  opacity: 0.9;;
+}
+
+
+.pkz-hero span{
+  font-size: 24px;
+  opacity:0.9;
+  color: var(--cor-azul-700);
 }
 
 /*PKZ - QUEM SOMOS NÓS*/
@@ -86,7 +104,7 @@ PKZ Lab
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
 }
 
 .descricao-sobre {
@@ -116,7 +134,7 @@ PKZ Lab
   display:flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .conteiner-imagem-sobre{
@@ -164,7 +182,7 @@ PKZ Lab
   display: flex;
   align-items: center;
   gap: 24px;
-  background-color: var(--cor-azul-700);
+  background-color: var(--cor-azul-800);
   color: var(--cor-cinza-100)
 }
 
@@ -204,7 +222,7 @@ PKZ Lab
   align-items: center;
   justify-content: center;
   padding: 64px;
-  background-color: var(--cor-azul-700);
+  background-color: var(--cor-azul-800);
   color: var(--cor-cinza-100);
   gap: 64px;
 }
@@ -243,6 +261,7 @@ PKZ Lab
   align-items: center;
   gap: 24px;
   border: 2px solid var(--cor-cinza-100);
+  background-color: var(--cor-azul-700);
   border-radius: 16px;
   padding: 32px;
   flex:1;
@@ -291,9 +310,10 @@ PKZ Lab
 .btn-agendamento{
   text-decoration: none;
   display: inline-block;
-  color: var(--cor-cinza-100);
-  border: 2px solid var(--cor-azul-100);
-  border-radius: 8px;
+  color: var(--cor-azul-700);
+  border: 2px solid var(--cor-azul-800);
+  background-color: var(--cor-cinza-100);
+  border-radius: 16px;
   padding: 12px;
   font-size: 24px;
 }
