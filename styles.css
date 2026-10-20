@@ -10,6 +10,8 @@
   --cor-azul-500: #00bbff;
   --cor-azul-700: #014b6e; 
   --cor-azul-800: #013451; 
+  --cor-azul-700: #014b6e; 
+  --cor-azul-800: #013451; 
   --cor-azul-900: #00112b;
   --cor-cinza-100: #fbfbfb;
 }
@@ -18,6 +20,11 @@ html,
 body {
   min-height: 100vh;
   background-color: var(--cor-cinza-100);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
@@ -34,6 +41,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 24px 64px;
+  padding: 24px 64px;
 }
 
 header ul {
@@ -48,8 +56,10 @@ header li {
 }
 
 header a {
+header a {
   text-decoration: none;
   color: var(--cor-cinza-100);
+  font-size: 24px;
   font-size: 24px;
 }
 
@@ -95,6 +105,33 @@ PKZ Lab
   font-size: 24px;
   opacity:0.9;
   color: var(--cor-azul-700);
+  background-image: url('https://placehold.co/1920x1080'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  min-height: calc(100vh - 60px);
+}
+
+.pkz-hero h1{
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+.pkz-hero p{
+  font-size: 32px;
+  opacity: 0.9;;
+}
+
+
+.pkz-hero span{
+  font-size: 24px;
+  opacity:0.9;
+  color: var(--cor-azul-700);
 }
 
 /*PKZ - QUEM SOMOS NÓS*/
@@ -104,6 +141,7 @@ PKZ Lab
   align-items: center;
   justify-content: space-between;
   gap: 32px;
+  min-height: calc(100vh - 60px);
   min-height: calc(100vh - 60px);
 }
 
@@ -122,6 +160,7 @@ PKZ Lab
 .cabecalho h2{
   font-size: 32px;
   font-weight: bold;
+  font-weight: bold;
 }
 
 .cabecalho span {
@@ -129,11 +168,14 @@ PKZ Lab
   font-weight:bold;
   font-size: 24px;
   opacity: 0.9;  
+  font-size: 24px;
+  opacity: 0.9;  
 }
 .p-sobre{
   display:flex;
   flex-direction: column;
   gap: 8px;
+  font-size: 24px;
   font-size: 24px;
 }
 
@@ -183,6 +225,7 @@ PKZ Lab
   align-items: center;
   gap: 24px;
   background-color: var(--cor-azul-800);
+  background-color: var(--cor-azul-800);
   color: var(--cor-cinza-100)
 }
 
@@ -195,9 +238,13 @@ PKZ Lab
 .descricao-caracteristica h2{
   font-size: 32px;
   font-weight: bold;
+  font-weight: bold;
 }
 
 .descricao-caracteristica span{
+  font-weight:bold;
+  font-size: 24px;
+  opacity: 0.9;
   font-weight:bold;
   font-size: 24px;
   opacity: 0.9;
@@ -221,7 +268,10 @@ PKZ Lab
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-items: center;
+  justify-content: center;
   padding: 64px;
+  background-color: var(--cor-azul-800);
   background-color: var(--cor-azul-800);
   color: var(--cor-cinza-100);
   gap: 64px;
@@ -237,14 +287,19 @@ PKZ Lab
 .cabecalho-secao-planos h2{
   font-size: 32px;
   font-weight: bold;
+  font-weight: bold;
 }
 .cabecalho-secao-planos span{
   font-weight:bold;
+  font-weight:bold;
   font-size: 24px;
+  opacity: 0.9;
   opacity: 0.9;
 }
 
 .conteiner-planos-cards{
+  width: 100%;
+  max-width: 1100px;
   width: 100%;
   max-width: 1100px;
   display: flex;
@@ -258,9 +313,12 @@ PKZ Lab
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  justify-content: space-between;
   align-items: center;
   gap: 24px;
+  gap: 24px;
   border: 2px solid var(--cor-cinza-100);
+  background-color: var(--cor-azul-700);
   background-color: var(--cor-azul-700);
   border-radius: 16px;
   padding: 32px;
@@ -276,6 +334,12 @@ PKZ Lab
   gap: 8px;
 }
 
+.cabecalho-card-plano {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .card-plano:hover {
   transform: scale(1.05);
   box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
@@ -283,12 +347,21 @@ PKZ Lab
 .card-plano h2{
   font-size: 32px;
   font-weight: bold;
+  font-size: 32px;
+  font-weight: bold;
 }
 .card-plano span{
   font-weight:bold;
   font-size: 24px;
   opacity: 0.9;  
+  font-weight:bold;
+  font-size: 24px;
+  opacity: 0.9;  
   align-self: flex-start;
+}
+
+.card-plano p{
+  font-size: 24px;
 }
 
 .card-plano p{
@@ -305,11 +378,23 @@ PKZ Lab
 
 .card-plano li{
   font-size: 20px;
+  margin-top: 8px;
+}
+
+.card-plano li{
+  font-size: 20px;
 }
 
 .btn-agendamento{
+.btn-agendamento{
   text-decoration: none;
   display: inline-block;
+  color: var(--cor-azul-700);
+  border: 2px solid var(--cor-azul-800);
+  background-color: var(--cor-cinza-100);
+  border-radius: 16px;
+  padding: 12px;
+  font-size: 24px;
   color: var(--cor-azul-700);
   border: 2px solid var(--cor-azul-800);
   background-color: var(--cor-cinza-100);
