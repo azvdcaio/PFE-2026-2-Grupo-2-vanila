@@ -24,29 +24,38 @@
       </a>
       <nav aria-label="Principal">
         <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="pkz-lab.html" aria-current="page">PKZ Lab</a></li>
-            <li><a href="one-to-one.html">One to One</a></li>
-            <li><a href="contato-pkz.html">Contato</a></li>
+            <li>
+              <a href="index.html">Início</a>
+            </li>
+            <li>
+              <a href="pkz-lab.html" aria-current="page">PKZ Lab</a>
+            </li>
+            <li>
+              <a href="one-to-one.html">One to One</a>
+            </li>
+            <li>
+              <a href="contato-one-to-one.html">Contato</a>
+            </li>
         </ul>
       </nav>
-      <div class="btn-nav-agendamento">
-            <a href="agendamento-pkz.html" class="btn-agendamento">Agendamento</a>
+      <div>
+        <a href="agendamento-pkz.html" class="btn-agendamento">Agendamento</a>
       </div>
     </header>
 
     <main>
       <!--Seção Hero-->
       <section class="pkz-hero" aria-labelledby="titulo-hero">
-        <img src="https://placehold.co/120x40" alt="PKZ Lab hero" />
-        <h1 id="titulo-hero">
-          Despertando o atleta que existe em seu filho
-        </h1>
-        <p>
-            Treinos dinâmicos e suporte de elite para desenvolver <span>habilidades</span>, <span>confiança</span>
-            e <span>amor pelo esporte</span> desde cedo.
-        </p>
-        <a href="pkz-agendamento.html" class="btn-hero">Agende uma aula</a>
+        <div class="cabecalho">
+            <h1 id="titulo-hero">
+              Despertando o atleta que existe em seu filho
+            </h1>
+            <p>
+                Treinos dinâmicos e suporte de elite para desenvolver <span>habilidades</span>, <span>confiança</span>
+                e <span>amor pelo esporte</span> desde cedo.
+            </p>
+        </div>
+        <a href="pkz-agendamento.html" class="btn-agendamento">Agende uma aula</a>
       </section>
 
       <!--Seção "quem somos nós"-->
@@ -168,11 +177,14 @@
           <span>Escolha o plano que melhor se adapta a você</span>
         </div>
         <div class="conteiner-planos-cards">
+
           <!--Pacote Performance-->
           <div class="card-plano">
-            <h2>Pacote Performance</h2>
-            <span>Para quem busca evolução acelerada</span>
-            <span>2x por semana</span>
+            <div class="cabecalho-card-plano">
+              <h2>Pacote Performance</h2>
+              <span>Para quem busca evolução acelerada</span>
+              <span>2x por semana</span>
+            </div>
             <ul>
               <li><i class="fa-solid fa-check"></i> 2 aulas semanais</li>
               <li>
@@ -186,29 +198,32 @@
               <li><i class="fa-solid fa-check"></i> Avaliação completa</li>
             </ul>
             <!--criando botão para inscrição-->
-            <a class="btn-selecionar-plano" href="agendamento-pkz.html">Entrar em contato</a>
+            <a class="btn-agendamento" href="agendamento-pkz.html">Entrar em contato</a>
           </div>
+
           <!--Pacote Flexibilidade-->
           <div class="card-plano">
-            <h2>Pacote Flexibilidade</h2>
-            <span>Um plano que se adapta ao atleta</span>
-            <p>
-              Os serviços da PKZ também podem ser contratados de forma
-              individual, de acordo com a necessidade de cada atleta.
-            </p>
-            <span>Mais autonomia, sem abrir mão do suporte profissional</span>
+            <div class="cabecalho-card-plano">
+              <h2>Pacote Flexibilidade</h2>
+              <span>Um plano que se adapta ao atleta</span>
+            </div>
+            <div>
+              <p>Os serviços da PKZ também podem ser contratados de forma
+                individual, de acordo com a necessidade de cada atleta.</p>
+              <p>Mais autonomia, sem abrir mão do suporte profissional</p>
+            </div>
             <!--criando botão para inscrição-->
-            <a class="btn-selecionar-plano" href="agendamento-pkz.html">Entrar em contato</a>
+            <a class="btn-agendamento" href="agendamento-pkz.html">Entrar em contato</a>
 
           </div>
           <!--Pacote Desenvolvimento-->
           <div class="card-plano">
-            <h2>Pacote Desenvolvimento</h2>
-            <span
-              >Equilíbrio entre treino, saúde e desenvolvimento
-              progressivo</span
-            >
-            <span>1x por semana</span>
+            <div class="cabecalho-card-plano">
+              <h2>Pacote Desenvolvimento</h2>
+              <span>Equilíbrio entre treino, saúde e desenvolvimento
+                progressivo</span>
+              <span>1x por semana</span>
+            </div>
             <ul>
               <li><i class="fa-solid fa-check"></i> 1 aula semanal</li>
               <li>
@@ -224,7 +239,7 @@
               </li>
             </ul>
             <!--criando botão para inscrição-->
-            <a class ="btn-selecionar-plano" href="agendamento-pkz.html">Entrar em contato</a>
+            <a class ="btn-agendamento" href="agendamento-pkz.html">Entrar em contato</a>
           </div>
         </div>
       </section>
@@ -317,7 +332,7 @@
 
     <!--Footer padronizado-->
     <footer>
-      <section aria-labelledby="titulo-footer-hub">
+      <section aria-labelledby="titulo-footer-hub"> <!--Falta o titulo-->
         <img src="https://placehold.co/80x28" alt="Hub" />
         <p>
           O Hub reúne PKZ Lab e One to One em um só espaço digital: duas
