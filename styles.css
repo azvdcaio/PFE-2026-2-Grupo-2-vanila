@@ -256,9 +256,102 @@ PKZ Lab
 
 /* One To One */
 
-/* Contato PKZ */
+/* Contato PKZ  One To One */
 
-/* Contato One To One */
+
+
+
+.footer-contato {
+  background-color: var(--cor-azul-700);
+  color: var(--cor-cinza-100);
+  font-family: "Poppins", sans-serif;
+  padding: 32px 24px 24px;
+}
+
+.footer-topo {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+/* Logo + texto */
+.footer-hub {
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.footer-logo::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--cor-azul-500); /* bolinha azul antes do HUB */
+}
+
+.footer-hub p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Redes sociais */
+.footer-redes h2 {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--cor-azul-100);
+  margin-bottom: 12px;
+}
+
+.footer-redes ul {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+}
+
+.footer-redes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--cor-azul-100);
+  border-radius: 6px;
+  color: var(--cor-azul-100);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.footer-redes a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Linha e parte de baixo */
+.footer-site hr {
+  border: none;
+  border-top: 1px solid rgba(179, 236, 255, 0.5);
+  margin-bottom: 16px;
+}
+
+.footer-base {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 11px;
+}
+
 
 /* Agendamento PKZ */
 

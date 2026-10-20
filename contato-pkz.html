@@ -3,31 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="styles.css" />
+    
     <title>Contato PKZ</title>
   </head>
   <body>
-    <header>
+    <header class="pkz-header">
       <a href="pkz-lab.html">
         <img src="https://placehold.co/140x40" alt="Logo da PKZ" />
       </a>
       <nav aria-label="Principal">
         <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="pkz-lab.html">PKZ Lab</a></li>
-          <li><a href="one-to-one.html">One to One</a></li>
+          <li>
+            <a href="index.html">Início</a>
+          </li>
+          <li>
+            <a href="pkz-lab.html">PKZ Lab</a>
+          </li>
+          <li>
+            <a href="one-to-one.html">One to One</a>
+          </li>
           <li>
             <a href="contato-pkz.html" aria-current="page">Contato</a>
           </li>
+          <li>
+            <a href="agendamento-pkz.html" class="btn-agendamento">Agendamento</a>
+          </li>
         </ul>
       </nav>
-      <a href="agendamento-pkz.html" class="btn-agendamento">Agendamento</a>
     </header>
 
     <main>
@@ -91,43 +100,41 @@
       </div>
     </main>
 
-    <footer>
-      <section aria-labelledby="titulo-footer-hub">
-        <img src="https://placehold.co/80x28" alt="Hub" />
-        <p>
+    <footer class="footer-contato">
+      <div class="footer-topo">
+       <section class="footer-hub" aria-labelledby="titulo-footer-hub">
+         <img src="https://placehold.co/80x28" alt="Hub" />
+         <p>
           O Hub reúne PKZ Lab e One to One em um só espaço digital: duas
           metodologias, um só compromisso com performance.
-        </p>
-      </section>
-      <section aria-labelledby="titulo-redes">
-        <h2 id="titulo-redes">Redes sociais</h2>
-        <ul>
+         </p>
+       </section>
+       <section class="footer-redes" aria-labelledby="titulo-redes">
+         <h2 id="titulo-redes" class="footer-logo">Redes sociais</h2>
+         <ul>
           <li>
-            <a
-              href="https://instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram do Hub"
-              >Instagram</a
-            >
+             <a href="#" aria-label="instagram">
+                <i class="fa-brands fa-instagram"> </i>
+              </a>
           </li>
           <li>
-            <a
-              href="mailto:contato@hub.com"
-              aria-label="Enviar e-mail para o Hub"
-              >E-mail</a
-            >
+             <a href="#" aria-label="Gmail">
+                <i class="fa-brands fa-google"> </i>
+              </a>
           </li>
-        </ul>
-      </section>
+         </ul>
+       </section>
+     </div>
       <hr />
+     <div class="footer-base"> 
       <p>
-        <small
-          >&copy; 2026 - Hub PKZ Lab &amp; One to One - Todos os direitos
-          reservados.</small
+        <small>&copy; 2026 - Hub PKZ Lab &amp; One to One - Todos os direitos reservados.</small
         >
       </p>
-      <p><small>Site institucional — PKZ Lab &amp; One to One</small></p>
+      <p>
+        <small>Site institucional — PKZ Lab &amp; One to One</small>
+      </p>
+     </div>
     </footer>
   </body>
 </html>
