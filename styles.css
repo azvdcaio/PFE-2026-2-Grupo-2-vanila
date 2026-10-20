@@ -67,33 +67,41 @@ PKZ Lab
 }
 
 .pkz-hero {
-  padding: 64px;
+  padding: 100px 64px;
   background-image: url('https://placehold.co/1920x1080'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  color: var(--cor-cinza-100);
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 80px;
+  text-align: center;
+  gap: 40px;
   min-height: calc(100vh - 60px);
 }
 
+.pkz-hero .cabecalho{
+  max-width: 900px;
+}
+
 .pkz-hero h1{
-  font-size: 40px;
-  font-weight: bold;
-  text-align: center;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 20px;
 }
 .pkz-hero p{
-  font-size: 32px;
+  font-size: clamp(24px, 2vw, 32px);
   opacity: 0.9;;
 }
 
 
 .pkz-hero span{
   font-size: 24px;
-  opacity:0.9;
+  font-weight: 700;
   color: var(--cor-azul-700);
 }
 
@@ -103,14 +111,13 @@ PKZ Lab
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  gap: 64px;
   min-height: calc(100vh - 60px);
 }
 
 .descricao-sobre {
     display:flex;
     flex-direction: column;
-    max-width: 50%;
     gap: 24px;
     flex:1; /*Toda parte de texto ocupa metade da seção Sobre Nós*/
 }
@@ -122,53 +129,59 @@ PKZ Lab
 .cabecalho h2{
   font-size: 32px;
   font-weight: bold;
+  line-height: 1.2;
 }
 
 .cabecalho span {
   color: var(--cor-azul-700);
   font-weight:bold;
   font-size: 24px;
-  opacity: 0.9;  
+  opacity: 0.9; 
+  letter-spacing: 2px;
+  text-transform: uppercase; 
 }
 .p-sobre{
   display:flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16pxpx;
   font-size: 24px;
 }
 
 .conteiner-imagem-sobre{
   flex:1;
-  max-width: 50%;
+  overflow: hidden;
   width: 100%;
 }
 
 .conteiner-imagem-sobre img{
   width: 100%;
-  height: auto; /*mantem a proporção*/
+  height: 440px; /*mantem a proporção*/
   object-fit: cover;
 }
 
 /*PKZ caracteristicas*/
 
 .pkz-caracteristicas {
+  background-color: var(--cor-cinza-100);
   padding: 64px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 48px;
   align-items: center;
 }
 
 .pkz-caracteristicas .cabecalho{
-  align-self: flex-start;
-  width: 100%;
-  max-width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap:12px;
 }
 
 .conteiner-cards-caracteristicas{
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
@@ -178,7 +191,7 @@ PKZ Lab
   width: 100%;
   height:auto;
   border-radius: 16px;;
-  padding: 32px;
+  padding: 24px 32px;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -195,11 +208,14 @@ PKZ Lab
 .descricao-caracteristica h2{
   font-size: 32px;
   font-weight: bold;
+  letter-spacing: 0.5px;
+  color: var(--cor-cinza-100);
 }
 
 .descricao-caracteristica span{
   font-weight:bold;
   font-size: 24px;
+  color: var(--cor-azul-100);
   opacity: 0.9;   
 }
 
@@ -210,13 +226,15 @@ PKZ Lab
   align-self: center;
   justify-content: center;
   flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
 }
 
 /*Seção Planos*/
 
 .pkz-planos {
   width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -230,15 +248,17 @@ PKZ Lab
 .cabecalho-secao-planos{
   display:flex;
   flex-direction: column;
-  gap: 16px;
-  align-items: center;
+  gap: 12px;
+  text-align: center;
 }
 
 .cabecalho-secao-planos h2{
   font-size: 32px;
-  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--cor-cinza-100);
 }
 .cabecalho-secao-planos span{
+  color: var(--cor-azul-100);
   font-weight:bold;
   font-size: 24px;
   opacity: 0.9;  
@@ -247,27 +267,22 @@ PKZ Lab
 .conteiner-planos-cards{
   width: 100%;
   max-width: 1100px;
-  display: flex;
-  gap: 24px;
-  margin: 0 auto;
-  justify-content: center;
-  flex-wrap:wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 32px;px;
 }
 
 .card-plano{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  border: 2px solid var(--cor-cinza-100);
+  gap: 28px;
+  border: 1.5px solid var(--cor-cinza-100);
   background-color: var(--cor-azul-700);
   border-radius: 16px;
-  padding: 32px;
-  flex:1;
-  min-width: 280px;
-  max-width: 350px;
+  padding: 32px 30px;
   transition: transform 0.3s ease, box-shadow 0.3 ease;
+  position: relative;
 }
 
 .cabecalho-card-plano {
@@ -282,50 +297,153 @@ PKZ Lab
 }
 .card-plano h2{
   font-size: 32px;
+  color: var(--cor-cinza-100);
+  letter-spacing: 0.5px;
   font-weight: bold;
 }
 .card-plano span{
   font-weight:bold;
   font-size: 24px;
   opacity: 0.9;  
-  align-self: flex-start;
+  color: var(--cor-azul-100);
 }
 
 .card-plano p{
   font-size: 24px;
+  color: #e2e8f0;
 }
 
 .card-plano ul{
   list-style: none;
   display:flex;
   flex-direction: column;
-  gap:12px;
-  margin-top: 8px;;
+  gap: 14px;
 }
 
 .card-plano li{
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
   font-size: 20px;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+.card-plano li i {
+  color: var(--cor-azul-500);
+  font-size: 15px;
+  margin-top: 4px;
 }
 
 .btn-agendamento{
   text-decoration: none;
   display: inline-block;
+  text-align: center;
   color: var(--cor-azul-700);
   border: 2px solid var(--cor-azul-800);
   background-color: var(--cor-cinza-100);
-  border-radius: 16px;
-  padding: 12px;
+  border-radius: 24px;
+  padding: 10px 24px;
   font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5;
+  box-shadow: 0 4px 14px rgba(0, 187, 255, 0.25);
 }
-
-
-
 
 
 /* One To One */
 
-/* Contato PKZ */
+/* Contato PKZ & one to one */
+.footer-contato {
+  background-color: var(--cor-azul-700);
+  color: var(--cor-cinza-100);
+  font-family: "Poppins", sans-serif;
+  padding: 32px 24px 24px;
+}
 
+.footer-topo {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+/* Logo + texto */
+.footer-hub {
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.footer-logo::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--cor-azul-500); /* bolinha azul antes do HUB */
+}
+
+.footer-hub p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Redes sociais */
+.footer-redes h2 {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--cor-azul-100);
+  margin-bottom: 12px;
+}
+
+.footer-redes ul {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+}
+
+.footer-redes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--cor-azul-100);
+  border-radius: 6px;
+  color: var(--cor-azul-100);
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.footer-redes a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Linha e parte de baixo */
+.footer-site hr {
+  border: none;
+  border-top: 1px solid rgba(179, 236, 255, 0.5);
+  margin-bottom: 16px;
+}
+
+.footer-base {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 11px;
+}
 /* Contato One To One */
 
 /* Agendamento PKZ */
