@@ -856,6 +856,99 @@ PKZ Lab
   width: 24px;
   background: var(--cor-cinza-100);
 }
+
+.planos-one {
+  padding: 64px max(24px, calc((100% - 1100px) / 2));
+  background: var(--cor-azul-900);
+  color: var(--cor-cinza-100);
+  text-align: center;
+}
+
+.planos-one h2 {
+  margin-bottom: 40px;
+  font-weight: 800;
+  font-size: 1.75rem;
+}
+
+.plano-card article {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: left;
+  color: var(--cor-azul-900);
+}
+
+.plano-card__imagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plano-card__badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--cor-azul-900);
+  color: var(--cor-cinza-100);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.plano-card__detalhes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  background: var(--cor-azul-100);
+}
+
+.plano-card__detalhes h3 {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.plano-card__detalhes dl > div {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--cor-azul-500);
+}
+
+.plano-card__detalhes dl > div:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.plano-card__detalhes dt {
+  margin-bottom: 4px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.plano-card__detalhes dd {
+  font-size: 0.85rem;
+}
+
+.plano-card__cta {
+  display: block;
+  margin-top: auto;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--cor-azul-900);
+  color: var(--cor-cinza-100);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.plano-card__cta:hover {
+  opacity: 0.85;
+}
+
+
 /* Contato PKZ */
 .footer-contato {
   background-color: var(--cor-azul-700);
