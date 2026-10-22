@@ -766,6 +766,28 @@ PKZ Lab
   padding-bottom: 18px;
 }
 
+.hero__wordmark {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  max-width: none;
+  font-weight: 800;
+  font-size: 9rem;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.hero__wordmark small {
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: 4px;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+}
+
 /* Contato PKZ */
 .footer-contato {
   background-color: var(--cor-azul-700);
