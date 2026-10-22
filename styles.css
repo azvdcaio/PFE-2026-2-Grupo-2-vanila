@@ -354,6 +354,95 @@ header a {
   color: var(--cor-azul-100);
 }
 
+.equipe__lista {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.membro {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #444;
+  border-radius: 6px;
+}
+
+.membro img {
+  width: 100%;
+  aspect-ratio: 10 / 7;
+  object-fit: cover;
+}
+
+.membro h3 {
+  padding: 18px 16px 4px;
+  font-size: 1rem;
+}
+
+.membro p {
+  padding: 0 16px 18px;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px 48px;
+  padding-top: 36px;
+  padding-bottom: 24px;
+  background: var(--cor-azul-900);
+  color: var(--cor-azul-100);
+  font-size: 0.8rem;
+}
+
+.footer__marca {
+  width: 260px;
+  line-height: 1.7;
+}
+
+.footer__marca img {
+  margin-bottom: 14px;
+}
+
+.footer__redes {
+  flex: 1;
+}
+
+.footer__redes h2 {
+  margin-bottom: 14px;
+  font-weight: 600;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.footer__redes ul {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-rede {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--cor-azul-700);
+  border-radius: 8px;
+  color: var(--cor-azul-100);
+}
+
+.footer__linha {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--cor-azul-800);
+}
+
+.footer__copy,
+.footer__tag {
+  font-size: 0.72rem;
+}
+
 /*===============================================
 PKZ Lab 
 ================================================*/

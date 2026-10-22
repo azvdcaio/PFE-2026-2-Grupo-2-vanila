@@ -172,16 +172,16 @@
 
       <!-- Section com as fotos e pequenas informações sobre a equipe -->
 
-      <section aria-labelledby="titulo-equipe">
-        <div>
+      <section class="secao equipe" aria-labelledby="titulo-equipe">
+        <div class="secao__cabecalho">
           <h2 id="titulo-equipe">
             Conheça alguns membros da equipe que vão ajudar no processo
           </h2>
         </div>
 
-        <ul>
+        <ul class="equipe__lista">
           <li>
-            <article>
+            <article class="membro">
               <figure>
                 <img
                   src="https://placehold.co/300x400"
@@ -193,7 +193,7 @@
             </article>
           </li>
           <li>
-            <article>
+            <article class="membro">
               <figure>
                 <img
                   src="https://placehold.co/300x400"
@@ -205,7 +205,7 @@
             </article>
           </li>
           <li>
-            <article>
+            <article class="membro">
               <figure>
                 <img
                   src="https://placehold.co/300x400"
@@ -222,8 +222,8 @@
 
     <!-- Footer -->
 
-    <footer>
-      <section aria-labelledby="titulo-footer-hub">
+    <footer class="footer">
+      <section class="footer__marca">
         <img src="https://placehold.co/80x28" alt="Hub" />
         <p>
           O Hub reúne PKZ Lab e One to One em um só espaço digital: duas
@@ -231,7 +231,7 @@
         </p>
       </section>
 
-      <section aria-labelledby="titulo-redes">
+      <section class="footer__redes" aria-labelledby="titulo-redes">
         <h2 id="titulo-redes">Redes sociais</h2>
         <ul>
           <li>
@@ -247,15 +247,17 @@
         </ul>
       </section>
 
-      <hr />
+      <hr class="footer__linha" />
 
-      <p>
+      <p class="footer__copy">
         <small
           >&copy; 2026 - Hub PKZ Lab &amp; One to One - Todos os direitos
           reservados.</small
         >
       </p>
-      <p><small>Site institucional — PKZ Lab &amp; One to One</small></p>
+      <p class="footer__tag">
+        <small>Site institucional — PKZ Lab &amp; One to One</small>
+      </p>
     </footer>
   </body>
 </html>
