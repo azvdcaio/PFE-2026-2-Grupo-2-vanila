@@ -1008,6 +1008,55 @@ PKZ Lab
   }
 }
 
+.localizacao {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 64px max(24px, calc((100% - 1100px) / 2));
+  background: var(--cor-azul-900);
+  color: var(--cor-cinza-100);
+}
+
+.localizacao__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.localizacao__dados {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.localizacao__dados dt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.localizacao__dados dd {
+  font-size: 0.8rem;
+  color: var(--cor-azul-100);
+}
+
+.localizacao__mapa img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.localizacao__mapa figcaption {
+  margin-top: 8px;
+  font-size: 0.7rem;
+  color: var(--cor-azul-100);
+  text-align: right;
+}
+
 
 /* Contato PKZ */
 .footer-contato {
