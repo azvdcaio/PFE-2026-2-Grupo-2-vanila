@@ -17,44 +17,56 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@500&family=Work+Sans:wght@400;500;600;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="global.css" />
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
-  <body>
-    <header>
+  <body class="pagina-pkz">
+    <header class="header__hub">
       <a href="pkz-lab.html">
-        <img src="https://placehold.co/140x40" alt="Logo da PKZ" />
+        <img src="https://placehold.co/140x40" alt="Logo da OneToOne" />
       </a>
 
-      <nav aria-label="Navegação principal">
-        <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="pkz-lab.html">PKZ Lab</a></li>
-          <li><a href="one-to-one.html">One to One</a></li>
-          <li><a href="contato-pkz.html">Contato</a></li>
-        </ul>
-      </nav>
+      <div class="header__acoes-exemplo">
+        <nav aria-label="Navegação principal">
+          <ul class="menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="pkz-lab.html">PKZ Lab</a></li>
+            <li><a href="one-to-one.html">One to One</a></li>
+            <li><a href="contato-pkz.html">Contato</a></li>
+          </ul>
+        </nav>
 
-      <a href="agendamento-pkz.html" class="btn-agendamento" aria-current="page"
-        >Agendamento</a
-      >
+        <a
+          href="agendamento-pkz.html"
+          class="btn-agendamento-exemplo"
+          aria-current="page"
+          >Agendamento</a
+        >
+      </div>
     </header>
 
     <main>
-      <section aria-labelledby="titulo-agendamento">
-        <div>
+      <section class="secao agendamento" aria-labelledby="titulo-agendamento">
+        <div class="agendamento__intro">
           <h1 id="titulo-agendamento">Agende seu horário</h1>
           <p>
             Escolha o melhor dia no calendário e preencha seus dados. Entramos
             em contato para confirmar.
           </p>
 
-          <ol>
-            <li>Selecione um dia disponível</li>
-            <li>Informe horário e seus dados</li>
-            <li>Receba a confirmação</li>
+          <ol class="passos">
+            <li>
+              <span class="passos__numero">1</span>Selecione um dia disponível
+            </li>
+            <li>
+              <span class="passos__numero">2</span>Informe horário e seus dados
+            </li>
+            <li><span class="passos__numero">3</span>Receba a confirmação</li>
           </ol>
         </div>
+
+        <div class="calendario"></div>
       </section>
     </main>
     <footer class="footer">

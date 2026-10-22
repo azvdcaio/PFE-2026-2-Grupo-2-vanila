@@ -846,4 +846,109 @@ PKZ Lab
 
 /* Agendamento PKZ */
 
+.pagina-pkz .header__hub {
+  background: var(--cor-azul-700);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.pagina-pkz .footer {
+  background: var(--cor-azul-700);
+}
+
+.pagina-pkz .footer__linha {
+  border-top-color: var(--cor-azul-100);
+}
+
+.pagina-pkz .btn-rede {
+  border-color: var(--cor-azul-100);
+  color: var(--cor-azul-500);
+}
+
 /* Agendamento One To One */
+.pagina-one .header__hub {
+  background: var(--cor-azul-800);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.pagina-one .footer {
+  background: var(--cor-azul-800);
+}
+
+.pagina-one .footer__linha {
+  border-top-color: var(--cor-azul-100);
+}
+
+.pagina-one .btn-rede {
+  border-color: var(--cor-azul-100);
+  color: var(--cor-azul-500);
+}
+
+.header__acoes-exemplo {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.btn-agendamento-exemplo {
+  border: 1px solid;
+  padding: 10px 22px;
+  border-radius: 10px;
+  background: var(--azul-botao);
+  color: var(--cor-cinza-100);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.btn-agendamento-exemplo:hover {
+  opacity: 0.85;
+}
+
+.agendamento {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 64px;
+}
+
+.agendamento h1 {
+  margin-bottom: 24px;
+  font-weight: 800;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  color: #1b1b1b;
+}
+
+.agendamento__intro > p {
+  max-width: 34ch;
+  margin-bottom: 32px;
+  color: #4d4d4d;
+  line-height: 1.6;
+}
+
+.passos {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  list-style: none;
+}
+
+.passos li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.95rem;
+}
+
+.passos__numero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--cor-azul-700);
+  color: var(--cor-cinza-100);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
