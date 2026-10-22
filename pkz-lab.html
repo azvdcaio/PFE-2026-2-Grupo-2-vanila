@@ -23,30 +23,28 @@
     <script src="script.js" defer></script>
   </head>
 
-  <body>
+  <body class="pkz-corpo">
     <!--Header da página PKZ LAB-->
-    <header class="pkz-header">
+    <header class="header__hub">
       <a href="pkz-lab.html">
-        <img src="https://placehold.co/140x40" alt="Logo da PKZ" />
+        <img src="https://placehold.co/140x40" alt="Logo da OneToOne" />
       </a>
-      <nav aria-label="Principal">
-        <ul>
-          <li>
-            <a href="index.html">Início</a>
-          </li>
-          <li>
-            <a href="pkz-lab.html" aria-current="page">PKZ Lab</a>
-          </li>
-          <li>
-            <a href="one-to-one.html">One to One</a>
-          </li>
-          <li>
-            <a href="contato-pkz.html">Contato</a>
-          </li>
-        </ul>
-      </nav>
-      <div>
-        <a href="agendamento-pkz.html" class="btn-agendamento">Agendamento</a>
+
+      <div class="header__acoes-exemplo">
+        <nav aria-label="Navegação principal">
+          <ul class="menu">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="pkz-lab.html" aria-current="page" >PKZ Lab</a></li>
+            <li><a href="one-to-one.html">One to One</a></li>
+            <li><a href="contato-pkz.html">Contato</a></li>
+          </ul>
+        </nav>
+
+        <a
+          href="agendamento-pkz.html"
+          class="btn-agendamento"
+          >Agendamento
+        </a>
       </div>
     </header>
 
@@ -279,23 +277,13 @@
       </section>
 
       <!-- Carrossel de opiniões -->
-      <section
-        aria-labelledby="titulo-opinioes"
-        aria-roledescription="carrossel"
-      >
+      <section class="secao" aria-labelledby="titulo-opinioes" aria-roledescription="carrossel">
         <h2 id="titulo-opinioes">A opinião de quem confia no nosso trabalho</h2>
-        <button type="button" aria-label="Ver depoimento anterior">
-          <img src="https://placehold.co/24x24" alt="" />
-        </button>
-        <ul>
-          <li aria-label="Depoimento 1" aria-current="true">
+        <ul class="opinioes__lista">
+          <li class="opiniao-card" aria-label="Depoimento 1" aria-current="true">
             <article>
               <blockquote>
-                <p>
-                  O treino em grupo mudou minha relação com o exercício — a
-                  energia da turma faz eu render muito mais do que treinando
-                  sozinho.
-                </p>
+                <p>O treino em grupo mudou minha relação com o exercício — a energia da turma faz eu render muito mais do que treinando sozinho.</p>
               </blockquote>
               <footer>
                 <img src="https://placehold.co/48x48" alt="" />
@@ -303,13 +291,10 @@
               </footer>
             </article>
           </li>
-          <li aria-label="Depoimento 2">
+          <li class="opiniao-card" aria-label="Depoimento 2">
             <article>
               <blockquote>
-                <p>
-                  Em poucos meses de One To One minha evolução física ficou
-                  visível — o acompanhamento técnico faz toda a diferença.
-                </p>
+                <p>Em poucos meses de One To One minha evolução física ficou visível — o acompanhamento técnico faz toda a diferença.</p>
               </blockquote>
               <footer>
                 <img src="https://placehold.co/48x48" alt="" />
@@ -318,49 +303,45 @@
             </article>
           </li>
         </ul>
-        <button type="button" aria-label="Ver próximo depoimento">
-          <img src="https://placehold.co/24x24" alt="" />
-        </button>
+        <div class="carrossel__setas-inline">
+          <button class="carrossel__seta carrossel__seta--escuro" type="button" aria-label="Ver depoimento anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button class="carrossel__seta carrossel__seta--escuro" type="button" aria-label="Ver próximo depoimento">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
       </section>
 
-      <!--Seção Localização-->
-      <section aria-labelledby="titulo-localizacao">
-        <div>
-          <p>Onde estamos</p>
+      <!-- Seção de localização -->
+      <section class="localizacao" aria-labelledby="titulo-localizacao">
+        <div class="localizacao__info">
+          <p class="secao__eyebrow secao__eyebrow--claro">Onde estamos</p>
           <h2 id="titulo-localizacao">Localização</h2>
-          <dl>
+          <dl class="localizacao__dados">
             <div>
               <dt><img src="https://placehold.co/24x24" alt="" /> Endereço</dt>
               <dd>Endereço da PKZ Lab</dd>
             </div>
             <div>
-              <dt>
-                <img src="https://placehold.co/24x24" alt="" /> Horário de
-                funcionamento
-              </dt>
+              <dt><img src="https://placehold.co/24x24" alt="" /> Horário de funcionamento</dt>
               <dd>08:00 - 19:00</dd>
             </div>
           </dl>
-          <a href="">Abrir no mapa</a>
+          <a class="btn btn--contorno" href="">Abrir no mapa</a>
         </div>
-        <figure>
-          <img
-            src="https://placehold.co/640x420"
-            alt="Mapa com a localização da PKZ Lab"
-          />
+        <figure class="localizacao__mapa">
+          <img src="https://placehold.co/640x420" alt="Mapa com a localização da PKZ Lab" />
           <figcaption>Dados do mapa ©2026 Google</figcaption>
         </figure>
       </section>
 
       <!-- Chamada para ação / Venha fazer parte -->
-      <section aria-labelledby="titulo-cta">
-        <p>Comece agora</p>
-        <h2 id="titulo-cta">Venha fazer parte da PKZ Lab.</h2>
-        <p>
-          Tire dúvidas, agende uma aula experimental e dê o próximo passo na sua
-          performance.
-        </p>
-        <a href="contato-pkz-lab.html">Entrar em contato</a>
+      <section class="cta-one" aria-labelledby="titulo-cta">
+        <p class="secao__eyebrow secao__eyebrow--claro">Comece agora</p>
+        <h2 id="titulo-cta">Venha fazer parte da <span>PKZ Lab</span>.</h2>
+        <p>Tire dúvidas, agende uma aula experimental e dê o próximo passo na sua performance.</p>
+        <a class="btn btn--ciano" href="contato-one-to-one.html">Entrar em contato</a>
       </section>
     </main>
 
