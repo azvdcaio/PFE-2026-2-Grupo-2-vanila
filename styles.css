@@ -948,6 +948,66 @@ PKZ Lab
   opacity: 0.85;
 }
 
+.opinioes__lista {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.opiniao-card article {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+  padding: 28px;
+  border-radius: 16px;
+  background: var(--cor-azul-900);
+  color: var(--cor-cinza-100);
+  text-align: left;
+}
+
+.opiniao-card blockquote p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.opiniao-card footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.opiniao-card footer img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--cor-azul-700);
+}
+
+.opiniao-card footer p {
+  font-size: 0.8rem;
+  color: var(--cor-azul-100);
+}
+
+.carrossel__setas-inline {
+  display: none;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+@media (max-width: 720px) {
+  .opinioes__lista {
+    grid-template-columns: 1fr;
+  }
+
+  .carrossel__setas-inline {
+    display: flex;
+  }
+}
+
 
 /* Contato PKZ */
 .footer-contato {
