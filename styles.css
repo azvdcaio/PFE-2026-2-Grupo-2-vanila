@@ -213,7 +213,7 @@ header a {
 .menu a {
   font-weight: 600;
   font-size: 0.8rem;
-  color: var(--cor-azul-100);
+  color: #b7b7b7;
 }
 
 .menu a:hover,
