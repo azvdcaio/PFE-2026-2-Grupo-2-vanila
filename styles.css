@@ -1057,6 +1057,34 @@ PKZ Lab
   text-align: right;
 }
 
+.cta-one {
+  margin: 0 max(24px, calc((100% - 1100px) / 2)) 64px;
+  padding: 56px 24px;
+  border-radius: 24px;
+  background: var(--cor-azul-800);
+  color: var(--cor-cinza-100);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.cta-one h2 {
+  max-width: 24ch;
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.cta-one h2 span {
+  color: var(--cor-azul-500);
+}
+
+.cta-one p {
+  max-width: 50ch;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
 
 /* Contato PKZ */
 .footer-contato {
