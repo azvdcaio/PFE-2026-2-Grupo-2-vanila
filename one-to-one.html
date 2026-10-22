@@ -4,8 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>One To One | Hub PKZ Lab e One To One</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@500&family=Work+Sans:wght@400;500;600;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
-    <script src="" defer></script>
+    <script src="script.js" defer></script>
   </head>
   <body>
     <!-- Header da página One To One -->
@@ -321,15 +333,16 @@
     </main>
 
     <!-- Footer padronizado -->
-    <footer>
-      <section aria-labelledby="titulo-footer-hub">
+    <footer class="footer">
+      <section class="footer__marca">
         <img src="https://placehold.co/80x28" alt="Hub" />
         <p>
           O Hub reúne PKZ Lab e One to One em um só espaço digital: duas
           metodologias, um só compromisso com performance.
         </p>
       </section>
-      <section aria-labelledby="titulo-redes">
+
+      <section class="footer__redes" aria-labelledby="titulo-redes">
         <h2 id="titulo-redes">Redes sociais</h2>
         <ul>
           <li>
@@ -337,27 +350,30 @@
               href="https://instagram.com/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram do Hub"
-              >Instagram</a
+              class="btn-rede"
             >
+              <i class="fa-brands fa-instagram"> </i>
+            </a>
           </li>
           <li>
-            <a
-              href="mailto:contato@hub.com"
-              aria-label="Enviar e-mail para o Hub"
-              >E-mail</a
-            >
+            <a href="mailto:contato@exemplo.com" class="btn-rede">
+              <i class="fa-brands fa-google"> </i>
+            </a>
           </li>
         </ul>
       </section>
-      <hr />
-      <p>
+
+      <hr class="footer__linha" />
+
+      <p class="footer__copy">
         <small
           >&copy; 2026 - Hub PKZ Lab &amp; One to One - Todos os direitos
           reservados.</small
         >
       </p>
-      <p><small>Site institucional — PKZ Lab &amp; One to One</small></p>
+      <p class="footer__tag">
+        <small>Site institucional — PKZ Lab &amp; One to One</small>
+      </p>
     </footer>
   </body>
 </html>
