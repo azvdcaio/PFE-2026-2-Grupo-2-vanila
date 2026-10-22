@@ -4,18 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>One To One | Hub PKZ Lab e One To One</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@500&family=Work+Sans:wght@400;500;600;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@500&family=Work+Sans:wght@400;500;600;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
@@ -26,68 +18,52 @@
         <img src="https://placehold.co/140x40" alt="Logo da OneToOne" />
       </a>
       <nav aria-label="Principal">
-        <ul>
+        <ul class="menu">
           <li><a href="index.html">Início</a></li>
           <li><a href="pkz-lab.html">PKZ Lab</a></li>
           <li><a href="one-to-one.html" aria-current="page">One to One</a></li>
           <li><a href="contato-one-to-one.html">Contato</a></li>
         </ul>
       </nav>
-      <a href="agendamento-one-to-one.html" class="btn-agendamento"
-        >Agendamento</a
-      >
+      <a href="agendamento-one-to-one.html" class="btn-agendamento">Agendamento</a>
     </header>
 
     <!-- Main -->
     <main>
       <!-- Hero section -->
-      <section id="hero" aria-labelledby="titulo-hero">
-        <img
-          src="https://placehold.co/1600x700"
-          alt="Instrutor acompanhando aluna durante treino personalizado com halteres"
-        />
-        <p class="hero-logo" aria-hidden="true">
-          ONE<br />TO<br />ONE<br /><small>STUDIO</small>
-        </p>
-        <h1 id="titulo-hero">
-          Treine em um <strong>ambiente exclusivo</strong>, projetado para você.
-        </h1>
-        <p><a href="agendamento-one-to-one.html">Agende uma aula</a></p>
+      <section id="hero" class="hero" aria-labelledby="titulo-hero">
+        <img class="hero__imagem" src="https://placehold.co/1600x700" alt="Instrutor acompanhando aluna durante treino personalizado com halteres" />
+        <p class="hero__wordmark" aria-hidden="true">ONE<br />TO<br />ONE<br /><small>STUDIO</small></p>
+        <div class="hero__conteudo">
+          <p class="hero__eyebrow">Treinamento de alta performance</p>
+          <h1 id="titulo-hero">Supere seus limites.<br />Alcance seu potencial</h1>
+          <p class="hero__texto">Treine em um ambiente exclusivo, com acompanhamento especializado e foco na sua evolução</p>
+          <p class="hero__acoes"><a class="btn btn--ciano" href="agendamento-one-to-one.html">Agende sua avaliação</a></p>
+        </div>
       </section>
 
       <!-- Seção de características -->
-      <section aria-labelledby="titulo-caracteristicas">
-        <div>
-          <p>Características</p>
-          <h2 id="titulo-caracteristicas">
-            No studio One To One você encontra tudo o que precisa em um só lugar
-          </h2>
+      <section class="secao caracteristicas" aria-labelledby="titulo-caracteristicas">
+        <div class="secao__cabecalho">
+          <p class="secao__eyebrow">Características</p>
+          <h2 id="titulo-caracteristicas">No studio One To One você encontra tudo o que precisa em um só lugar</h2>
         </div>
-        <ul>
+        <ul class="equipe__lista">
           <li>
-            <article>
-              <img
-                src="https://placehold.co/400x500"
-                alt="Aluna em treino personalizado na One To One"
-              />
+            <article class="membro">
+              <img src="https://placehold.co/400x500" alt="Aluna em treino personalizado na One To One" />
               <h3>Treino personalizado de verdade</h3>
             </article>
           </li>
           <li>
-            <article>
-              <img
-                src="https://placehold.co/400x500"
-                alt="Atendimento de fisioterapia com equipamento de avaliação"
-              />
+            <article class="membro">
+              <img src="https://placehold.co/400x500" alt="Atendimento de fisioterapia com equipamento de avaliação" />
               <h3>Fisioterapia com tecnologia de ponta</h3>
             </article>
           </li>
           <li>
-            <article>
-              <img
-                src="https://placehold.co/400x500"
-                alt="Prato com alimentação balanceada"
-              />
+            <article class="membro">
+              <img src="https://placehold.co/400x500" alt="Prato com alimentação balanceada" />
               <h3>Nutrição prática e eficiente</h3>
             </article>
           </li>
@@ -95,147 +71,116 @@
       </section>
 
       <!-- Carrossel de planos -->
-      <section
-        id="planos"
-        aria-labelledby="titulo-planos"
-        aria-roledescription="carrossel"
-      >
+      <section id="planos" class="planos-one" aria-labelledby="titulo-planos" aria-roledescription="carrossel">
         <h2 id="titulo-planos">Nossos planos</h2>
-        <button type="button" aria-label="Ver plano anterior">
-          <img src="https://placehold.co/24x24" alt="" />
-        </button>
-        <ul>
-          <li aria-label="Slide 1 de 4" aria-current="true">
-            <article aria-labelledby="titulo-plano-express">
-              <img
-                src="https://placehold.co/440x480"
-                alt="Aluna com roupa de treino, identidade visual One To One"
-              />
-              <p>Plano Express</p>
-              <div>
-                <h3 id="titulo-plano-express">
-                  Para quem tem pouco tempo mas não abre mão de se cuidar
-                </h3>
-                <dl>
-                  <div>
-                    <dt>Treinos</dt>
-                    <dd>Treinos de 30 min até 5x por semana</dd>
-                  </div>
-                  <div>
-                    <dt>Fisio</dt>
-                    <dd>Avaliação inclusa</dd>
-                  </div>
-                  <div>
-                    <dt>Nutri</dt>
-                    <dd>Avaliação inclusa</dd>
-                  </div>
-                </dl>
-                <a href="contato-one-to-one.html">Entrar em contato</a>
-              </div>
-            </article>
-          </li>
-          <li aria-label="Slide 2 de 4">
-            <article aria-labelledby="titulo-plano-2">
-              <img
-                src="https://placehold.co/440x480"
-                alt="Aluna com roupa de treino, identidade visual One To One"
-              />
-              <p>Plano One Move</p>
-              <div>
-                <h3 id="titulo-plano-2">
-                  Para quem tem pouco tempo mas não abre mão de se cuidar
-                </h3>
-                <dl>
-                  <div>
-                    <dt>Treinos</dt>
-                    <dd>Treinos de 30 min até 5x por semana</dd>
-                  </div>
-                  <div>
-                    <dt>Fisio</dt>
-                    <dd>Avaliação inclusa</dd>
-                  </div>
-                  <div>
-                    <dt>Nutri</dt>
-                    <dd>Avaliação inclusa</dd>
-                  </div>
-                </dl>
-                <a href="contato-one-to-one.html">Entrar em contato</a>
-              </div>
-            </article>
-          </li>
-          <li aria-label="Slide 3 de 4">
-            <article aria-labelledby="titulo-plano-3">
-              <img
-                src="https://placehold.co/440x480"
-                alt="Aluna com roupa de treino, identidade visual One To One"
-              />
-              <p>Plano One Power</p>
-              <div>
-                <h3 id="titulo-plano-3">
-                  O ideal para quem busca evolução mais próxima
-                </h3>
-                <dl>
-                  <div>
-                    <dt>Treinos</dt>
-                    <dd>Treinos de 60 min - 6x por semana</dd>
-                  </div>
-                  <div>
-                    <dt>Fisio</dt>
-                    <dd>Avaliação inclusa</dd>
-                  </div>
-                  <div>
-                    <dt>Nutri</dt>
-                    <dd>
-                      Avaliação inclusa<br />Planejamento alimentar
-                      personalizado
-                    </dd>
-                  </div>
-                </dl>
-                <a href="contato-one-to-one.html">Entrar em contato</a>
-              </div>
-            </article>
-          </li>
-          <li aria-label="Slide 4 de 4">
-            <article aria-labelledby="titulo-plano-4">
-              <img
-                src="https://placehold.co/440x480"
-                alt="Aluna com roupa de treino, identidade visual One To One"
-              />
-              <p>Plano Be The One</p>
-              <div>
-                <h3 id="titulo-plano-4">O mais completo do Studio</h3>
-                <dl>
-                  <div>
-                    <dt>Treinos</dt>
-                    <dd>Treinos de 60 min - até 2 por dia</dd>
-                  </div>
-                  <div>
-                    <dt>Fisio</dt>
-                    <dd>2 sessões semanais com fisioterapeuta</dd>
-                  </div>
-                  <div>
-                    <dt>Nutri</dt>
-                    <dd>
-                      Avaliação mensal<br />Planejamento alimentar personalizado
-                    </dd>
-                  </div>
-                </dl>
-                <a href="contato-one-to-one.html">Entrar em contato</a>
-              </div>
-            </article>
-          </li>
-        </ul>
-        <button type="button" aria-label="Ver próximo plano">
-          <img src="https://placehold.co/24x24" alt="" />
-        </button>
-        <ul aria-label="Selecionar slide">
-          <li>
-            <button
-              type="button"
-              aria-label="Ir para slide 1"
-              aria-current="true"
-            ></button>
-          </li>
+        <div class="carrossel">
+          <button class="carrossel__seta" type="button" aria-label="Ver plano anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <ul class="carrossel__slides">
+            <li class="plano-card" aria-label="Slide 1 de 4" aria-current="true">
+              <article aria-labelledby="titulo-plano-express">
+                <img class="plano-card__imagem" src="https://placehold.co/440x480" alt="Aluna com roupa de treino, identidade visual One To One" />
+                <p class="plano-card__badge">Plano Express</p>
+                <div class="plano-card__detalhes">
+                  <h3 id="titulo-plano-express">Para quem tem pouco tempo mas não abre mão de se cuidar</h3>
+                  <dl>
+                    <div>
+                      <dt>Treinos</dt>
+                      <dd>Treinos de 30 min até 5x por semana</dd>
+                    </div>
+                    <div>
+                      <dt>Fisio</dt>
+                      <dd>Avaliação inclusa</dd>
+                    </div>
+                    <div>
+                      <dt>Nutri</dt>
+                      <dd>Avaliação inclusa</dd>
+                    </div>
+                  </dl>
+                  <a class="plano-card__cta" href="contato-one-to-one.html">Entrar em contato</a>
+                </div>
+              </article>
+            </li>
+            <li class="plano-card" aria-label="Slide 2 de 4">
+              <article aria-labelledby="titulo-plano-2">
+                <img class="plano-card__imagem" src="https://placehold.co/440x480" alt="Aluna com roupa de treino, identidade visual One To One" />
+                <p class="plano-card__badge">Plano One Move</p>
+                <div class="plano-card__detalhes">
+                  <h3 id="titulo-plano-2">Para quem tem pouco tempo mas não abre mão de se cuidar</h3>
+                  <dl>
+                    <div>
+                      <dt>Treinos</dt>
+                      <dd>Treinos de 30 min até 5x por semana</dd>
+                    </div>
+                    <div>
+                      <dt>Fisio</dt>
+                      <dd>Avaliação inclusa</dd>
+                    </div>
+                    <div>
+                      <dt>Nutri</dt>
+                      <dd>Avaliação inclusa</dd>
+                    </div>
+                  </dl>
+                  <a class="plano-card__cta" href="contato-one-to-one.html">Entrar em contato</a>
+                </div>
+              </article>
+            </li>
+            <li class="plano-card" aria-label="Slide 3 de 4">
+              <article aria-labelledby="titulo-plano-3">
+                <img class="plano-card__imagem" src="https://placehold.co/440x480" alt="Aluna com roupa de treino, identidade visual One To One" />
+                <p class="plano-card__badge">Plano One Power</p>
+                <div class="plano-card__detalhes">
+                  <h3 id="titulo-plano-3">O ideal para quem busca evolução mais próxima</h3>
+                  <dl>
+                    <div>
+                      <dt>Treinos</dt>
+                      <dd>Treinos de 60 min - 6x por semana</dd>
+                    </div>
+                    <div>
+                      <dt>Fisio</dt>
+                      <dd>Avaliação inclusa</dd>
+                    </div>
+                    <div>
+                      <dt>Nutri</dt>
+                      <dd>Avaliação inclusa<br />Planejamento alimentar personalizado</dd>
+                    </div>
+                  </dl>
+                  <a class="plano-card__cta" href="contato-one-to-one.html">Entrar em contato</a>
+                </div>
+              </article>
+            </li>
+            <li class="plano-card" aria-label="Slide 4 de 4">
+              <article aria-labelledby="titulo-plano-4">
+                <img class="plano-card__imagem" src="https://placehold.co/440x480" alt="Aluna com roupa de treino, identidade visual One To One" />
+                <p class="plano-card__badge">Plano Be The One</p>
+                <div class="plano-card__detalhes">
+                  <h3 id="titulo-plano-4">O mais completo do Studio</h3>
+                  <dl>
+                    <div>
+                      <dt>Treinos</dt>
+                      <dd>Treinos de 60 min - até 2 por dia</dd>
+                    </div>
+                    <div>
+                      <dt>Fisio</dt>
+                      <dd>2 sessões semanais com fisioterapeuta</dd>
+                    </div>
+                    <div>
+                      <dt>Nutri</dt>
+                      <dd>Avaliação mensal<br />Planejamento alimentar personalizado</dd>
+                    </div>
+                  </dl>
+                  <a class="plano-card__cta" href="contato-one-to-one.html">Entrar em contato</a>
+                </div>
+              </article>
+            </li>
+          </ul>
+          <button class="carrossel__seta" type="button" aria-label="Ver próximo plano">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+        <ul class="carrossel__dots" aria-label="Selecionar slide">
+          <li><button type="button" aria-label="Ir para slide 1" aria-current="true"></button></li>
           <li><button type="button" aria-label="Ir para slide 2"></button></li>
           <li><button type="button" aria-label="Ir para slide 3"></button></li>
           <li><button type="button" aria-label="Ir para slide 4"></button></li>
@@ -243,92 +188,71 @@
       </section>
 
       <!-- Carrossel de opiniões -->
-      <section
-        aria-labelledby="titulo-opinioes"
-        aria-roledescription="carrossel"
-      >
+      <section class="secao" aria-labelledby="titulo-opinioes" aria-roledescription="carrossel">
         <h2 id="titulo-opinioes">A opinião de quem confia no nosso trabalho</h2>
-        <button type="button" aria-label="Ver depoimento anterior">
-          <img src="https://placehold.co/24x24" alt="" />
-        </button>
-        <ul>
-          <li aria-label="Depoimento 1" aria-current="true">
+        <ul class="opinioes__lista">
+          <li class="opiniao-card" aria-label="Depoimento 1" aria-current="true">
             <article>
               <blockquote>
-                <p>
-                  O treino em grupo mudou minha relação com o exercício — a
-                  energia da turma faz eu render muito mais do que treinando
-                  sozinho.
-                </p>
+                <p>O treino em grupo mudou minha relação com o exercício — a energia da turma faz eu render muito mais do que treinando sozinho.</p>
               </blockquote>
               <footer>
                 <img src="https://placehold.co/48x48" alt="" />
-                <p>
-                  <strong>[Nome do aluno]</strong><br />Aluno(a) · One To One
-                </p>
+                <p><strong>[Nome do aluno]</strong><br />Aluno(a) · One To One</p>
               </footer>
             </article>
           </li>
-          <li aria-label="Depoimento 2">
+          <li class="opiniao-card" aria-label="Depoimento 2">
             <article>
               <blockquote>
-                <p>
-                  Em poucos meses de One To One minha evolução física ficou
-                  visível — o acompanhamento técnico faz toda a diferença.
-                </p>
+                <p>Em poucos meses de One To One minha evolução física ficou visível — o acompanhamento técnico faz toda a diferença.</p>
               </blockquote>
               <footer>
                 <img src="https://placehold.co/48x48" alt="" />
-                <p>
-                  <strong>[Nome do aluno]</strong><br />Aluno(a) · One To One
-                </p>
+                <p><strong>[Nome do aluno]</strong><br />Aluno(a) · One To One</p>
               </footer>
             </article>
           </li>
         </ul>
-        <button type="button" aria-label="Ver próximo depoimento">
-          <img src="https://placehold.co/24x24" alt="" />
-        </button>
+        <div class="carrossel__setas-inline">
+          <button class="carrossel__seta carrossel__seta--escuro" type="button" aria-label="Ver depoimento anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button class="carrossel__seta carrossel__seta--escuro" type="button" aria-label="Ver próximo depoimento">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
       </section>
 
       <!-- Seção de localização -->
-      <section aria-labelledby="titulo-localizacao">
-        <div>
-          <p>Onde estamos</p>
+      <section class="localizacao" aria-labelledby="titulo-localizacao">
+        <div class="localizacao__info">
+          <p class="secao__eyebrow secao__eyebrow--claro">Onde estamos</p>
           <h2 id="titulo-localizacao">Localização</h2>
-          <dl>
+          <dl class="localizacao__dados">
             <div>
               <dt><img src="https://placehold.co/24x24" alt="" /> Endereço</dt>
               <dd>Endereço da One to One</dd>
             </div>
             <div>
-              <dt>
-                <img src="https://placehold.co/24x24" alt="" /> Horário de
-                funcionamento
-              </dt>
+              <dt><img src="https://placehold.co/24x24" alt="" /> Horário de funcionamento</dt>
               <dd>08:00 - 19:00</dd>
             </div>
           </dl>
-          <a href="">Abrir no mapa</a>
+          <a class="btn btn--contorno" href="">Abrir no mapa</a>
         </div>
-        <figure>
-          <img
-            src="https://placehold.co/640x420"
-            alt="Mapa com a localização da One To One"
-          />
+        <figure class="localizacao__mapa">
+          <img src="https://placehold.co/640x420" alt="Mapa com a localização da One To One" />
           <figcaption>Dados do mapa ©2026 Google</figcaption>
         </figure>
       </section>
 
-      <!-- Chamada para ação -->
-      <section aria-labelledby="titulo-cta">
-        <p>Comece agora</p>
-        <h2 id="titulo-cta">Venha fazer parte da ONE TO ONE.</h2>
-        <p>
-          Tire dúvidas, agende uma aula experimental e dê o próximo passo na sua
-          performance.
-        </p>
-        <a href="contato-one-to-one.html">Entrar em contato</a>
+      <!-- CTA -->
+      <section class="cta-one" aria-labelledby="titulo-cta">
+        <p class="secao__eyebrow secao__eyebrow--claro">Comece agora</p>
+        <h2 id="titulo-cta">Venha fazer parte da <span>ONE TO ONE</span>.</h2>
+        <p>Tire dúvidas, agende uma aula experimental e dê o próximo passo na sua performance.</p>
+        <a class="btn btn--ciano" href="contato-one-to-one.html">Entrar em contato</a>
       </section>
     </main>
 
@@ -336,44 +260,18 @@
     <footer class="footer">
       <section class="footer__marca">
         <img src="https://placehold.co/80x28" alt="Hub" />
-        <p>
-          O Hub reúne PKZ Lab e One to One em um só espaço digital: duas
-          metodologias, um só compromisso com performance.
-        </p>
+        <p>O Hub reúne PKZ Lab e One to One em um só espaço digital: duas metodologias, um só compromisso com performance.</p>
       </section>
-
       <section class="footer__redes" aria-labelledby="titulo-redes">
         <h2 id="titulo-redes">Redes sociais</h2>
         <ul>
-          <li>
-            <a
-              href="https://instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-rede"
-            >
-              <i class="fa-brands fa-instagram"> </i>
-            </a>
-          </li>
-          <li>
-            <a href="mailto:contato@exemplo.com" class="btn-rede">
-              <i class="fa-brands fa-google"> </i>
-            </a>
-          </li>
+          <li><a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="btn-rede"><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href="mailto:contato@exemplo.com" class="btn-rede"><i class="fa-brands fa-google"></i></a></li>
         </ul>
       </section>
-
       <hr class="footer__linha" />
-
-      <p class="footer__copy">
-        <small
-          >&copy; 2026 - Hub PKZ Lab &amp; One to One - Todos os direitos
-          reservados.</small
-        >
-      </p>
-      <p class="footer__tag">
-        <small>Site institucional — PKZ Lab &amp; One to One</small>
-      </p>
+      <p class="footer__copy"><small>&copy; 2026 - Hub PKZ Lab &amp; One to One - Todos os direitos reservados.</small></p>
+      <p class="footer__tag"><small>Site institucional — PKZ Lab &amp; One to One</small></p>
     </footer>
   </body>
 </html>
