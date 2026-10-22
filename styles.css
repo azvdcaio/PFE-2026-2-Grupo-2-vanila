@@ -750,6 +750,21 @@ PKZ Lab
 }
 
 /* One To One */
+.hero__eyebrow {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cor-azul-500);
+}
+
+.secao__eyebrow--claro {
+  color: var(--cor-azul-100);
+}
+
+.membro h3:last-child {
+  padding-bottom: 18px;
+}
 
 /* Contato PKZ */
 .footer-contato {
