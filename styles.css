@@ -8,8 +8,8 @@
 :root {
   --cor-azul-100: #b3ecff;
   --cor-azul-500: #00bbff;
-  --cor-azul-700: #014b6e; 
-  --cor-azul-800: #013451; 
+  --cor-azul-700: #014b6e;
+  --cor-azul-800: #013451;
   --cor-azul-900: #00112b;
   --cor-cinza-100: #fbfbfb;
 }
@@ -21,8 +21,27 @@ body {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  font-family: "Work Sans", sans-serif;
+  color: #111;
+  line-height: 1.5;
+}
+
+main {
+  flex: 1;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 header {
@@ -55,8 +74,284 @@ header a {
 
 /* Index.html */
 
+.secao,
+.header__hub,
+.footer {
+  padding-left: max(24px, calc((100% - 1100px) / 2));
+  padding-right: max(24px, calc((100% - 1100px) / 2));
+}
+
+.secao {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn--primario {
+  background: var(--azul-botao);
+  color: var(--cor-cinza-100);
+}
+
+.btn--contorno {
+  padding: 13px 20px;
+  border-color: var(--cor-azul-700);
+  background: var(--cor-azul-800);
+  color: var(--cor-azul-100);
+  font-size: 0.7rem;
+}
+
+.btn--ciano {
+  padding: 12px 20px;
+  border-radius: 4px;
+  background: var(--cor-azul-500);
+  color: var(--cor-azul-900);
+  font-size: 0.82rem;
+}
+
 .header__hub {
-  background-color: var(--cor-azul-900);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background: var(--cor-azul-900);
+  color: var(--cor-cinza-100);
+}
+
+.menu {
+  gap: 28px;
+}
+
+.menu a {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--cor-azul-100);
+}
+
+.menu a:hover,
+.menu a[aria-current="page"] {
+  color: var(--cor-cinza-100);
+}
+
+.menu a[aria-current="page"] {
+  font-weight: 800;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 680px;
+  padding: 64px 24px;
+  background: var(--cor-azul-900);
+  color: var(--cor-cinza-100);
+  text-align: center;
+}
+
+.hero__imagem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3);
+}
+
+.hero__conteudo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  max-width: 900px;
+}
+
+.hero h1 {
+  max-width: 11ch;
+  font-weight: 800;
+  font-size: 3.5rem;
+  line-height: 1.2;
+}
+
+.hero__texto {
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.hero__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.secao__cabecalho {
+  margin-bottom: 48px;
+}
+
+.secao__eyebrow {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--cor-azul-700);
+}
+
+.secao h2 {
+  margin-bottom: 12px;
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--cor-azul-900);
+}
+
+.secao__texto {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.valores__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.valor {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  column-gap: 24px;
+  width: 80%;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: var(--cor-azul-800);
+  color: var(--cor-cinza-100);
+}
+
+.valor--direita {
+  margin-left: auto;
+}
+
+.valor img {
+  grid-row: 1 / 3;
+  width: 72px;
+  height: 72px;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--cor-azul-700);
+}
+
+.valor h3 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.valor p {
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.empresas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.empresas__cabecalho {
+  grid-column: 1 / 3;
+  margin-bottom: 0;
+}
+
+.empresa {
+  position: relative;
+  display: flex;
+  min-height: 380px;
+  padding: 28px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--cor-azul-900);
+  color: var(--cor-cinza-100);
+}
+
+.empresa__imagem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.empresa--pkz .empresa__imagem {
+  filter: brightness(0.4);
+}
+
+.empresa--one .empresa__imagem {
+  filter: brightness(0.3);
+}
+
+.empresa__conteudo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1;
+}
+
+.empresa__marca {
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--cor-azul-100);
+}
+
+.empresa--one .empresa__marca {
+  color: var(--cor-azul-500);
+}
+
+.empresa h3 {
+  max-width: 14ch;
+  font-weight: 800;
+  font-size: 1.9rem;
+  line-height: 1.2;
+}
+
+.empresa__descricao {
+  max-width: 48ch;
+  margin-top: auto;
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tags li {
+  padding: 5px 12px;
+  border-radius: 4px;
+  background: var(--cor-azul-800);
+  font-weight: 600;
+  font-size: 0.68rem;
+  color: var(--cor-azul-100);
 }
 
 /*===============================================
@@ -68,12 +363,12 @@ PKZ Lab
 
 .pkz-hero {
   padding: 100px 64px;
-  background-image: url('https://placehold.co/1920x1080'); 
+  background-image: url("https://placehold.co/1920x1080");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: var(--cor-cinza-100);
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -82,24 +377,23 @@ PKZ Lab
   min-height: calc(100vh - 60px);
 }
 
-.pkz-hero .cabecalho{
+.pkz-hero .cabecalho {
   max-width: 900px;
 }
 
-.pkz-hero h1{
+.pkz-hero h1 {
   font-size: clamp(36px, 5vw, 64px);
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1.15;
   margin-bottom: 20px;
 }
-.pkz-hero p{
+.pkz-hero p {
   font-size: clamp(24px, 2vw, 32px);
-  opacity: 0.9;;
+  opacity: 0.9;
 }
 
-
-.pkz-hero span{
+.pkz-hero span {
   font-size: 24px;
   font-weight: 700;
   color: var(--cor-azul-700);
@@ -116,17 +410,17 @@ PKZ Lab
 }
 
 .descricao-sobre {
-    display:flex;
-    flex-direction: column;
-    gap: 24px;
-    flex:1; /*Toda parte de texto ocupa metade da seção Sobre Nós*/
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1; /*Toda parte de texto ocupa metade da seção Sobre Nós*/
 }
 .cabecalho {
   display: flex;
   flex-direction: column;
-  gap:16px;
+  gap: 16px;
 }
-.cabecalho h2{
+.cabecalho h2 {
   font-size: 32px;
   font-weight: bold;
   line-height: 1.2;
@@ -134,26 +428,26 @@ PKZ Lab
 
 .cabecalho span {
   color: var(--cor-azul-700);
-  font-weight:bold;
+  font-weight: bold;
   font-size: 24px;
-  opacity: 0.9; 
+  opacity: 0.9;
   letter-spacing: 2px;
-  text-transform: uppercase; 
+  text-transform: uppercase;
 }
-.p-sobre{
-  display:flex;
+.p-sobre {
+  display: flex;
   flex-direction: column;
   gap: 16pxpx;
   font-size: 24px;
 }
 
-.conteiner-imagem-sobre{
-  flex:1;
+.conteiner-imagem-sobre {
+  flex: 1;
   overflow: hidden;
   width: 100%;
 }
 
-.conteiner-imagem-sobre img{
+.conteiner-imagem-sobre img {
   width: 100%;
   height: 440px; /*mantem a proporção*/
   object-fit: cover;
@@ -170,15 +464,15 @@ PKZ Lab
   align-items: center;
 }
 
-.pkz-caracteristicas .cabecalho{
+.pkz-caracteristicas .cabecalho {
   max-width: 900px;
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap:12px;
+  gap: 12px;
 }
 
-.conteiner-cards-caracteristicas{
+.conteiner-cards-caracteristicas {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -189,14 +483,14 @@ PKZ Lab
 
 .card-caracteristica {
   width: 100%;
-  height:auto;
-  border-radius: 16px;;
+  height: auto;
+  border-radius: 16px;
   padding: 24px 32px;
   display: flex;
   align-items: center;
   gap: 24px;
   background-color: var(--cor-azul-800);
-  color: var(--cor-cinza-100)
+  color: var(--cor-cinza-100);
 }
 
 .descricao-caracteristica {
@@ -205,23 +499,22 @@ PKZ Lab
   gap: 8px;
 }
 
-.descricao-caracteristica h2{
+.descricao-caracteristica h2 {
   font-size: 32px;
   font-weight: bold;
   letter-spacing: 0.5px;
   color: var(--cor-cinza-100);
 }
 
-.descricao-caracteristica span{
-  font-weight:bold;
+.descricao-caracteristica span {
+  font-weight: bold;
   font-size: 24px;
   color: var(--cor-azul-100);
-  opacity: 0.9;   
+  opacity: 0.9;
 }
 
-
 .conteiner-img-icone-caracteristica {
-  order:-1; 
+  order: -1;
   display: flex;
   align-self: center;
   justify-content: center;
@@ -245,34 +538,34 @@ PKZ Lab
   gap: 64px;
 }
 
-.cabecalho-secao-planos{
-  display:flex;
+.cabecalho-secao-planos {
+  display: flex;
   flex-direction: column;
   gap: 12px;
   text-align: center;
 }
 
-.cabecalho-secao-planos h2{
+.cabecalho-secao-planos h2 {
   font-size: 32px;
   text-transform: uppercase;
   color: var(--cor-cinza-100);
 }
-.cabecalho-secao-planos span{
+.cabecalho-secao-planos span {
   color: var(--cor-azul-100);
-  font-weight:bold;
+  font-weight: bold;
   font-size: 24px;
-  opacity: 0.9;  
+  opacity: 0.9;
 }
 
-.conteiner-planos-cards{
+.conteiner-planos-cards {
   width: 100%;
   max-width: 1100px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-  gap: 32px;px;
+  gap: 32px;
 }
 
-.card-plano{
+.card-plano {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -281,7 +574,7 @@ PKZ Lab
   background-color: var(--cor-azul-700);
   border-radius: 16px;
   padding: 32px 30px;
-  transition: transform 0.3s ease, box-shadow 0.3 ease;
+  transition: 0.3s ease-in;
   position: relative;
 }
 
@@ -293,34 +586,34 @@ PKZ Lab
 
 .card-plano:hover {
   transform: scale(1.05);
-  box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
-.card-plano h2{
+.card-plano h2 {
   font-size: 32px;
   color: var(--cor-cinza-100);
   letter-spacing: 0.5px;
   font-weight: bold;
 }
-.card-plano span{
-  font-weight:bold;
+.card-plano span {
+  font-weight: bold;
   font-size: 24px;
-  opacity: 0.9;  
+  opacity: 0.9;
   color: var(--cor-azul-100);
 }
 
-.card-plano p{
+.card-plano p {
   font-size: 24px;
   color: #e2e8f0;
 }
 
-.card-plano ul{
+.card-plano ul {
   list-style: none;
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
-.card-plano li{
+.card-plano li {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -335,14 +628,14 @@ PKZ Lab
   margin-top: 4px;
 }
 
-.btn-agendamento{
+.btn-agendamento {
   text-decoration: none;
   display: inline-block;
   text-align: center;
   color: var(--cor-azul-700);
   border: 2px solid var(--cor-azul-800);
   background-color: var(--cor-cinza-100);
-  border-radius: 24px;
+  border-radius: 8px;
   padding: 10px 24px;
   font-size: 24px;
   font-weight: 600;
@@ -350,10 +643,9 @@ PKZ Lab
   box-shadow: 0 4px 14px rgba(0, 187, 255, 0.25);
 }
 
-
 /* One To One */
 
-/* Contato PKZ & one to one */
+/* Contato PKZ */
 .footer-contato {
   background-color: var(--cor-azul-700);
   color: var(--cor-cinza-100);
