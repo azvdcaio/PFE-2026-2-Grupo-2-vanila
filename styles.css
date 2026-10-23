@@ -23,11 +23,22 @@ body {
 body {
   font-family: "Work Sans", sans-serif;
   color: #111;
-  line-height: 1.5;
+  line-height: 1.6;
+  letter-spacing: 0.12;
+  word-spacing: 0.16;
 }
 
 main {
   flex: 1;
+}
+h1 {
+  font-size: 3rem;
+}
+h2{
+  font-size: 2rem;
+}
+h3, p, span {
+  font-size: 1.25rem;
 }
 
 ul {
@@ -61,15 +72,16 @@ header ul {
   gap: 1rem;
 }
 
-header li {
+li {
   list-style: none;
   text-decoration: none;
+  font-size: 1.25rem;
 }
 
 header a {
   text-decoration: none;
   color: var(--cor-cinza-100);
-  font-size: 24px;
+  font-size: 1.25rem;
 }
 
 .footer {
@@ -148,13 +160,15 @@ header a {
   font-size: 0.8rem;
 }
 
-/* Index.html */
+/*------------------------------------------
+Index.html
+--------------------------------------------*/
 
 .secao,
 .header__hub,
 .footer {
-  padding-left: max(24px, calc((100% - 1100px) / 2));
-  padding-right: max(24px, calc((100% - 1100px) / 2));
+  padding-left: max(64px, calc((100% - 1100px) / 2));
+  padding-right: max(64px, calc((100% - 1100px) / 2));
 }
 
 .secao {
@@ -212,7 +226,7 @@ header a {
 
 .menu a {
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 1.25rem;
   color: #b7b7b7;
 }
 
@@ -468,7 +482,8 @@ PKZ Lab
 }
 
 .pkz-hero {
-  padding: 100px 64px;
+  padding-left: max(64px, calc((100% - 1100px) / 2));
+  padding-right: max(64px, calc((100% - 1100px) / 2));
   background-image: url("https://placehold.co/1920x1080");
   background-size: cover;
   background-position: center;
@@ -480,41 +495,31 @@ PKZ Lab
   align-items: center;
   text-align: center;
   gap: 40px;
-  min-height: calc(100vh - 60px);
-}
-
-.pkz-hero .cabecalho {
-  max-width: 900px;
+  min-height: calc(100vh - 80px);
+  margin-bottom: 64px;
 }
 
 .pkz-hero h1 {
-  font-size: 3.5rem;
   font-weight: 800;
   text-transform: uppercase;
-  line-height: 1.2;
   margin-bottom: 20px;
-}
-.pkz-hero p {
-  font-size: 0.85rem;
-  line-height: 1.6;
-  opacity: 0.9;
 }
 
 .pkz-hero .cabecalho span {
-  font-size: 0.85rem;
-  line-height: 1.6;
+  color: var(--cor-azul-800);
   text-transform: lowercase;
-  color: var(--cor-azul-700);
 }
 
 /*PKZ - QUEM SOMOS NÓS*/
 .pkz-sobre {
-  padding: 64px;
+  padding-left: max(64px, calc((100% - 1100px) / 2));
+  padding-right: max(64px, calc((100% - 1100px) / 2));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 64px;
-  min-height: calc(100vh - 60px);
+  gap: 32px;
+  min-height: calc(100vh - 80px);
+  margin-bottom: 64px;
 }
 
 .descricao-sobre {
@@ -528,24 +533,21 @@ PKZ Lab
   flex-direction: column;
   gap: 16px;
 }
-.cabecalho h2 {
-  font-size: 1.75rem;
-  line-height: 1.2;
+
+.pkz-sobre .cabecalho h2{
+  color:var(--cor-azul-800)
 }
 
 .cabecalho span {
   color: var(--cor-azul-700);
-  font-weight: bold;
-  font-size: 0.95rem;
+  font-weight: 600;
   opacity: 0.9;
-  letter-spacing: 2px;
   text-transform: uppercase;
 }
 .p-sobre {
   display: flex;
   flex-direction: column;
-  gap: 16pxpx;
-  font-size: 24px;
+  gap: 16px;
 }
 
 .conteiner-imagem-sobre {
@@ -556,34 +558,38 @@ PKZ Lab
 
 .conteiner-imagem-sobre img {
   width: 100%;
-  height: 440px; /*mantem a proporção*/
+  max-height: 45vh; /*mantem a proporção*/
   object-fit: cover;
 }
 
 /*PKZ caracteristicas*/
 
 .pkz-caracteristicas {
+  padding-left: max(64px, calc((100% - 1100px) / 2));
+  padding-right: max(64px, calc((100% - 1100px) / 2));
   background-color: var(--cor-cinza-100);
-  padding: 64px;
   display: flex;
   flex-direction: column;
   gap: 48px;
+  margin-bottom: 64px;
   align-items: center;
 }
 
 .pkz-caracteristicas .cabecalho {
-  max-width: 900px;
   display: flex;
   flex-direction: column;
-  text-align: center;
   gap: 12px;
+}
+
+.pkz-caracteristicas .cabecalho h2 {
+  color: var(--cor-azul-800);
 }
 
 .conteiner-cards-caracteristicas {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  width: 100%;
+  gap: 24px;
+  width: 80%;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -592,7 +598,7 @@ PKZ Lab
   width: 100%;
   height: auto;
   border-radius: 16px;
-  padding: 24px 32px;
+  padding: 24px;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -607,42 +613,47 @@ PKZ Lab
 }
 
 .descricao-caracteristica h2 {
-  font-size: 32px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
   color: var(--cor-cinza-100);
 }
 
 .descricao-caracteristica span {
-  font-weight: bold;
-  font-size: 24px;
   color: var(--cor-azul-100);
-  opacity: 0.9;
 }
 
 .conteiner-img-icone-caracteristica {
+  background-color: var(--cor-azul-100);
   order: -1;
   display: flex;
+  align-items:center ;
   align-self: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+}
+
+.conteiner-img-icone-caracteristica img {
+  height: 55px;
+  width: 55px;
   border-radius: 8px;
 }
 
 /*Seção Planos*/
 
 .pkz-planos {
+  padding-left: max(64px, calc((100% - 1100px) / 2));
+  padding-right: max(64px, calc((100% - 1100px) / 2));
+  padding-bottom: 64px;
+  padding-top:64px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 64px;
+  justify-content: space-around;
   background-color: var(--cor-azul-800);
   color: var(--cor-cinza-100);
-  gap: 64px;
+  gap: 32px;
 }
 
 .cabecalho-secao-planos {
@@ -653,14 +664,11 @@ PKZ Lab
 }
 
 .cabecalho-secao-planos h2 {
-  font-size: 32px;
   text-transform: uppercase;
   color: var(--cor-cinza-100);
 }
 .cabecalho-secao-planos span {
   color: var(--cor-azul-100);
-  font-weight: bold;
-  font-size: 24px;
   opacity: 0.9;
 }
 
@@ -676,13 +684,12 @@ PKZ Lab
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 28px;
+  gap: 16px;
   border: 1.5px solid var(--cor-cinza-100);
   background-color: var(--cor-azul-700);
   border-radius: 16px;
-  padding: 32px 30px;
+  padding: 24px 24px;
   transition: 0.3s ease-in;
-  position: relative;
 }
 
 .cabecalho-card-plano {
@@ -696,20 +703,15 @@ PKZ Lab
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 .card-plano h2 {
-  font-size: 32px;
   color: var(--cor-cinza-100);
-  letter-spacing: 0.5px;
-  font-weight: bold;
+  letter-spacing: 0.15px;
 }
 .card-plano span {
-  font-weight: bold;
-  font-size: 24px;
   opacity: 0.9;
   color: var(--cor-azul-100);
 }
 
 .card-plano p {
-  font-size: 24px;
   color: #e2e8f0;
 }
 
@@ -724,14 +726,11 @@ PKZ Lab
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  font-size: 20px;
-  line-height: 1.5;
   color: #e2e8f0;
 }
 
 .card-plano li i {
   color: var(--cor-azul-500);
-  font-size: 15px;
   margin-top: 4px;
 }
 
@@ -744,13 +743,48 @@ PKZ Lab
   background-color: var(--cor-cinza-100);
   border-radius: 8px;
   padding: 10px 24px;
-  font-size: 24px;
   font-weight: 600;
   letter-spacing: 0.5;
   box-shadow: 0 4px 14px rgba(0, 187, 255, 0.25);
 }
 
-/* One To One */
+/*Seção opinião*/
+.secao{
+  padding-left: max(64px, calc((100% - 1100px) / 2));
+  padding-right: max(64px, calc((100% - 1100px) / 2));
+  padding-bottom: 64px;
+}
+
+#pkz-opiniao{
+  background-color: var(--cor-azul-800);
+}
+
+#pkz-localizacao {
+  background-color: var(--cor-azul-800);
+  margin-bottom: 64px;
+  padding-bottom: 64px;
+  padding-top:64px;
+}
+
+#cta-pkz {
+  background-color: var(--cor-azul-800);
+
+}
+
+.localizacao__mapa iframe {
+  width: 100%;
+  height: 350px;
+  border-radius: 8px;
+  border: none;
+}
+
+#footer-pkz{
+  background-color: var(--cor-azul-700);
+}
+
+/*------------------------------------------------
+One To One
+------------------------------------------------*/
 .hero__eyebrow {
   font-weight: 700;
   font-size: 0.75rem;
@@ -1014,7 +1048,8 @@ PKZ Lab
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: center;
-  padding: 64px max(24px, calc((100% - 1100px) / 2));
+  padding-left: max(64px, calc((100% - 1100px) / 2));
+  padding-right: max(64px, calc((100% - 1100px) / 2));
   background: var(--cor-azul-900);
   color: var(--cor-cinza-100);
 }
