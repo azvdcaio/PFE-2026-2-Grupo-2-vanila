@@ -765,6 +765,9 @@ PKZ Lab
   padding-bottom: 64px;
   padding-top:64px;
 }
+#secao-pkz h2{
+  color: var(--cor-azul-800);
+}
 
 #cta-pkz {
   background-color: var(--cor-azul-800);
