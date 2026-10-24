@@ -760,15 +760,182 @@ PKZ Lab
 }
 
 /*Seção opinião*/
+/* ==========================================================================
+   Carrossel de Opiniões (Interativo, acessível e funcional)
+   ========================================================================== 
+*/
 .secao {
-  padding-left: max(64px, calc((100% - 1100px) / 2));
-  padding-right: max(64px, calc((100% - 1100px) / 2));
-  padding-bottom: 64px;
+  padding-left: max(24px, calc((100% - 1100px) / 2));
+  padding-right: max(24px, calc((100% - 1100px) / 2));
+  padding-top: 72px;
+  padding-bottom: 72px;
 }
 
-#pkz-opiniao {
-  background-color: var(--cor-azul-700);
+.secao--opinioes {
+  background-color: var(--cor-cinza-100);
+  text-align: center;
+  position: relative;
 }
+
+.secao--opinioes h2 {
+  margin-bottom: 32px;
+  color: var(--cor-azul-800);
+}
+
+.carrossel__trilho-wrapper {
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto;
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.opinioes__lista {
+  display: grid;
+  width: 100%;
+}
+
+.opiniao-card {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(40px);
+  transition: all var(--transicao-suave);
+}
+
+.opiniao-card[aria-current="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  z-index: 2;
+}
+
+
+#pkz-opiniao-card article {
+    display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  padding: 32px 36px;
+  border-radius: 16px;
+  background: var(--cor-azul-800);
+  color: var(--cor-cinza-100);
+  text-align: left;
+  box-shadow: 0 10px 24px rgba(0, 17, 43, 0.12);
+  border: 1px solid rgba(0, 187, 255, 0.15);
+}
+
+.opiniao-card blockquote p {
+  color:var(--cor-cinza-100);
+}
+
+.opiniao-card footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+}
+
+.opiniao-card footer img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--cor-azul-500);
+}
+
+.avatar-fallback {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--cor-azul-700);
+  color: var(--cor-cinza-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: 2px solid var(--cor-azul-500);
+}
+
+.opiniao-card footer p {
+  font-size: 0.9rem;
+  color: var(--cor-azul-100);
+  line-height: 1.4;
+}
+
+.opiniao-card footer p strong {
+  color: var(--cor-cinza-100);
+  font-size: 1rem;
+}
+
+/* Indicadores de bolinhas do carrossel */
+.carrossel__indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.carrossel__indicadores button {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transicao-suave);
+}
+
+.carrossel__indicadores button[aria-current="true"] {
+  width: 28px;
+  background: var(--cor-azul-700);
+}
+
+/* Controles de Setas do Carrossel */
+.pkz-carrossel__setas-inline {
+  position: absolute;
+  top: 55%; /* Centraliza com o corpo dos cards */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 980px; /* Mais largo que o carrossel (820px) para não cobrir o texto */
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  pointer-events: none; /* Deixa os cliques passarem pelo meio da tela */
+  z-index: 10;
+}
+
+.carrossel__seta {
+pointer-events: auto; /* Reativa o clique físico apenas nos botões redondos */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--cor-cinza-100);
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all var(--transicao-suave);
+}
+
+.carrossel__seta--escuro {
+  color: var(--cor-azul-900);
+  background: #e2e8f0;
+}
+
+.carrossel__seta--escuro:hover {
+  background: var(--cor-azul-500);
+  color: var(--cor-azul-900);
+  transform: scale(1.08);
+}
+
+/*Seção lozalização*/
 
 #pkz-localizacao {
   background-color: var(--cor-azul-800);
