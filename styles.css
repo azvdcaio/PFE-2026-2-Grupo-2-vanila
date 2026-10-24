@@ -31,9 +31,7 @@ body {
 main {
   flex: 1;
 }
-/* =========================================================
-   Tipografia Responsiva (Fluid Typography)
-   ========================================================= */
+/* Tipografia Responsiva */
 
 h1 {
   font-size: clamp(2rem, 1rem + 3vw, 3.5rem);
@@ -41,15 +39,24 @@ h1 {
   line-height: 1.15;
 }
 
-h2,h3 {
+h2 {
   font-size: clamp(1.5rem, 0.75rem + 2vw, 2.25rem);
   font-weight: 700;
   line-height: 1.25;
 }
 
-p, span, li, a {
+h3 {
+  font-size: clamp(1.25rem, 0.8rem + 1.2vw, 1.5rem);
+  font-weight: 600;
+}
+
+p {
   font-size: clamp(1rem, 0.85rem + 0.5vw, 1.125rem);
   line-height: 1.65;
+}
+
+span {
+  font-size: clamp(0.875rem, 0.75rem + 0.5vw, 1rem);
 }
 
 ul {
@@ -598,7 +605,7 @@ PKZ Lab
 .conteiner-cards-caracteristicas {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 24px;
   width: 80%;
   max-width: 1100px;
   margin: 0 auto;
@@ -618,10 +625,9 @@ PKZ Lab
 .descricao-caracteristica {
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.descricao-caracteristica h2 {
+.descricao-caracteristica h3 {
   color: var(--cor-cinza-100);
 }
 
@@ -715,8 +721,10 @@ PKZ Lab
   color: var(--cor-azul-100);
 }
 
-.card-plano p {
+.card-plano p, .card-plano li {
   color: #e2e8f0;
+  font-size: clamp(0.9rem, 0.8rem + 0.5vw, 1rem);
+  line-height: 1.6;
 }
 
 .card-plano ul {
@@ -729,13 +737,14 @@ PKZ Lab
 .card-plano li {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  color: #e2e8f0;
+  gap: 10px;
 }
 
 .card-plano li i {
   color: var(--cor-azul-500);
   margin-top: 4px;
+  font-size: 0.85rem;
+  flex-shrink: 0;
 }
 
 .btn-agendamento {
