@@ -24,8 +24,8 @@ body {
   font-family: "Work Sans", sans-serif;
   color: #111;
   line-height: 1.6;
-  letter-spacing: 0.12;
-  word-spacing: 0.16;
+  letter-spacing: 0.012em;
+  word-spacing: 0.016em;
 }
 
 main {
@@ -550,8 +550,8 @@ PKZ Lab
   gap: 16px;
 }
 
-.pkz-sobre .cabecalho h2{
-  color:var(--cor-azul-800)
+.pkz-sobre .cabecalho h2 {
+  color: var(--cor-azul-800);
 }
 
 .cabecalho span {
@@ -640,7 +640,7 @@ PKZ Lab
   color: var(--cor-azul-800);
   order: -1;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   flex-shrink: 0;
   width: 58px;
@@ -655,7 +655,7 @@ PKZ Lab
   padding-left: max(64px, calc((100% - 1100px) / 2));
   padding-right: max(64px, calc((100% - 1100px) / 2));
   padding-bottom: 64px;
-  padding-top:64px;
+  padding-top: 64px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -721,7 +721,8 @@ PKZ Lab
   color: var(--cor-azul-100);
 }
 
-.card-plano p, .card-plano li {
+.card-plano p,
+.card-plano li {
   color: #e2e8f0;
   font-size: clamp(0.9rem, 0.8rem + 0.5vw, 1rem);
   line-height: 1.6;
@@ -762,13 +763,13 @@ PKZ Lab
 }
 
 /*Seção opinião*/
-.secao{
+.secao {
   padding-left: max(64px, calc((100% - 1100px) / 2));
   padding-right: max(64px, calc((100% - 1100px) / 2));
   padding-bottom: 64px;
 }
 
-#pkz-opiniao{
+#pkz-opiniao {
   background-color: var(--cor-azul-800);
 }
 
@@ -776,15 +777,14 @@ PKZ Lab
   background-color: var(--cor-azul-800);
   margin-bottom: 64px;
   padding-bottom: 64px;
-  padding-top:64px;
+  padding-top: 64px;
 }
-#secao-pkz h2{
+#secao-pkz h2 {
   color: var(--cor-azul-800);
 }
 
 #cta-pkz {
   background-color: var(--cor-azul-800);
-
 }
 
 .localizacao__mapa iframe {
@@ -794,7 +794,7 @@ PKZ Lab
   border: none;
 }
 
-#footer-pkz{
+#footer-pkz {
   background-color: var(--cor-azul-700);
 }
 
