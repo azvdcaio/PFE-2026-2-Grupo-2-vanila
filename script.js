@@ -158,11 +158,8 @@ if (cards.length > 0) {
 }
 
 /* ==========================================================
-   Modais: comportamento genérico
-   - Abrir:  <button data-modal-abrir="id-do-dialog">
-   - Fechar: <button data-modal-fechar> dentro do <dialog>
-   - Clique no backdrop também fecha
-   ========================================================== */
+  Modais: comportamento genérico
+========================================================== */
 
 document.addEventListener("click", (evento) => {
   const gatilhoAbrir = evento.target.closest("[data-modal-abrir]");
@@ -185,4 +182,26 @@ document.addEventListener("click", (evento) => {
   ) {
     evento.target.close();
   }
+});
+
+/* ==========================================================
+  Modais: comportamento genérico
+========================================================== */
+
+/* Revela os cards de valores quando entram na tela */
+const cardsValores = document.querySelectorAll(
+  ".valores__lista .card-caracteristica",
+);
+
+const observador = new IntersectionObserver((entradas) => {
+  entradas.forEach((entrada) => {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.remove("valor--oculto");
+    }
+  });
+});
+
+cardsValores.forEach((card) => {
+  card.classList.add("valor--oculto");
+  observador.observe(card);
 });
