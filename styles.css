@@ -133,7 +133,7 @@ header a {
 .footer__redes h2 {
   margin-bottom: 14px;
   font-weight: 600;
-  font-size: 0.68rem;
+  font-size: 12px;
   text-transform: uppercase;
 }
 
@@ -152,6 +152,9 @@ header a {
   display: flex;
   gap: 10px;
 }
+.footer__redes i{
+  font-size: 20px;
+}
 
 .btn-rede {
   display: flex;
@@ -159,7 +162,7 @@ header a {
   justify-content: center;
   width: 32px;
   height: 32px;
-  border: 1px solid var(--cor-azul-700);
+  border: 1px solid var(--cor-cinza-100);
   border-radius: 8px;
   color: var(--cor-azul-100);
   transition: all 0.3s ease-in-out;
@@ -669,6 +672,7 @@ PKZ Lab
   padding-left: max(64px, calc((100% - 1100px) / 2));
   padding-right: max(64px, calc((100% - 1100px) / 2));
   background-image: url(assets/pkz_hero_banner.jpg);
+  background-image: linear-gradient(rgba(0, 17, 43, 0.7), rgba(0, 17, 43, 0.7)), url(assets/pkz_hero_banner.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -935,7 +939,6 @@ PKZ Lab
   border-radius: 8px;
   padding: 10px 24px;
   font-weight: 600;
-  letter-spacing: 0.5;
   transition: all 0.3s ease;
 }
 
