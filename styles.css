@@ -920,6 +920,7 @@ PKZ Lab
 
 .btn-agendamento:hover {
   background-color: transparent;
+  color: var(--cor-cinza-100);
   border-color: var(--cor-cinza-100);
 }
 
@@ -930,20 +931,19 @@ PKZ Lab
   padding-bottom: 64px;
   display: flex;
   flex-direction: column;
-  gap:24px;
+  gap: 24px;
 }
 
-.pkz-secao-opiniao h2{
+.pkz-secao-opiniao h2 {
   color: var(--cor-azul-800);
 }
 
-.pkz-secao-opiniao ul li article{
+.pkz-secao-opiniao ul li article {
   background-color: var(--cor-azul-800);
-  padding:32px;
+  padding: 32px;
 }
-.pkz-secao-opiniao ul li article footer p{
-  color:var(--cor-azul-100);
-
+.pkz-secao-opiniao ul li article footer p {
+  color: var(--cor-azul-100);
 }
 
 /*Seção localização*/
@@ -955,7 +955,6 @@ PKZ Lab
   padding-top: 64px;
 }
 
-
 #secao-pkz h2 {
   color: var(--cor-azul-800);
 }
@@ -965,13 +964,13 @@ PKZ Lab
   border-radius: 32px;
 }
 
-#cta-pkz h2 span{
-  font-size: clamp(1.5rem, 0.75rem + 2vw, 2.25rem);;
+#cta-pkz h2 span {
+  font-size: clamp(1.5rem, 0.75rem + 2vw, 2.25rem);
 }
-#cta-pkz h2{
+#cta-pkz h2 {
   letter-spacing: 0.02rem;
 }
-#cta-pkz p{
+#cta-pkz p {
   font-size: clamp(1rem, 0.85rem + 0.5vw, 1.125rem);
   line-height: 1.65;
 }
