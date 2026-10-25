@@ -23,7 +23,7 @@
     <!-- Header da página inicial -->
     <header class="header__hub">
       <a href="index.html" class="header__logo">
-        <img src="https://placehold.co/140x40" alt="Hub — página inicial" />
+        <img src="assets/hub_logo.png" alt="Hub — página inicial" />
       </a>
       <nav aria-label="Principal">
         <ul class="menu">
@@ -271,7 +271,7 @@
 
     <footer class="footer">
       <section class="footer__marca">
-        <img src="https://placehold.co/80x28" alt="Hub" />
+        <img src="assets/hub_logo.png" alt="Hub" />
         <p>
           O Hub reúne PKZ Lab e One to One em um só espaço digital: duas
           metodologias, um só compromisso com performance.
@@ -287,13 +287,18 @@
               target="_blank"
               rel="noopener noreferrer"
               class="btn-rede"
+              aria-label="Instagram"
             >
-              <i class="fa-brands fa-instagram"> </i>
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
             </a>
           </li>
           <li>
-            <a href="mailto:contato@exemplo.com" class="btn-rede">
-              <i class="fa-brands fa-google"> </i>
+            <a
+              href="mailto:contato@exemplo.com"
+              class="btn-rede"
+              aria-label="E-mail"
+            >
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             </a>
           </li>
         </ul>
@@ -311,6 +316,7 @@
         <small>Site institucional — PKZ Lab &amp; One to One</small>
       </p>
     </footer>
+
     <!-- Modal das empresas -->
     <dialog
       id="modal-escolha-empresa"
