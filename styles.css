@@ -1010,6 +1010,67 @@ PKZ Lab
   background-color: var(--cor-azul-700);
 }
 
+/* --- Media Query Phablets e Tablets Pequenos (até 767px) --- */
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden; /* Corta imediatamente a barra branca */
+    width: 100%;
+  }
+
+  #pkz-localizacao {
+    display: flex;
+    gap:24px;
+    justify-content: center;
+  }
+
+  /*espaçamentos laterais padrão para phablets */
+  .pkz-corpo .pkz-hero,
+  .pkz-corpo .pkz-sobre,
+  .pkz-corpo .pkz-caracteristicas,
+  .pkz-corpo .pkz-planos,
+  .pkz-corpo .pkz-secao-opiniao,
+  .pkz-corpo #pkz-localizacao {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* Altera os cartões de características para empilhar o ícone acima do texto */
+  .pkz-corpo .card-caracteristica {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .pkz-corpo .conteiner-img-icone-caracteristica {
+    order: 0;
+  }
+
+  .pkz-corpo .conteiner-planos-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Mobile (até 600px) --- */
+@media (max-width: 600px) {
+  .pkz-sobre{
+    flex-direction: column;
+  }
+  .pkz-corpo .pkz-hero,
+  .pkz-corpo .pkz-sobre,
+  .pkz-corpo .pkz-caracteristicas,
+  .pkz-corpo .pkz-planos,
+  .pkz-corpo .pkz-secao-opiniao,
+  .pkz-corpo #pkz-localizacao {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .pkz-corpo #cta-pkz {
+    padding: 40px 16px;
+    border-radius: 16px;
+  }
+}
+
 /*------------------------------------------------
 One To One
 ------------------------------------------------*/
