@@ -24,7 +24,7 @@
   <body class="pagina-pkz">
     <header class="header__hub">
       <a href="pkz-lab.html">
-        <img src="https://placehold.co/140x40" alt="Logo da OneToOne" />
+        <img src="https://placehold.co/140x40" alt="Logo da PKZ Lab" />
       </a>
 
       <div class="header__acoes-exemplo">
@@ -66,9 +66,104 @@
           </ol>
         </div>
 
-        <div class="calendario"></div>
+        <!-- Na One To One: data-empresa="one-to-one" -->
+        <div class="calendario" data-empresa="pkz">
+          <div class="calendario__topo">
+            <h2
+              class="calendario__titulo"
+              id="calendario-titulo"
+              aria-live="polite"
+            ></h2>
+            <div class="calendario__nav">
+              <button
+                type="button"
+                class="calendario__seta"
+                data-calendario-anterior
+                aria-label="Mês anterior"
+              >
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+              </button>
+              <button
+                type="button"
+                class="calendario__seta"
+                data-calendario-proximo
+                aria-label="Próximo mês"
+              >
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+          <ul class="calendario__semana" aria-hidden="true">
+            <li>DOM</li>
+            <li>SEG</li>
+            <li>TER</li>
+            <li>QUA</li>
+            <li>QUI</li>
+            <li>SEX</li>
+            <li>SÁB</li>
+          </ul>
+
+          <div
+            class="calendario__dias"
+            role="group"
+            aria-labelledby="calendario-titulo"
+          ></div>
+
+          <ul class="calendario__legenda">
+            <li>
+              <i
+                class="calendario__marca calendario__marca--selecionado"
+                aria-hidden="true"
+              ></i
+              >Selecionado
+            </li>
+            <li>
+              <i
+                class="calendario__marca calendario__marca--hoje"
+                aria-hidden="true"
+              ></i
+              >Hoje
+            </li>
+            <li>
+              <i
+                class="calendario__marca calendario__marca--indisponivel"
+                aria-hidden="true"
+              ></i
+              >Indisponível
+            </li>
+            <li>
+              <i
+                class="calendario__marca calendario__marca--feriado"
+                aria-hidden="true"
+              ></i
+              >Feriado
+            </li>
+            <li>
+              <i
+                class="calendario__marca calendario__marca--reservado"
+                aria-hidden="true"
+              ></i
+              >Reservado
+            </li>
+          </ul>
+        </div>
       </section>
+
+      <!-- Reservas feitas neste navegador (aparece só depois da primeira reserva) -->
+      <div
+        class="reservas"
+        data-reservas
+        role="region"
+        aria-labelledby="titulo-reservas"
+        hidden
+      >
+        <h2 class="reservas__titulo" id="titulo-reservas">Suas reservas</h2>
+        <p class="reservas__texto">Agendamentos feitos neste navegador.</p>
+        <ul class="reservas__lista"></ul>
+      </div>
     </main>
+
     <footer class="footer">
       <section class="footer__marca">
         <img src="https://placehold.co/80x28" alt="Hub" />
@@ -87,13 +182,18 @@
               target="_blank"
               rel="noopener noreferrer"
               class="btn-rede"
+              aria-label="Instagram"
             >
-              <i class="fa-brands fa-instagram"> </i>
+              <i class="fa-brands fa-instagram" aria-hidden="true"></i>
             </a>
           </li>
           <li>
-            <a href="mailto:contato@exemplo.com" class="btn-rede">
-              <i class="fa-brands fa-google"> </i>
+            <a
+              href="mailto:contato@exemplo.com"
+              class="btn-rede"
+              aria-label="E-mail"
+            >
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             </a>
           </li>
         </ul>
@@ -111,5 +211,143 @@
         <small>Site institucional — PKZ Lab &amp; One to One</small>
       </p>
     </footer>
+
+    <!-- Modal: formulário de agendamento -->
+    <dialog
+      id="modal-agendamento"
+      class="modal modal--agendamento"
+      aria-labelledby="modal-agendamento-titulo"
+    >
+      <div class="modal__caixa">
+        <button
+          type="button"
+          class="modal__fechar"
+          aria-label="Fechar"
+          data-modal-fechar
+        >
+          <i class="fa fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <div class="modal__cabecalho">
+          <h2 id="modal-agendamento-titulo">Finalize seu agendamento</h2>
+          <p class="data-agendamento">
+            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+            <time data-agendamento-data></time>
+          </p>
+        </div>
+
+        <form class="form-agendamento">
+          <input type="hidden" name="data" />
+
+          <fieldset class="form-agendamento__campo">
+            <legend class="form-agendamento__rotulo">Horário</legend>
+            <div class="horarios"></div>
+          </fieldset>
+
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="agendamento-nome"
+              >Nome completo</label
+            >
+            <input
+              class="form-agendamento__input"
+              type="text"
+              id="agendamento-nome"
+              name="nome"
+              placeholder="Seu nome"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="agendamento-whatsapp"
+              >WhatsApp</label
+            >
+            <input
+              class="form-agendamento__input"
+              type="tel"
+              id="agendamento-whatsapp"
+              name="whatsapp"
+              placeholder="(00) 00000-0000"
+              autocomplete="tel"
+              pattern="\(\d{2}\) \d{4,5}-\d{4}"
+              title="Use o formato (00) 00000-0000"
+              required
+            />
+          </div>
+
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="agendamento-email"
+              >E-mail (opcional)</label
+            >
+            <input
+              class="form-agendamento__input"
+              type="email"
+              id="agendamento-email"
+              name="email"
+              placeholder="voce@email.com"
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="agendamento-obs"
+              >Observações (opcional)</label
+            >
+            <textarea
+              class="form-agendamento__input"
+              id="agendamento-obs"
+              name="observacoes"
+              rows="3"
+              placeholder="Algo que devemos saber?"
+            ></textarea>
+          </div>
+
+          <p class="form-agendamento__erro" role="alert"></p>
+
+          <div class="form-agendamento__acoes">
+            <button
+              type="button"
+              class="form-agendamento__botao"
+              data-modal-fechar
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              class="form-agendamento__botao form-agendamento__botao--primario"
+            >
+              Confirmar agendamento
+            </button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <!-- Modal: popup de sucesso -->
+    <dialog
+      id="modal-sucesso"
+      class="modal modal--sucesso"
+      aria-labelledby="modal-sucesso-titulo"
+    >
+      <div class="modal__caixa sucesso">
+        <div class="sucesso__icone" aria-hidden="true">
+          <i class="fa fa-check"></i>
+        </div>
+        <h2
+          class="sucesso__titulo"
+          id="modal-sucesso-titulo"
+          data-sucesso-titulo
+        ></h2>
+        <p class="sucesso__detalhe" data-sucesso-detalhe></p>
+        <button
+          type="button"
+          class="form-agendamento__botao form-agendamento__botao--primario sucesso__botao"
+          data-modal-fechar
+        >
+          Fechar
+        </button>
+      </div>
+    </dialog>
   </body>
 </html>
