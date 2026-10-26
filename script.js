@@ -591,22 +591,53 @@ iniciarCalendario();
 
 // Modelo de Carrossel
 function iniciarCarrossel(secao) {
-  const slides = [...secao.querySelectorAll('.carrossel__slides > li')];
+  const faixa = secao.querySelector('.carrossel__slides');
+  const slides = [...faixa.children];
   const dots = [...secao.querySelectorAll('.carrossel__dots button')];
   const [anterior, proximo] = secao.querySelectorAll('.carrossel > .carrossel__seta');
   if (!slides.length || !anterior || !proximo) return;
+  const reduzir = window.matchMedia('(prefers-reduced-motion: reduce)');
   let atual = 0;
+  let animacao;
 
-  function mostrar(i) {
-    atual = (i + slides.length) % slides.length;
-    slides.forEach((s, n) => s.setAttribute('aria-current', n === atual));
-    dots.forEach((d, n) => d.setAttribute('aria-current', n === atual));
+  function marcar(i) {
+    atual = i;
+    slides.forEach((s, n) => s.setAttribute('aria-current', n === i));
+    dots.forEach((d, n) => d.setAttribute('aria-current', n === i));
   }
 
-  anterior.addEventListener('click', () => mostrar(atual - 1));
-  proximo.addEventListener('click', () => mostrar(atual + 1));
-  dots.forEach((d, n) => d.addEventListener('click', () => mostrar(n)));
-  mostrar(0);
+  function irPara(i, duracao = 700) {
+    i = (i + slides.length) % slides.length;
+    marcar(i);
+    const inicio = faixa.scrollLeft;
+    const fim = i * faixa.clientWidth;
+    cancelAnimationFrame(animacao);
+    if (reduzir.matches) { faixa.scrollLeft = fim; return; }
+    faixa.style.scrollSnapType = 'none';
+    const t0 = performance.now();
+    function passo(agora) {
+      const p = Math.min((agora - t0) / duracao, 1);
+      const suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      faixa.scrollLeft = inicio + (fim - inicio) * suave;
+      if (p < 1) animacao = requestAnimationFrame(passo);
+      else faixa.style.scrollSnapType = '';
+    }
+    animacao = requestAnimationFrame(passo);
+  }
+
+  let espera;
+  faixa.addEventListener('scroll', () => {
+    clearTimeout(espera);
+    espera = setTimeout(() => {
+      const n = Math.round(faixa.scrollLeft / faixa.clientWidth);
+      if (n !== atual) marcar(n);
+    }, 100);
+  });
+
+  anterior.addEventListener('click', () => irPara(atual - 1));
+  proximo.addEventListener('click', () => irPara(atual + 1));
+  dots.forEach((d, n) => d.addEventListener('click', () => irPara(n)));
+  marcar(0);
 }
 
 document.querySelectorAll('.planos-one').forEach(iniciarCarrossel);

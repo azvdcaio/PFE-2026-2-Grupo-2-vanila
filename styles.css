@@ -1480,20 +1480,22 @@ One To One
 }
 
 .carrossel__slides {
-  display: grid;
+  display: flex;
   width: 100%;
   max-width: 820px;
-  overflow: hidden;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  gap: 24px;
+}
+
+.carrossel__slides::-webkit-scrollbar {
+  display: none;
 }
 
 .carrossel__slides > li {
-  grid-area: 1 / 1;
-  width: 100%;
-  visibility: hidden;
-}
-
-.carrossel__slides > li[aria-current="true"] {
-  visibility: visible;
+  flex: 0 0 100%;
+  scroll-snap-align: start;
 }
 
 .carrossel__dots {
@@ -1510,6 +1512,13 @@ One To One
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carrossel__dots button {
+    transition: none;
+  }
 }
 
 .carrossel__dots button[aria-current="true"] {
