@@ -2310,3 +2310,24 @@ textarea.form-agendamento__input {
     padding-inline: 24px;
   }
 }
+
+
+
+/* redes socias contato da pkz */
+.contatos_redes_pkz {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+ margin: 25px 0 0;
+
+}
+
+.contatos_redes_pkz .btn-rede {
+  width: 43px;
+  height: 43px;
+  border-radius: 10px;
+  font-size: 1.2rem; /* tamanho do ícone */
+}

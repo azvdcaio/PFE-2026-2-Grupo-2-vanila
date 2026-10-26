@@ -39,66 +39,173 @@
       </div>
     </header>
 
-    <main>
-      <h1 id="title-contato">Entre em contato com a PKZ Lab</h1>
-      <p id="subtitle-contato">
-        Tem alguma duvida, critica ou sugestão? Preencha o formulário abaixo e
-        nossa equipe responderá o mais rapido possivel
-      </p>
-
-      <div class="contato-container">
-        <section class="contato-info">
-          <h2>Informações de Contato</h2>
-          <address>
-            <p>Telefone: +55 (21) 99999-9999</p>
-            <p>Email: demo@gmail.com</p>
-            <p>Endereço: Barra da tijuca, Rio de Janeiro/RJ</p>
-          </address>
+   <main>
+      <!--Título, informações de contato e formulário (mesmo grid do agendamento)-->
+      <section class="secao agendamento contato" aria-labelledby="titulo-contato">
+        <div class="agendamento__intro contato__intro">
+          <h1 id="titulo-contato">Entre em contato com a PKZ Lab</h1>
           <p>
-            <a href="agendamento-pkz.html" class="btn"
+            Tem alguma dúvida, crítica ou sugestão? Preencha o formulário e
+            nossa equipe responderá o mais rápido possível.
+          </p>
+
+          <p>
+            <a href="agendamento-pkz.html" class="btn btn--ciano"
               >Agendar uma aula experimental</a
             >
           </p>
 
-          <ul class="rede-social">
+          <h2 id="titulo-informacoes">Informação de contato</h2>
+          <address class="contato__info">
+            <ul class="passos contato__lista">
+              <li>
+                <span class="passos__numero"
+                  ><i class="fa-solid fa-phone" aria-hidden="true"></i
+                ></span>
+                +55 (21) 99999-9999
+              </li>
+              <li>
+                <span class="passos__numero"
+                  ><i class="fa-solid fa-envelope" aria-hidden="true"></i
+                ></span>
+                <a href="mailto:demo@gmail.com">demo@gmail.com</a>
+              </li>
+              <li>
+                <span class="passos__numero"
+                  ><i class="fa-solid fa-location-dot" aria-hidden="true"></i
+                ></span>
+                Barra da Tijuca, Rio de Janeiro
+              </li>
+            </ul>
+          </address>
+
+          <ul class="contatos_redes_pkz" aria-label="Redes sociais da PKZ lab ">
             <li>
-              <a href="#" aria-label="TikTok">
-                <i class="fa-brands fa-tiktok"> </i>
+              <a
+                href="https://www.tiktok.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-rede"
+                aria-label="TikTok da PKZ LAB"
+              >
+                <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
               </a>
             </li>
             <li>
-              <a href="#" aria-label="instagram">
-                <i class="fa-brands fa-instagram"> </i>
+              <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-rede"
+                aria-label="Instagram da PKZ LAB"
+              >
+                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
               </a>
             </li>
             <li>
-              <a href="#" aria-label="Whatsapp">
-                <i class="fa-brands fa-whatsapp"> </i>
+              <a
+                href="https://www.whatsapp.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-rede"
+                aria-label="WhatsApp da PKZ LAB "
+              >
+                <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
               </a>
             </li>
           </ul>
-        </section>
+        </div>
 
-        <form class="contato-form" method="POST">
-          <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" required>
+        <!--Formulário de Contato-->
+        <form
+          class="form-agendamento"
+          action="#"
+          method="get"
+          aria-label="Formulário de contato"
+        >
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="nome">Nome</label>
+            <input
+              class="form-agendamento__input"
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Seu nome"
+              autocomplete="given-name"
+              required
+            >
+          </div>
 
-          <label for="sobrenome">Sobrenome:</label>
-          <input type="text" id="sobrenome" name="sobrenome" required>
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="sobrenome"
+              >Sobrenome (opcional)</label
+            >
+            <input
+              class="form-agendamento__input"
+              type="text"
+              id="sobrenome"
+              name="sobrenome"
+              placeholder="Seu sobrenome"
+              autocomplete="family-name"
+            >
+          </div>
 
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="_replyto" required>
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="email">E-mail</label>
+            <input
+              class="form-agendamento__input"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="voce@email.com"
+              autocomplete="email"
+              required
+            >
+          </div>
 
-          <label for="telefone">Telefone:</label>
-          <input type="tel" id="telefone" name="telefone" required>
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="whatsapp"
+              >WhatsApp (opcional)</label
+            >
+            <input
+              class="form-agendamento__input"
+              type="tel"
+              id="whatsapp"
+              name="whatsapp"
+              placeholder="(00) 00000-0000"
+              autocomplete="tel"
+              pattern="\(\d{2}\) \d{4,5}-\d{4}"
+              title="Use o formato (00) 00000-0000"
+            >
+          </div>
 
-          <label for="message">Mensagem:</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
+          <div class="form-agendamento__campo">
+            <label class="form-agendamento__rotulo" for="mensagem"
+              >Mensagem</label
+            >
+            <textarea
+              class="form-agendamento__input"
+              id="mensagem"
+              name="mensagem"
+              rows="5"
+              placeholder="Escreva sua dúvida, crítica ou sugestão"
+              autocomplete="off"
+              required
+            ></textarea>
+          </div>
 
-          <button type="submit">Enviar mensagem</button>
+          <p class="form-agendamento__erro" role="alert"></p>
+
+          <button
+            type="submit"
+            class="form-agendamento__botao form-agendamento__botao--primario"
+          >
+            Enviar mensagem
+          </button>
         </form>
-      </div>
+      </section>
     </main>
+
 
     <footer class="footer" id="footer-pkz">
       <section class="footer__marca" aria-label="Rodapé do site">
