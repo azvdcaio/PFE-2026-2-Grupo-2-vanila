@@ -1,4 +1,78 @@
 /* ==========================================================
+   MENU HAMBÚRGUER
+   Funciona em qualquer página: procura o <nav> dentro do
+   <header> e cria o botão sozinho, então o HTML não muda.
+   Sem JS, o menu continua visível (o CSS só esconde o menu
+   quando o header ganha a classe .menu-pronto).
+   ========================================================== */
+function iniciarMenu() {
+  const PONTO_DESKTOP = window.matchMedia("(min-width: 767px)");
+
+  document.querySelectorAll("body > header").forEach((header, indice) => {
+    const nav = header.querySelector("nav");
+    if (!nav) return;
+
+    // O painel é o filho direto do header que contém o nav:
+    // o próprio <nav> ou o wrapper com o botão "Agendamento"
+    const painel = [...header.children].find((filho) => filho.contains(nav));
+    if (!painel) return;
+
+    painel.classList.add("menu-painel");
+    painel.id ||= `menu-painel-${indice}`;
+
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "menu-toggle";
+    botao.setAttribute("aria-controls", painel.id);
+    botao.setAttribute("aria-expanded", "false");
+    botao.setAttribute("aria-label", "Abrir menu");
+
+    const barra = document.createElement("span");
+    barra.className = "menu-toggle__barra";
+    barra.setAttribute("aria-hidden", "true");
+    botao.append(barra);
+
+    header.insertBefore(botao, painel);
+    header.classList.add("menu-pronto");
+
+    function definirAberto(aberto) {
+      header.classList.toggle("menu-aberto", aberto);
+      botao.setAttribute("aria-expanded", String(aberto));
+      botao.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+    }
+
+    const estaAberto = () => header.classList.contains("menu-aberto");
+
+    botao.addEventListener("click", () => definirAberto(!estaAberto()));
+
+    // Fecha ao escolher um link
+    painel.addEventListener("click", (evento) => {
+      if (evento.target.closest("a")) definirAberto(false);
+    });
+
+    // Fecha com Esc e devolve o foco ao botão
+    header.addEventListener("keydown", (evento) => {
+      if (evento.key === "Escape" && estaAberto()) {
+        definirAberto(false);
+        botao.focus();
+      }
+    });
+
+    // Fecha ao clicar fora do header
+    document.addEventListener("click", (evento) => {
+      if (estaAberto() && !header.contains(evento.target)) definirAberto(false);
+    });
+
+    // Ao chegar no layout de desktop, o menu volta ao estado fechado
+    PONTO_DESKTOP.addEventListener("change", (evento) => {
+      if (evento.matches) definirAberto(false);
+    });
+  });
+}
+
+iniciarMenu();
+
+/* ==========================================================
    MODAIS: comportamento genérico
    - Abrir:  <button data-modal-abrir="id-do-dialog">
    - Fechar: <button data-modal-fechar> dentro do <dialog>
