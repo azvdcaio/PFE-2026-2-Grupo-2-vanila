@@ -1074,6 +1074,13 @@ PKZ Lab
 /*------------------------------------------------
 One To One
 ------------------------------------------------*/
+/*===============================================
+One To One
+Mobile first: o estilo base vale de 320px em diante
+e as media queries (min-width) só acrescentam o que muda
+601px phablets | 768px tablets | 1025px laptops
+================================================*/
+
 .hero__eyebrow {
   font-weight: 700;
   font-size: 0.75rem;
@@ -1112,12 +1119,13 @@ One To One
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
 }
 
+/* Carrossel (compartilhado entre Planos e Opiniões) */
 .carrossel {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 8px;
 }
 
 .carrossel__seta {
@@ -1125,8 +1133,8 @@ One To One
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: none;
   border-radius: 50%;
   background: transparent;
@@ -1181,22 +1189,23 @@ One To One
   background: var(--cor-cinza-100);
 }
 
+/* Planos (carrossel) */
 .planos-one {
-  padding: 64px max(24px, calc((100% - 1100px) / 2));
+  padding: 48px max(24px, calc((100% - 1100px) / 2));
   background: var(--cor-azul-900);
   color: var(--cor-cinza-100);
   text-align: center;
 }
 
 .planos-one h2 {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   font-weight: 800;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 
 .plano-card article {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   position: relative;
   border-radius: 16px;
   overflow: hidden;
@@ -1206,14 +1215,14 @@ One To One
 
 .plano-card__imagem {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
 .plano-card__badge {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 16px;
+  left: 16px;
   padding: 6px 14px;
   border-radius: 20px;
   background: var(--cor-azul-900);
@@ -1226,7 +1235,7 @@ One To One
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 32px;
+  padding: 24px;
   background: var(--cor-azul-100);
 }
 
@@ -1272,11 +1281,12 @@ One To One
   opacity: 0.85;
 }
 
+/* Opiniões */
 .opinioes__lista {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-top: 40px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .opiniao-card article {
@@ -1284,7 +1294,7 @@ One To One
   flex-direction: column;
   gap: 24px;
   height: 100%;
-  padding: 28px;
+  padding: 24px;
   border-radius: 16px;
   background: var(--cor-azul-900);
   color: var(--cor-cinza-100);
@@ -1316,29 +1326,24 @@ One To One
 }
 
 .carrossel__setas-inline {
-  display: none;
+  display: flex;
   justify-content: center;
   gap: 16px;
   margin-top: 24px;
 }
 
-@media (max-width: 720px) {
-  .opinioes__lista {
-    grid-template-columns: 1fr;
-  }
-
-  .carrossel__setas-inline {
-    display: flex;
-  }
+/* Características (reaproveita .equipe__lista / .membro) */
+.caracteristicas .membro img {
+  aspect-ratio: 4 / 5;
 }
 
+/* Localização */
 .localizacao {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1fr;
+  gap: 32px;
   align-items: center;
-  padding-left: max(64px, calc((100% - 1100px) / 2));
-  padding-right: max(64px, calc((100% - 1100px) / 2));
+  padding: 40px max(24px, calc((100% - 1100px) / 2));
   background: var(--cor-azul-900);
   color: var(--cor-cinza-100);
 }
@@ -1382,9 +1387,10 @@ One To One
   text-align: right;
 }
 
+/* Chamada para ação */
 .cta-one {
-  margin: 0 max(24px, calc((100% - 1100px) / 2)) 64px;
-  padding: 56px 24px;
+  margin: 0 max(24px, calc((100% - 1100px) / 2)) 48px;
+  padding: 40px 24px;
   border-radius: 24px;
   background: var(--cor-azul-800);
   color: var(--cor-cinza-100);
@@ -1398,7 +1404,7 @@ One To One
 .cta-one h2 {
   max-width: 24ch;
   font-weight: 800;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .cta-one h2 span {
@@ -1409,6 +1415,224 @@ One To One
   max-width: 50ch;
   font-size: 0.85rem;
   opacity: 0.9;
+}
+
+/* 601px — phablets: opiniões em 2 colunas, sem setas extras */
+@media (min-width: 601px) {
+  .opinioes__lista {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .carrossel__setas-inline {
+    display: none;
+  }
+}
+
+/* 768px — tablets: card de plano em 2 colunas, localização lado a lado */
+@media (min-width: 768px) {
+  .carrossel {
+    gap: 16px;
+  }
+
+  .planos-one {
+    padding-block: 64px;
+  }
+
+  .planos-one h2 {
+    margin-bottom: 40px;
+    font-size: 1.75rem;
+  }
+
+  .plano-card article {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .plano-card__imagem {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .plano-card__badge {
+    top: 20px;
+    left: 20px;
+  }
+
+  .plano-card__detalhes {
+    padding: 32px;
+  }
+
+  .opinioes__lista {
+    margin-top: 40px;
+  }
+
+  .opiniao-card article {
+    padding: 28px;
+  }
+
+  .localizacao {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding: 0 max(64px, calc((100% - 1100px) / 2));
+  }
+
+  .cta-one {
+    margin-bottom: 64px;
+    padding-block: 56px;
+  }
+
+  .cta-one h2 {
+    font-size: 2rem;
+  }
+}
+
+/* 1025px — laptops e desktops */
+@media (min-width: 1025px) {
+  .carrossel {
+    gap: 24px;
+  }
+}
+
+/* One To One — ajustes responsivos das classes compartilhadas
+   Mobile first e restrito à página (.pagina-one): Hub e PKZ não mudam.
+   A base abaixo vale de 320px; cada media query devolve o valor de desktop. */
+.pagina-one .header__hub {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+}
+
+.pagina-one .menu {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+}
+
+.pagina-one .hero {
+  min-height: 520px;
+  padding: 48px 24px;
+}
+
+.pagina-one .hero__conteudo {
+  gap: 20px;
+}
+
+.pagina-one .hero h1 {
+  max-width: 14ch;
+  font-size: 2rem;
+}
+
+.pagina-one .hero__wordmark {
+  display: none;
+}
+
+.pagina-one .secao {
+  padding-block: 48px;
+}
+
+.pagina-one .secao__cabecalho {
+  margin-bottom: 32px;
+}
+
+.pagina-one .secao h2 {
+  font-size: 1.5rem;
+}
+
+.pagina-one .equipe__lista {
+  grid-template-columns: 1fr;
+}
+
+.pagina-one .footer__marca {
+  width: 100%;
+}
+
+.pagina-one .btn-rede {
+  width: 44px;
+  height: 44px;
+}
+
+@media (min-width: 601px) {
+  .pagina-one .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .pagina-one .caracteristicas .membro img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (min-width: 768px) {
+  .pagina-one .header__hub {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .pagina-one .menu {
+    flex-wrap: nowrap;
+    gap: 28px;
+  }
+
+  .pagina-one .hero {
+    min-height: 600px;
+  }
+
+  .pagina-one .hero h1 {
+    max-width: 11ch;
+    font-size: 3rem;
+  }
+
+  .pagina-one .hero__wordmark {
+    display: block;
+    font-size: 5rem;
+  }
+
+  .pagina-one .secao {
+    padding-block: 64px;
+  }
+
+  .pagina-one .secao__cabecalho {
+    margin-bottom: 48px;
+  }
+
+  .pagina-one .secao h2 {
+    font-size: 1.75rem;
+  }
+
+  .pagina-one .equipe__lista {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pagina-one .caracteristicas .membro img {
+    aspect-ratio: 4 / 5;
+  }
+
+  .pagina-one .footer__marca {
+    width: 260px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .pagina-one .hero {
+    min-height: 680px;
+    padding-block: 64px;
+  }
+
+  .pagina-one .hero__conteudo {
+    gap: 24px;
+  }
+
+  .pagina-one .hero h1 {
+    font-size: 3.5rem;
+  }
+
+  .pagina-one .hero__wordmark {
+    font-size: 9rem;
+  }
+
+  .pagina-one .btn-rede {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 /* Contato PKZ */
