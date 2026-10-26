@@ -126,7 +126,7 @@
             type="button"
             aria-label="Ver plano anterior"
           >
-            <i class="fa-solid fa-chevron-left"></i>
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
           </button>
           <ul class="carrossel__slides">
             <li
@@ -134,7 +134,7 @@
               aria-label="Slide 1 de 4"
               aria-current="true"
             >
-              <article aria-labelledby="titulo-plano-express">
+              <article aria-labelledby="titulo-plano-1">
                 <img
                   class="plano-card__imagem"
                   src="https://placehold.co/440x480"
@@ -142,7 +142,7 @@
                 >
                 <p class="plano-card__badge">Plano Express</p>
                 <div class="plano-card__detalhes">
-                  <h3 id="titulo-plano-express">
+                  <h3 id="titulo-plano-1">
                     Para quem tem pouco tempo mas não abre mão de se cuidar
                   </h3>
                   <dl>
@@ -271,7 +271,7 @@
             type="button"
             aria-label="Ver próximo plano"
           >
-            <i class="fa-solid fa-chevron-right"></i>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
           </button>
         </div>
         <ul class="carrossel__dots" aria-label="Selecionar slide">
@@ -340,19 +340,19 @@
             type="button"
             aria-label="Ver depoimento anterior"
           >
-            <i class="fa-solid fa-chevron-left"></i>
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
           </button>
           <button
             class="carrossel__seta carrossel__seta--escuro"
             type="button"
             aria-label="Ver próximo depoimento"
           >
-            <i class="fa-solid fa-chevron-right"></i>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
           </button>
         </div>
       </section>
 
-      <!-- Seção de localização -->
+<!-- Seção de localização -->
       <section class="localizacao" aria-labelledby="titulo-localizacao">
         <div class="localizacao__info">
           <p class="secao__eyebrow secao__eyebrow--claro">Onde estamos</p>
@@ -360,7 +360,10 @@
           <dl class="localizacao__dados">
             <div>
               <dt><img src="https://placehold.co/24x24" alt=""> Endereço</dt>
-              <dd>Endereço da One to One</dd>
+              <dd>
+                Av. Armando Lombardi, 949, Loja I – Barra da Tijuca, Rio de
+                Janeiro
+              </dd>
             </div>
             <div>
               <dt>
@@ -370,13 +373,23 @@
               <dd>08:00 - 19:00</dd>
             </div>
           </dl>
-          <a class="btn btn--contorno" href="">Abrir no mapa</a>
+          <a
+            class="btn btn--contorno"
+            href="https://www.google.com/maps/search/?api=1&amp;query=Av+Armando+Lombardi+949+Barra+da+Tijuca+Rio+de+Janeiro"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Abrir no mapa (abre em nova aba)"
+            >Abrir no mapa</a
+          >
         </div>
         <figure class="localizacao__mapa">
-          <img
-            src="https://placehold.co/640x420"
-            alt="Mapa com a localização da One To One"
-          >
+          <iframe
+            src="https://www.google.com/maps?q=Av+Armando+Lombardi+949+Barra+da+Tijuca+Rio+de+Janeiro&amp;output=embed"
+            title="Mapa com a localização da One To One"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
           <figcaption>Dados do mapa ©2026 Google</figcaption>
         </figure>
       </section>
@@ -398,7 +411,9 @@
     <!-- Footer padronizado -->
     <footer class="footer">
       <section class="footer__marca" aria-label="Rodapé do site">
-        <img src="assets/hub_logo.png" alt="Hub">
+        <a href="index.html">
+          <img src="assets/hub_logo.png" alt="Hub PKZ Lab e One To One, ir para a página inicial">
+        </a>
         <p>
           O Hub reúne PKZ Lab e One to One em um só espaço digital: duas
           metodologias, um só compromisso com performance.

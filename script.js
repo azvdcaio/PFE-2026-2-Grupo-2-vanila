@@ -588,3 +588,25 @@ function iniciarCalendario() {
 }
 
 iniciarCalendario();
+
+// Modelo de Carrossel
+function iniciarCarrossel(secao) {
+  const slides = [...secao.querySelectorAll('.carrossel__slides > li')];
+  const dots = [...secao.querySelectorAll('.carrossel__dots button')];
+  const [anterior, proximo] = secao.querySelectorAll('.carrossel > .carrossel__seta');
+  if (!slides.length || !anterior || !proximo) return;
+  let atual = 0;
+
+  function mostrar(i) {
+    atual = (i + slides.length) % slides.length;
+    slides.forEach((s, n) => s.setAttribute('aria-current', n === atual));
+    dots.forEach((d, n) => d.setAttribute('aria-current', n === atual));
+  }
+
+  anterior.addEventListener('click', () => mostrar(atual - 1));
+  proximo.addEventListener('click', () => mostrar(atual + 1));
+  dots.forEach((d, n) => d.addEventListener('click', () => mostrar(n)));
+  mostrar(0);
+}
+
+document.querySelectorAll('.planos-one').forEach(iniciarCarrossel);

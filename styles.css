@@ -1408,12 +1408,6 @@ PKZ Lab
 /*------------------------------------------------
 One To One
 ------------------------------------------------*/
-/*===============================================
-One To One
-Mobile first: o estilo base vale de 320px em diante
-e as media queries (min-width) só acrescentam o que muda
-601px phablets | 768px tablets | 1025px laptops
-================================================*/
 
 .hero__eyebrow {
   font-weight: 700;
@@ -1486,20 +1480,20 @@ e as media queries (min-width) só acrescentam o que muda
 }
 
 .carrossel__slides {
-  display: flex;
+  display: grid;
   width: 100%;
   max-width: 820px;
   overflow: hidden;
 }
 
 .carrossel__slides > li {
-  flex-shrink: 0;
+  grid-area: 1 / 1;
   width: 100%;
-  display: none;
+  visibility: hidden;
 }
 
 .carrossel__slides > li[aria-current="true"] {
-  display: block;
+  visibility: visible;
 }
 
 .carrossel__dots {
@@ -1540,6 +1534,7 @@ e as media queries (min-width) só acrescentam o que muda
 .plano-card article {
   display: grid;
   grid-template-columns: 1fr;
+  height: 100%;
   position: relative;
   border-radius: 16px;
   overflow: hidden;
@@ -1714,6 +1709,13 @@ e as media queries (min-width) só acrescentam o que muda
   border-radius: 12px;
 }
 
+.localizacao__mapa iframe {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 0;
+  border-radius: 12px;
+}
+
 .localizacao__mapa figcaption {
   margin-top: 8px;
   font-size: 0.7rem;
@@ -1827,9 +1829,6 @@ e as media queries (min-width) só acrescentam o que muda
   }
 }
 
-/* One To One — ajustes responsivos das classes compartilhadas
-   Mobile first e restrito à página (.pagina-one): Hub e PKZ não mudam.
-   A base abaixo vale de 320px; cada media query devolve o valor de desktop. */
 .pagina-one .header__hub {
   flex-wrap: wrap;
   justify-content: center;
