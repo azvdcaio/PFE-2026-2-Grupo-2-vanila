@@ -1414,6 +1414,63 @@ One To One
 /* Contato PKZ */
 
 /* Contato One To One */
+/* Todas as regras começam com .pagina-one: nunca alcançam as páginas da PKZ */
+
+/* .agendamento vem depois no arquivo e define align-items: center */
+.pagina-one .contato.agendamento {
+  align-items: start;
+}
+
+/* Vence o ".secao h2" global */
+.pagina-one .contato h2 {
+  margin-bottom: 16px;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--cor-agendamento);
+}
+
+.pagina-one .contato__info {
+  font-style: normal; /* <address> é itálico por padrão */
+}
+
+.pagina-one .contato__lista .passos__numero {
+  background: var(--cor-agendamento);
+}
+
+.pagina-one .contato__lista a:hover {
+  text-decoration: underline;
+}
+
+.pagina-one .contato__redes {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* Vence ".pagina-one .btn-rede", que vem depois */
+.pagina-one .contato__redes .btn-rede {
+  width: 40px;
+  height: 40px;
+  border-color: #cfcbbd;
+  border-radius: 10px;
+  background: #fff;
+  color: var(--cor-agendamento);
+  font-size: 1.1rem;
+}
+
+.pagina-one .contato__redes .btn-rede:hover {
+  border-color: var(--cor-agendamento);
+  background: var(--cor-agendamento);
+  color: #fff;
+}
+
+/* Card branco, mesmo visual do .calendario */
+.pagina-one .contato .form-agendamento {
+  padding: 24px;
+  border: 1px solid #e3e0d8;
+  border-radius: 20px;
+  background: #fff;
+}
 
 /* Agendamento PKZ */
 
