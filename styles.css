@@ -1408,6 +1408,12 @@ PKZ Lab
 /*------------------------------------------------
 One To One
 ------------------------------------------------*/
+/*===============================================
+One To One
+Mobile first: o estilo base vale de 320px em diante
+e as media queries (min-width) só acrescentam o que muda
+601px phablets | 768px tablets | 1025px laptops
+================================================*/
 
 .hero__eyebrow {
   font-weight: 700;
@@ -1426,14 +1432,13 @@ One To One
 }
 
 .hero__wordmark {
-  display: none;
   position: absolute;
   top: 50%;
   right: 5%;
   transform: translateY(-50%);
   max-width: none;
   font-weight: 800;
-  font-size: 5rem;
+  font-size: 9rem;
   line-height: 0.85;
   color: transparent;
   -webkit-text-stroke: 2px rgba(255, 255, 255, 0.15);
@@ -1520,7 +1525,7 @@ One To One
 
 /* Planos (carrossel) */
 .planos-one {
-  padding: 48px var(--margem);
+  padding: 48px max(24px, calc((100% - 1100px) / 2));
   background: var(--cor-azul-900);
   color: var(--cor-cinza-100);
   text-align: center;
@@ -1672,7 +1677,7 @@ One To One
   grid-template-columns: 1fr;
   gap: 32px;
   align-items: center;
-  padding: 40px var(--margem);
+  padding: 40px max(24px, calc((100% - 1100px) / 2));
   background: var(--cor-azul-900);
   color: var(--cor-cinza-100);
 }
@@ -1718,9 +1723,9 @@ One To One
 
 /* Chamada para ação */
 .cta-one {
-  margin: 0 var(--margem) 40px;
-  padding: 40px 16px;
-  border-radius: 16px;
+  margin: 48px max(24px, calc((100% - 1100px) / 2));
+  padding: 40px 24px;
+  border-radius: 24px;
   background: var(--cor-azul-800);
   color: var(--cor-cinza-100);
   text-align: center;
@@ -1746,17 +1751,7 @@ One To One
   opacity: 0.9;
 }
 
-/* Ajustes só da página One To One */
-.pagina-one .hero h1 {
-  max-width: 14ch;
-  font-size: 2rem;
-}
-
-.pagina-one .secao__cabecalho {
-  margin-bottom: 32px;
-}
-
-/* 601px — 767px: phablets e tablets pequenos */
+/* 601px — phablets: opiniões em 2 colunas, sem setas extras */
 @media (min-width: 601px) {
   .opinioes__lista {
     grid-template-columns: repeat(2, 1fr);
@@ -1766,22 +1761,10 @@ One To One
   .carrossel__setas-inline {
     display: none;
   }
-
-  .caracteristicas .membro img {
-    aspect-ratio: 16 / 10;
-  }
-
-  .pagina-one .hero h1 {
-    font-size: 2.5rem;
-  }
 }
 
-/* 767px — 1024px: tablets */
-@media (min-width: 767px) {
-  .hero__wordmark {
-    display: block;
-  }
-
+/* 768px — tablets: card de plano em 2 colunas, localização lado a lado */
+@media (min-width: 768px) {
   .carrossel {
     gap: 16px;
   }
@@ -1821,24 +1804,106 @@ One To One
     padding: 28px;
   }
 
-  .caracteristicas .membro img {
-    aspect-ratio: 4 / 5;
-  }
-
   .localizacao {
     grid-template-columns: 1fr 1fr;
     gap: 48px;
-    padding: 0 var(--margem);
+    padding: 64px max(64px, calc((100% - 1100px) / 2));
   }
 
   .cta-one {
-    margin-bottom: 64px;
-    padding: 56px 24px;
-    border-radius: 24px;
+    margin-block: 64px;
+    padding-block: 56px;
   }
 
   .cta-one h2 {
     font-size: 2rem;
+  }
+}
+
+/* 1025px — laptops e desktops */
+@media (min-width: 1025px) {
+  .carrossel {
+    gap: 24px;
+  }
+}
+
+/* One To One — ajustes responsivos das classes compartilhadas
+   Mobile first e restrito à página (.pagina-one): Hub e PKZ não mudam.
+   A base abaixo vale de 320px; cada media query devolve o valor de desktop. */
+.pagina-one .header__hub {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+}
+
+.pagina-one .menu {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+}
+
+.pagina-one .hero {
+  min-height: 520px;
+  padding: 48px 24px;
+}
+
+.pagina-one .hero__conteudo {
+  gap: 20px;
+}
+
+.pagina-one .hero h1 {
+  max-width: 14ch;
+  font-size: 2rem;
+}
+
+.pagina-one .hero__wordmark {
+  display: none;
+}
+
+.pagina-one .secao {
+  padding-block: 48px;
+}
+
+.pagina-one .secao__cabecalho {
+  margin-bottom: 32px;
+}
+
+.pagina-one .secao h2 {
+  font-size: 1.5rem;
+}
+
+.pagina-one .equipe__lista {
+  grid-template-columns: 1fr;
+}
+
+.pagina-one .footer__marca {
+  width: 100%;
+}
+
+.pagina-one .btn-rede {
+  width: 44px;
+  height: 44px;
+}
+
+@media (min-width: 601px) {
+  .pagina-one .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .pagina-one .caracteristicas .membro img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (min-width: 768px) {
+  .pagina-one .header__hub {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .pagina-one .menu {
+    flex-wrap: nowrap;
+    gap: 28px;
   }
 
   .pagina-one .hero {
@@ -1850,34 +1915,57 @@ One To One
     font-size: 3rem;
   }
 
+  .pagina-one .hero__wordmark {
+    display: block;
+    font-size: 5rem;
+  }
+
+  .pagina-one .secao {
+    padding-block: 64px;
+  }
+
   .pagina-one .secao__cabecalho {
     margin-bottom: 48px;
   }
+
+  .pagina-one .secao h2 {
+    font-size: 1.75rem;
+  }
+
+  .pagina-one .equipe__lista {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .pagina-one .caracteristicas .membro img {
+    aspect-ratio: 4 / 5;
+  }
+
+  .pagina-one .footer__marca {
+    width: 260px;
+  }
 }
 
-/* 1025px — 1200px: laptops, desktops e telas grandes */
 @media (min-width: 1025px) {
-  .hero__wordmark {
-    font-size: 9rem;
-  }
-
-  .carrossel {
-    gap: 24px;
-  }
-
   .pagina-one .hero {
     min-height: 680px;
+    padding-block: 64px;
+  }
+
+  .pagina-one .hero__conteudo {
+    gap: 24px;
   }
 
   .pagina-one .hero h1 {
     font-size: 3.5rem;
   }
-}
 
-/* 1201px em diante: telas muito grandes e TVs */
-@media (min-width: 1201px) {
-  .pagina-one .hero {
-    min-height: 760px;
+  .pagina-one .hero__wordmark {
+    font-size: 9rem;
+  }
+
+  .pagina-one .btn-rede {
+    width: 32px;
+    height: 32px;
   }
 }
 
