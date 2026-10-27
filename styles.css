@@ -1839,8 +1839,6 @@ One To One
 }
 
 .pagina-one .header__hub {
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 8px 24px;
 }
 
@@ -1904,10 +1902,6 @@ One To One
 }
 
 @media (min-width: 768px) {
-  .pagina-one .header__hub {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-  }
 
   .pagina-one .menu {
     flex-wrap: nowrap;
