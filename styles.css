@@ -1264,6 +1264,26 @@ PKZ Lab
   border-color: var(--cor-cinza-100);
 }
 
+.header__acoes .btn-agendamento {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  background-color: transparent;
+  color: var(--cor-cinza-100);
+  border-color: var(--cor-cinza-100);
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.header__acoes .btn-agendamento:hover,
+.header__acoes .btn-agendamento[aria-current="page"] {
+  color: var(--cor-azul-700);
+  border: 1px solid var(--cor-azul-800);
+  background-color: var(--cor-cinza-100);
+}
+
 /*Seção opinião*/
 .pkz-secao-opiniao {
   padding: 0 var(--margem) 40px;
@@ -1512,7 +1532,9 @@ One To One
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transition: width 0.5s ease, background-color 0.5s ease;
+  transition:
+    width 0.5s ease,
+    background-color 0.5s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1911,7 +1933,6 @@ One To One
 }
 
 @media (min-width: 768px) {
-
   .pagina-one .menu {
     flex-wrap: nowrap;
     gap: 28px;
