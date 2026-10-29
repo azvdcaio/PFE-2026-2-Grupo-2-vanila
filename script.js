@@ -417,7 +417,6 @@ function iniciarCalendario() {
       input.type = "radio";
       input.name = "horario";
       input.value = hora;
-      input.required = true;
       input.disabled = reservado || horarioPassou(dia, hora);
       texto.textContent = hora;
       if (reservado) label.title = "Horário reservado";
@@ -496,7 +495,7 @@ function iniciarCalendario() {
 
     diaSelecionado = botao.dataset.data;
     marcarSelecao();
-    erro.textContent = "";
+    limparErros();
 
     form.elements.data.value = diaSelecionado;
     textoData.dateTime = diaSelecionado;
@@ -505,9 +504,210 @@ function iniciarCalendario() {
     modal.showModal();
   });
 
+  /* ==========================================================
+     VALIDAÇÃO DO FORMULÁRIO (feita só em JS, sem regex e sem
+     atributos de validação do HTML: o <form> tem "novalidate")
+     ========================================================== */
+
+  // Devolve só os dígitos de um texto: "(31) 98888-7777" -> "31988887777"
+  function apenasNumeros(texto) {
+    let numeros = "";
+    for (let posicao = 0; posicao < texto.length; posicao++) {
+      const caractere = texto[posicao];
+      if (caractere >= "0" && caractere <= "9") {
+        numeros = numeros + caractere;
+      }
+    }
+    return numeros;
+  }
+
+  function validarHorario(horario) {
+    if (horario === "") return "Selecione um horário.";
+    if (!HORARIOS.includes(horario)) return "Horário inválido.";
+    return "";
+  }
+
+  function validarNome(nome) {
+    nome = nome.trim();
+
+    if (nome === "") return "Preencha o nome.";
+    if (nome.length < 3) return "O nome precisa ter pelo menos 3 letras.";
+    if (nome.length > 80) return "O nome está muito longo.";
+
+    for (let posicao = 0; posicao < nome.length; posicao++) {
+      const caractere = nome[posicao];
+
+      // uma letra muda quando vira maiúscula ou minúscula ("a" e "A"),
+      // já números e símbolos continuam iguais ("1" e "1")
+      const ehLetra = caractere.toLowerCase() !== caractere.toUpperCase();
+      const ehEspaco = caractere === " ";
+      const ehHifen = caractere === "-";
+      const ehApostrofo = caractere === "'";
+
+      if (!ehLetra && !ehEspaco && !ehHifen && !ehApostrofo) {
+        return "O nome só pode ter letras.";
+      }
+    }
+
+    if (nome.indexOf(" ") === -1) return "Informe nome e sobrenome.";
+
+    return "";
+  }
+
+  function validarWhatsapp(whatsapp) {
+    const numeros = apenasNumeros(whatsapp);
+
+    if (numeros === "") return "Preencha o WhatsApp.";
+    if (numeros.length !== 10 && numeros.length !== 11) {
+      return "Use o formato (00) 00000-0000.";
+    }
+    if (numeros[0] === "0" || numeros[1] === "0") return "DDD inválido.";
+    if (numeros.length === 11 && numeros[2] !== "9") {
+      return "Celular deve começar com 9 depois do DDD.";
+    }
+
+    return "";
+  }
+
+  // E-mail é obrigatório
+  function validarEmail(email) {
+    email = email.trim();
+
+    if (email === "") return "Preencha o e-mail.";
+    if (email.length > 120) return "E-mail muito longo.";
+
+    const posicaoDoArroba = email.indexOf("@");
+    const posicaoDoUltimoPonto = email.lastIndexOf(".");
+
+    const temTextoAntesDoArroba = posicaoDoArroba > 0;
+    const temSoUmArroba = email.indexOf("@", posicaoDoArroba + 1) === -1;
+    const temPontoDepoisDoArroba = posicaoDoUltimoPonto > posicaoDoArroba + 1;
+    const naoTerminaComPonto = posicaoDoUltimoPonto < email.length - 1;
+    const naoTemEspaco = email.indexOf(" ") === -1;
+
+    if (
+      !temTextoAntesDoArroba ||
+      !temSoUmArroba ||
+      !temPontoDepoisDoArroba ||
+      !naoTerminaComPonto ||
+      !naoTemEspaco
+    ) {
+      return "E-mail inválido. Exemplo: nome@dominio.com";
+    }
+
+    return "";
+  }
+
+  function validarObservacoes(texto) {
+    if (texto.length > 300) return "Máximo de 300 caracteres.";
+    return "";
+  }
+
+  // A data vem de um input hidden: confere se não foi alterada no DevTools
+  function dataEstaValida() {
+    const texto = form.elements.data.value;
+    const partes = texto.split("-");
+
+    if (partes.length !== 3) return false;
+    if (
+      partes[0].length !== 4 ||
+      partes[1].length !== 2 ||
+      partes[2].length !== 2
+    ) {
+      return false;
+    }
+    if (apenasNumeros(texto).length !== 8) return false;
+
+    const data = dataDe(texto);
+    if (isNaN(data.getTime())) return false;
+
+    return !motivoBloqueio(data, lerReservas());
+  }
+
+  const VALIDADORES = {
+    horario: validarHorario,
+    nome: validarNome,
+    whatsapp: validarWhatsapp,
+    email: validarEmail,
+    observacoes: validarObservacoes,
+  };
+
+  // Mensagem no <span> + borda vermelha no campo.
+  // Mensagem vazia = campo certo: apaga o erro. Devolve true se está certo.
+  function mostrarErro(nomeDoCampo, mensagem) {
+    const spanDeErro = form.querySelector(`[data-erro-para="${nomeDoCampo}"]`);
+    // os radios não são um input só: a borda vai no grupo de horários
+    const campo =
+      nomeDoCampo === "horario" ? listaHorarios : form.elements[nomeDoCampo];
+
+    spanDeErro.textContent = mensagem;
+
+    if (mensagem === "") {
+      campo.classList.remove("invalido");
+      campo.removeAttribute("aria-invalid");
+      return true;
+    }
+
+    campo.classList.add("invalido");
+    campo.setAttribute("aria-invalid", "true");
+    return false;
+  }
+
+  function validarCampo(nomeDoCampo) {
+    // para radio, .value é o valor do marcado ou ""
+    const valor = form.elements[nomeDoCampo].value;
+    return mostrarErro(nomeDoCampo, VALIDADORES[nomeDoCampo](valor));
+  }
+
+  function validarFormulario() {
+    erro.textContent = "";
+
+    // sem curto-circuito: valida todos para mostrar todos os erros de uma vez
+    let tudoCerto = true;
+    let primeiroComErro = null;
+
+    for (const nomeDoCampo in VALIDADORES) {
+      if (!validarCampo(nomeDoCampo)) {
+        tudoCerto = false;
+        if (primeiroComErro === null) primeiroComErro = nomeDoCampo;
+      }
+    }
+
+    if (!dataEstaValida()) {
+      erro.textContent = "Data indisponível. Feche e escolha outro dia.";
+      return false;
+    }
+
+    if (primeiroComErro === "horario") {
+      listaHorarios.querySelector("input:not(:disabled)")?.focus();
+    } else if (primeiroComErro) {
+      form.elements[primeiroComErro].focus();
+    }
+
+    return tudoCerto;
+  }
+
+  function limparErros() {
+    for (const nomeDoCampo in VALIDADORES) mostrarErro(nomeDoCampo, "");
+    erro.textContent = "";
+  }
+
+  // Valida ao sair do campo; depois do primeiro erro, revalida a cada tecla
+  ["nome", "whatsapp", "email", "observacoes"].forEach((nomeDoCampo) => {
+    const campo = form.elements[nomeDoCampo];
+
+    campo.addEventListener("blur", () => validarCampo(nomeDoCampo));
+    campo.addEventListener("input", () => {
+      if (campo.classList.contains("invalido")) validarCampo(nomeDoCampo);
+    });
+  });
+
+  // Os radios são recriados a cada abertura do modal: delegação no container
+  listaHorarios.addEventListener("change", () => validarCampo("horario"));
+
   /* ---- Máscara do WhatsApp: (00) 00000-0000 ---- */
   form.elements.whatsapp.addEventListener("input", (evento) => {
-    const n = evento.target.value.replace(/\D/g, "").slice(0, 11);
+    const n = apenasNumeros(evento.target.value).slice(0, 11);
 
     if (n.length > 10)
       evento.target.value = `(${n.slice(0, 2)}) ${n.slice(2, 7)}-${n.slice(7)}`;
@@ -527,8 +727,12 @@ function iniciarCalendario() {
   form.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
+    if (!validarFormulario()) return;
+
     const dados = Object.fromEntries(new FormData(form));
     dados.nome = dados.nome.trim();
+    dados.email = dados.email.trim();
+    dados.observacoes = dados.observacoes.trim();
     const reservas = lerReservas(); // lê de novo: outra aba pode ter reservado antes
 
     const conflito = reservas.some(
@@ -573,7 +777,7 @@ function iniciarCalendario() {
 
   modal.addEventListener("close", () => {
     form.reset();
-    erro.textContent = "";
+    limparErros();
   });
 
   // Se o agendamento for feito em outra aba, atualiza esta
@@ -591,19 +795,21 @@ iniciarCalendario();
 
 // Modelo de Carrossel
 function iniciarCarrossel(secao) {
-  const faixa = secao.querySelector('.carrossel__slides');
+  const faixa = secao.querySelector(".carrossel__slides");
   const slides = [...faixa.children];
-  const dots = [...secao.querySelectorAll('.carrossel__dots button')];
-  const [anterior, proximo] = secao.querySelectorAll('.carrossel > .carrossel__seta');
+  const dots = [...secao.querySelectorAll(".carrossel__dots button")];
+  const [anterior, proximo] = secao.querySelectorAll(
+    ".carrossel > .carrossel__seta",
+  );
   if (!slides.length || !anterior || !proximo) return;
-  const reduzir = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)");
   let atual = 0;
   let animacao;
 
   function marcar(i) {
     atual = i;
-    slides.forEach((s, n) => s.setAttribute('aria-current', n === i));
-    dots.forEach((d, n) => d.setAttribute('aria-current', n === i));
+    slides.forEach((s, n) => s.setAttribute("aria-current", n === i));
+    dots.forEach((d, n) => d.setAttribute("aria-current", n === i));
   }
 
   function irPara(i, duracao = 700) {
@@ -612,21 +818,24 @@ function iniciarCarrossel(secao) {
     const inicio = faixa.scrollLeft;
     const fim = i * faixa.clientWidth;
     cancelAnimationFrame(animacao);
-    if (reduzir.matches) { faixa.scrollLeft = fim; return; }
-    faixa.style.scrollSnapType = 'none';
+    if (reduzir.matches) {
+      faixa.scrollLeft = fim;
+      return;
+    }
+    faixa.style.scrollSnapType = "none";
     const t0 = performance.now();
     function passo(agora) {
       const p = Math.min((agora - t0) / duracao, 1);
       const suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
       faixa.scrollLeft = inicio + (fim - inicio) * suave;
       if (p < 1) animacao = requestAnimationFrame(passo);
-      else faixa.style.scrollSnapType = '';
+      else faixa.style.scrollSnapType = "";
     }
     animacao = requestAnimationFrame(passo);
   }
 
   let espera;
-  faixa.addEventListener('scroll', () => {
+  faixa.addEventListener("scroll", () => {
     clearTimeout(espera);
     espera = setTimeout(() => {
       const n = Math.round(faixa.scrollLeft / faixa.clientWidth);
@@ -634,10 +843,10 @@ function iniciarCarrossel(secao) {
     }, 100);
   });
 
-  anterior.addEventListener('click', () => irPara(atual - 1));
-  proximo.addEventListener('click', () => irPara(atual + 1));
-  dots.forEach((d, n) => d.addEventListener('click', () => irPara(n)));
+  anterior.addEventListener("click", () => irPara(atual - 1));
+  proximo.addEventListener("click", () => irPara(atual + 1));
+  dots.forEach((d, n) => d.addEventListener("click", () => irPara(n)));
   marcar(0);
 }
 
-document.querySelectorAll('.planos-one').forEach(iniciarCarrossel);
+document.querySelectorAll(".planos-one").forEach(iniciarCarrossel);
