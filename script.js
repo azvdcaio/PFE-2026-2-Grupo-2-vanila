@@ -117,13 +117,17 @@ const cardsValores = document.querySelectorAll(
   ".valores__lista .card-caracteristica",
 );
 
-const observador = new IntersectionObserver((entradas) => {
-  entradas.forEach((entrada) => {
-    if (entrada.isIntersecting) {
-      entrada.target.classList.remove("valor--oculto");
-    }
-  });
-});
+const observador = new IntersectionObserver(
+  (entradas) => {
+    entradas.forEach((entrada) => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.remove("valor--oculto");
+        observador.unobserve(entrada.target);
+      }
+    });
+  },
+  { threshold: 0.2 },
+);
 
 cardsValores.forEach((card) => {
   card.classList.add("valor--oculto");
@@ -647,8 +651,8 @@ function iniciarCalendario() {
   });
 
   /* ==========================================================
-     VALIDAÇÃO DO FORMULÁRIO (feita só em JS, sem regex e sem
-     atributos de validação do HTML: o <form> tem "novalidate")
+    VALIDAÇÃO DO FORMULÁRIO (feita só em JS, sem regex e sem
+    atributos de validação do HTML: o <form> tem "novalidate")
      ========================================================== */
 
   function validarHorario(horario) {
