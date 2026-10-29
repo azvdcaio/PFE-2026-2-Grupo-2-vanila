@@ -1,4 +1,93 @@
 /* ==========================================================
+   SUBMENUS DO HEADER
+   Lista única das seções de cada página. O JS cria o submenu
+   em todos os headers do site, então o HTML não muda.
+   - Desktop: aparece no hover (ou no foco do teclado), via CSS
+   - Mobile: abre pelo botão com a seta, dentro do hambúrguer
+   ========================================================== */
+const SUBMENUS = {
+  "index.html": [
+    { texto: "Valores", ancora: "valores" },
+    { texto: "Empresas", ancora: "empresas" },
+    { texto: "Equipe", ancora: "equipe" },
+  ],
+  "pkz-lab.html": [
+    { texto: "Quem somos", ancora: "pkz-sobre" },
+    { texto: "Características", ancora: "pkz-caracteristicas" },
+    { texto: "Planos", ancora: "pkz-planos" },
+    { texto: "Depoimentos", ancora: "pkz-depoimentos" },
+    { texto: "Localização", ancora: "pkz-localizacao" },
+  ],
+  "one-to-one.html": [
+    { texto: "Características", ancora: "caracteristicas" },
+    { texto: "Planos", ancora: "planos" },
+    { texto: "Depoimentos", ancora: "depoimentos" },
+    { texto: "Localização", ancora: "localizacao" },
+  ],
+};
+
+function iniciarSubmenus() {
+  const PONTO_DESKTOP = window.matchMedia("(min-width: 767px)");
+  const itens = [];
+
+  document.querySelectorAll("body > header .menu > li > a").forEach((link) => {
+    const pagina = link.getAttribute("href");
+    const secoes = SUBMENUS[pagina];
+    if (!secoes) return;
+
+    const item = link.parentElement;
+    const id = `submenu-${pagina.replace(".html", "")}`;
+    item.classList.add("menu__item--sub");
+
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.className = "submenu-toggle";
+    botao.setAttribute("aria-expanded", "false");
+    botao.setAttribute("aria-controls", id);
+    botao.setAttribute("aria-label", `Seções de ${link.textContent.trim()}`);
+    botao.innerHTML =
+      '<i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
+
+    const lista = document.createElement("ul");
+    lista.className = "submenu";
+    lista.id = id;
+
+    secoes.forEach(({ texto, ancora }) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = `${pagina}#${ancora}`;
+      a.textContent = texto;
+      li.append(a);
+      lista.append(li);
+    });
+
+    item.append(botao, lista);
+    itens.push({ item, botao });
+
+    botao.addEventListener("click", () => {
+      const aberto = item.classList.toggle("submenu-aberto");
+      botao.setAttribute("aria-expanded", String(aberto));
+    });
+
+    // Sem isso o :focus-within mantém o submenu aberto após o clique
+    lista.addEventListener("click", (evento) => {
+      if (PONTO_DESKTOP.matches) evento.target.closest("a")?.blur();
+    });
+  });
+
+  // No desktop o submenu é só hover: limpa o que ficou aberto no mobile
+  PONTO_DESKTOP.addEventListener("change", (evento) => {
+    if (!evento.matches) return;
+    itens.forEach(({ item, botao }) => {
+      item.classList.remove("submenu-aberto");
+      botao.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+iniciarSubmenus();
+
+/* ==========================================================
    MENU HAMBÚRGUER
    Funciona em qualquer página: procura o <nav> dentro do
    <header> e cria o botão sozinho, então o HTML não muda.

@@ -457,6 +457,115 @@ button.btn {
   }
 }
 
+/* Submenu das seções (criado pelo JS) */
+.menu__item--sub {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu__item--sub > a {
+  flex: 1;
+}
+
+.submenu-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--cor-cinza-100);
+  cursor: pointer;
+}
+
+.submenu-toggle i {
+  transition: transform 0.2s ease;
+}
+
+.submenu-toggle[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.submenu-toggle:focus-visible {
+  outline: 3px solid var(--cor-azul-500);
+  outline-offset: -3px;
+}
+
+.submenu {
+  display: none;
+  flex-basis: 100%;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 0 8px 16px;
+}
+
+.submenu-aberto > .submenu {
+  display: flex;
+}
+
+.menu .submenu li + li {
+  border-top: 0;
+}
+
+.menu .submenu a {
+  padding: 8px 0;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* cor do submenu igual ao fundo do header de cada página */
+.pkz-corpo,
+.pagina-pkz {
+  --cor-submenu: var(--cor-azul-700);
+}
+
+.pagina-one {
+  --cor-submenu: var(--cor-azul-800);
+}
+
+@media (min-width: 767px) {
+  .submenu-toggle {
+    display: none;
+  }
+
+  .menu__item--sub {
+    position: relative;
+  }
+
+  .submenu {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    min-width: 200px;
+    padding: 12px 16px;
+    border-radius: 0 0 8px 8px;
+    background: var(--cor-submenu, var(--cor-azul-900));
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.25);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      visibility 0.2s;
+  }
+
+  .menu__item--sub:hover > .submenu,
+  .menu__item--sub:focus-within > .submenu {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .menu .submenu a {
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+}
+
 .hero {
   position: relative;
   display: flex;
