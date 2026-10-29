@@ -2786,3 +2786,16 @@ textarea.form-agendamento__input {
   outline-offset: 4px;
   border-radius: 6px;
 }
+
+.form-agendamento__sucesso {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #d1e7dd;
+  color: #0f5132;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.form-agendamento__sucesso:empty {
+  display: none;
+}

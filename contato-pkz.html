@@ -1,29 +1,29 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato PKZ</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contato | PKZ Lab</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-    >
+    />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@500&family=Work+Sans:wght@400;500;600;800&display=swap"
       rel="stylesheet"
-    >
-    <link rel="stylesheet" href="styles.css">
+    />
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body class="pagina-pkz">
     <header class="header__hub">
       <a href="pkz-lab.html" class="header__logo">
-        <img src="assets/pkz_logo.png" alt="Logo da PKZ">
+        <img src="assets/pkz_logo.png" alt="Logo da PKZ" />
       </a>
 
       <div class="header__acoes">
@@ -39,9 +39,12 @@
       </div>
     </header>
 
-   <main>
+    <main>
       <!--Título, informações de contato e formulário (mesmo grid do agendamento)-->
-      <section class="secao agendamento contato" aria-labelledby="titulo-contato">
+      <section
+        class="secao agendamento contato"
+        aria-labelledby="titulo-contato"
+      >
         <div class="agendamento__intro contato__intro">
           <h1 id="titulo-contato">Entre em contato com a PKZ Lab</h1>
           <p>
@@ -79,14 +82,14 @@
             </ul>
           </address>
 
-          <ul class="contatos_redes_pkz" aria-label="Redes sociais da PKZ lab ">
+          <ul class="contatos_redes_pkz" aria-label="Redes sociais da PKZ Lab">
             <li>
               <a
                 href="https://www.tiktok.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-rede"
-                aria-label="TikTok da PKZ LAB"
+                aria-label="TikTok da PKZ Lab"
               >
                 <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
               </a>
@@ -97,7 +100,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-rede"
-                aria-label="Instagram da PKZ LAB"
+                aria-label="Instagram da PKZ Lab"
               >
                 <i class="fa-brands fa-instagram" aria-hidden="true"></i>
               </a>
@@ -108,7 +111,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn-rede"
-                aria-label="WhatsApp da PKZ LAB "
+                aria-label="WhatsApp da PKZ Lab"
               >
                 <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
               </a>
@@ -116,12 +119,14 @@
           </ul>
         </div>
 
-        <!--Formulário de Contato-->
+        <!--Formulário de Contato (novalidate: a validação é feita pelo script.js)-->
         <form
           class="form-agendamento"
           action="#"
           method="get"
           aria-label="Formulário de contato"
+          novalidate
+          data-form-contato
         >
           <div class="form-agendamento__campo">
             <label class="form-agendamento__rotulo" for="nome">Nome</label>
@@ -132,8 +137,8 @@
               name="nome"
               placeholder="Seu nome"
               autocomplete="given-name"
-              required
-            >
+            />
+            <span class="erro-campo" data-erro-para="nome"></span>
           </div>
 
           <div class="form-agendamento__campo">
@@ -147,20 +152,22 @@
               name="sobrenome"
               placeholder="Seu sobrenome"
               autocomplete="family-name"
-            >
+            />
+            <span class="erro-campo" data-erro-para="sobrenome"></span>
           </div>
 
           <div class="form-agendamento__campo">
             <label class="form-agendamento__rotulo" for="email">E-mail</label>
             <input
               class="form-agendamento__input"
-              type="email"
+              type="text"
+              inputmode="email"
               id="email"
               name="email"
               placeholder="voce@email.com"
               autocomplete="email"
-              required
-            >
+            />
+            <span class="erro-campo" data-erro-para="email"></span>
           </div>
 
           <div class="form-agendamento__campo">
@@ -174,9 +181,8 @@
               name="whatsapp"
               placeholder="(00) 00000-0000"
               autocomplete="tel"
-              pattern="\(\d{2}\) \d{4,5}-\d{4}"
-              title="Use o formato (00) 00000-0000"
-            >
+            />
+            <span class="erro-campo" data-erro-para="whatsapp"></span>
           </div>
 
           <div class="form-agendamento__campo">
@@ -190,11 +196,12 @@
               rows="5"
               placeholder="Escreva sua dúvida, crítica ou sugestão"
               autocomplete="off"
-              required
             ></textarea>
+            <span class="erro-campo" data-erro-para="mensagem"></span>
           </div>
 
           <p class="form-agendamento__erro" role="alert"></p>
+          <p class="form-agendamento__sucesso" role="status"></p>
 
           <button
             type="submit"
@@ -206,10 +213,9 @@
       </section>
     </main>
 
-
     <footer class="footer" id="footer-pkz">
       <section class="footer__marca" aria-label="Rodapé do site">
-        <img src="assets/hub_logo.png" alt="Hub">
+        <img src="assets/hub_logo.png" alt="Hub" />
         <p>
           O Hub reúne PKZ Lab e One to One em um só espaço digital: duas
           metodologias, um só compromisso com performance.
@@ -242,7 +248,7 @@
         </ul>
       </section>
 
-      <hr class="footer__linha">
+      <hr class="footer__linha" />
 
       <p class="footer__copy">
         <small
