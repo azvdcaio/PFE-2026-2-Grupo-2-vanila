@@ -17,12 +17,14 @@ const SUBMENUS = {
     { texto: "Planos", ancora: "pkz-planos" },
     { texto: "Depoimentos", ancora: "pkz-depoimentos" },
     { texto: "Localização", ancora: "pkz-localizacao" },
+    { texto: "Dúvidas", ancora: "pkz-faq" },
   ],
   "one-to-one.html": [
     { texto: "Características", ancora: "caracteristicas" },
     { texto: "Planos", ancora: "planos" },
     { texto: "Depoimentos", ancora: "depoimentos" },
     { texto: "Localização", ancora: "localizacao" },
+    { texto: "Dúvidas", ancora: "faq" },
   ],
 };
 
@@ -67,6 +69,15 @@ function iniciarSubmenus() {
     botao.addEventListener("click", () => {
       const aberto = item.classList.toggle("submenu-aberto");
       botao.setAttribute("aria-expanded", String(aberto));
+
+      // Só um submenu aberto por vez
+      if (aberto) {
+        itens.forEach((outro) => {
+          if (outro.item === item) return;
+          outro.item.classList.remove("submenu-aberto");
+          outro.botao.setAttribute("aria-expanded", "false");
+        });
+      }
     });
 
     // Sem isso o :focus-within mantém o submenu aberto após o clique
