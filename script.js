@@ -3,7 +3,7 @@
    o que falta 
    ========================================================== */
 
-// Breakpoint usado pelo menu e pelos submenus (mesmo valor do CSS)
+// Breakpoint usado pelo menu (mesmo valor do CSS)
 const DESKTOP = window.matchMedia("(min-width: 767px)");
 
 /* ==========================================================
@@ -66,96 +66,7 @@ function iniciarMenu() {
 }
 
 /* ==========================================================
-   2. SUBMENUS
-   ========================================================== */
-const SUBMENUS = {
-  "index.html": [
-    { texto: "Valores", ancora: "valores" },
-    { texto: "Empresas", ancora: "empresas" },
-    { texto: "Equipe", ancora: "equipe" },
-  ],
-  "pkz-lab.html": [
-    { texto: "Quem somos", ancora: "pkz-sobre" },
-    { texto: "Características", ancora: "pkz-caracteristicas" },
-    { texto: "Planos", ancora: "pkz-planos" },
-    { texto: "Depoimentos", ancora: "pkz-depoimentos" },
-    { texto: "Localização", ancora: "pkz-localizacao" },
-    { texto: "Dúvidas", ancora: "pkz-faq" },
-  ],
-  "one-to-one.html": [
-    { texto: "Características", ancora: "caracteristicas" },
-    { texto: "Planos", ancora: "planos" },
-    { texto: "Depoimentos", ancora: "depoimentos" },
-    { texto: "Localização", ancora: "localizacao" },
-    { texto: "Dúvidas", ancora: "faq" },
-  ],
-};
-
-function iniciarSubmenus() {
-  const itens = []; // guarda todos para fechar os outros ao abrir um
-
-  document.querySelectorAll("body > header .menu > li > a").forEach((link) => {
-    const pagina = link.getAttribute("href");
-    const secoes = SUBMENUS[pagina];
-    if (!secoes) return; // link sem submenu (ex.: "Contato")
-
-    const item = link.parentElement;
-    const id = `submenu-${pagina.replace(".html", "")}`;
-    item.classList.add("menu__item--sub");
-
-    // Botão da setinha (usado no mobile)
-    const botao = document.createElement("button");
-    botao.type = "button";
-    botao.className = "submenu-toggle";
-    botao.setAttribute("aria-expanded", "false");
-    botao.setAttribute("aria-controls", id);
-    botao.setAttribute("aria-label", `Seções de ${link.textContent.trim()}`);
-    botao.innerHTML = '<i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
-
-    // Lista de links das seções
-    const lista = document.createElement("ul");
-    lista.className = "submenu";
-    lista.id = id;
-
-    secoes.forEach(({ texto, ancora }) => {
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-      a.href = `${pagina}#${ancora}`;
-      a.textContent = texto;
-      li.append(a);
-      lista.append(li);
-    });
-
-    item.append(botao, lista);
-    itens.push({ item, botao });
-
-    botao.addEventListener("click", () => {
-      const aberto = item.classList.toggle("submenu-aberto");
-      botao.setAttribute("aria-expanded", String(aberto));
-
-      // Só um submenu aberto por vez
-      if (aberto) {
-        itens.forEach((outro) => {
-          if (outro.item === item) return;
-          outro.item.classList.remove("submenu-aberto");
-          outro.botao.setAttribute("aria-expanded", "false");
-        });
-      }
-    });
-  });
-
-  // Ao virar desktop (submenu é só hover), limpa o que ficou aberto
-  DESKTOP.addEventListener("change", (evento) => {
-    if (!evento.matches) return;
-    itens.forEach(({ item, botao }) => {
-      item.classList.remove("submenu-aberto");
-      botao.setAttribute("aria-expanded", "false");
-    });
-  });
-}
-
-/* ==========================================================
-   3. MODAIS (genéricos)
+   2. MODAIS (genéricos)
    ========================================================== */
 let cliqueComecouNoFundo = false;
 
@@ -185,7 +96,7 @@ document.addEventListener("click", (evento) => {
 });
 
 /* ==========================================================
-   4. REVELAR CARDS AO ROLAR (index.html)
+   3. REVELAR CARDS AO ROLAR (index.html)
    ========================================================== */
 const observador = new IntersectionObserver(
   (entradas) => {
@@ -205,7 +116,7 @@ document.querySelectorAll(".valores__lista .card-caracteristica").forEach((card)
 });
 
 /* ==========================================================
-   5. VALIDAÇÃO (compartilhada pelo calendário e pelo contato)
+   4. VALIDAÇÃO (compartilhada pelo calendário e pelo contato)
    ========================================================== */
 
 // "(31) 98888-7777" -> "31988887777"
@@ -330,7 +241,7 @@ function ligarValidacaoDoCampo(campo, validar) {
 }
 
 /* ==========================================================
-   6. CALENDÁRIO DE AGENDAMENTO
+   5. CALENDÁRIO DE AGENDAMENTO
    ========================================================== */
 function iniciarCalendario() {
   const calendario = document.querySelector(".calendario");
@@ -744,7 +655,7 @@ function iniciarCalendario() {
 }
 
 /* ==========================================================
-   7. FORMULÁRIO DE CONTATO
+   6. FORMULÁRIO DE CONTATO
    ========================================================== */
 function iniciarContato() {
   const form = document.querySelector("[data-form-contato]");
@@ -828,7 +739,7 @@ function iniciarContato() {
 }
 
 /* ==========================================================
-   8. CARROSSEL DE PLANOS
+   7. CARROSSEL DE PLANOS
    ========================================================== */
 function iniciarCarrossel(secao) {
   const faixa = secao.querySelector(".carrossel__slides");
@@ -877,7 +788,6 @@ function iniciarCarrossel(secao) {
    Cada função se protege com "if (!elemento) return", então o
    mesmo arquivo roda em todas as páginas sem erro.
    ========================================================== */
-iniciarSubmenus();
 iniciarMenu();
 iniciarCalendario();
 iniciarContato();
