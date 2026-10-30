@@ -1,3 +1,4 @@
+https://azvdcaio.github.io/PFE-2026-2-Grupo-2-vanila/
 # HUB - Projeto FrontEnd
 
 Website desenvolvido como parte das avaliações da disciplina de Projeto FrontEnd do IBMEC, com o objetivo de juntar as informações sobre a PKZ Lab e One To One em um lugar só.
