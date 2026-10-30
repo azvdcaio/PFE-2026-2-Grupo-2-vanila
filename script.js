@@ -1,9 +1,72 @@
 /* ==========================================================
-   SUBMENUS DO HEADER
-   Lista única das seções de cada página. O JS cria o submenu
-   em todos os headers do site, então o HTML não muda.
-   - Desktop: aparece no hover (ou no foco do teclado), via CSS
-   - Mobile: abre pelo botão com a seta, dentro do hambúrguer
+   Ideia geral do arquivo: o HTML fica "limpo" e o JS monta
+   o que falta 
+   ========================================================== */
+
+// Breakpoint usado pelo menu e pelos submenus (mesmo valor do CSS)
+const DESKTOP = window.matchMedia("(min-width: 767px)");
+
+/* ==========================================================
+   1. MENU HAMBÚRGUER
+   ========================================================== */
+function iniciarMenu() {
+  const header = document.querySelector("body > header");
+  const nav = header?.querySelector("nav");
+  if (!nav) return;
+
+  // O "painel" é o filho direto do header que contém o nav
+  const painel = [...header.children].find((filho) => filho.contains(nav));
+  painel.classList.add("menu-painel");
+  painel.id ||= "menu-painel";
+
+  const botao = document.createElement("button");
+  botao.type = "button";
+  botao.className = "menu-toggle";
+  botao.setAttribute("aria-controls", painel.id);
+  botao.setAttribute("aria-expanded", "false");
+  botao.setAttribute("aria-label", "Abrir menu");
+  botao.innerHTML = '<span class="menu-toggle__barra" aria-hidden="true"></span>';
+
+  header.insertBefore(botao, painel);
+  header.classList.add("menu-pronto");
+
+  // Única função que muda o estado: tudo passa por aqui
+  function definirAberto(aberto) {
+    header.classList.toggle("menu-aberto", aberto);
+    botao.setAttribute("aria-expanded", String(aberto));
+    botao.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+  }
+
+  botao.addEventListener("click", () => {
+    definirAberto(!header.classList.contains("menu-aberto"));
+  });
+
+  // Fecha ao clicar num link do menu
+  painel.addEventListener("click", (evento) => {
+    if (evento.target.closest("a")) definirAberto(false);
+  });
+
+  // Fecha com ESC e devolve o foco ao botão (acessibilidade)
+  header.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape") {
+      definirAberto(false);
+      botao.focus();
+    }
+  });
+
+  // Fecha ao clicar fora do header
+  document.addEventListener("click", (evento) => {
+    if (!header.contains(evento.target)) definirAberto(false);
+  });
+
+  // Ao virar desktop, volta para o estado fechado
+  DESKTOP.addEventListener("change", (evento) => {
+    if (evento.matches) definirAberto(false);
+  });
+}
+
+/* ==========================================================
+   2. SUBMENUS
    ========================================================== */
 const SUBMENUS = {
   "index.html": [
@@ -29,27 +92,27 @@ const SUBMENUS = {
 };
 
 function iniciarSubmenus() {
-  const PONTO_DESKTOP = window.matchMedia("(min-width: 767px)");
-  const itens = [];
+  const itens = []; // guarda todos para fechar os outros ao abrir um
 
   document.querySelectorAll("body > header .menu > li > a").forEach((link) => {
     const pagina = link.getAttribute("href");
     const secoes = SUBMENUS[pagina];
-    if (!secoes) return;
+    if (!secoes) return; // link sem submenu (ex.: "Contato")
 
     const item = link.parentElement;
     const id = `submenu-${pagina.replace(".html", "")}`;
     item.classList.add("menu__item--sub");
 
+    // Botão da setinha (usado no mobile)
     const botao = document.createElement("button");
     botao.type = "button";
     botao.className = "submenu-toggle";
     botao.setAttribute("aria-expanded", "false");
     botao.setAttribute("aria-controls", id);
     botao.setAttribute("aria-label", `Seções de ${link.textContent.trim()}`);
-    botao.innerHTML =
-      '<i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
+    botao.innerHTML = '<i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
 
+    // Lista de links das seções
     const lista = document.createElement("ul");
     lista.className = "submenu";
     lista.id = id;
@@ -79,15 +142,10 @@ function iniciarSubmenus() {
         });
       }
     });
-
-    // Sem isso o :focus-within mantém o submenu aberto após o clique
-    lista.addEventListener("click", (evento) => {
-      if (PONTO_DESKTOP.matches) evento.target.closest("a")?.blur();
-    });
   });
 
-  // No desktop o submenu é só hover: limpa o que ficou aberto no mobile
-  PONTO_DESKTOP.addEventListener("change", (evento) => {
+  // Ao virar desktop (submenu é só hover), limpa o que ficou aberto
+  DESKTOP.addEventListener("change", (evento) => {
     if (!evento.matches) return;
     itens.forEach(({ item, botao }) => {
       item.classList.remove("submenu-aberto");
@@ -96,127 +154,39 @@ function iniciarSubmenus() {
   });
 }
 
-iniciarSubmenus();
-
 /* ==========================================================
-   MENU HAMBÚRGUER
-   Funciona em qualquer página: procura o <nav> dentro do
-   <header> e cria o botão sozinho, então o HTML não muda.
-   Sem JS, o menu continua visível (o CSS só esconde o menu
-   quando o header ganha a classe .menu-pronto).
+   3. MODAIS (genéricos)
    ========================================================== */
-function iniciarMenu() {
-  const PONTO_DESKTOP = window.matchMedia("(min-width: 767px)");
-
-  document.querySelectorAll("body > header").forEach((header, indice) => {
-    const nav = header.querySelector("nav");
-    if (!nav) return;
-
-    // O painel é o filho direto do header que contém o nav:
-    // o próprio <nav> ou o wrapper com o botão "Agendamento"
-    const painel = [...header.children].find((filho) => filho.contains(nav));
-    if (!painel) return;
-
-    painel.classList.add("menu-painel");
-    painel.id ||= `menu-painel-${indice}`;
-
-    const botao = document.createElement("button");
-    botao.type = "button";
-    botao.className = "menu-toggle";
-    botao.setAttribute("aria-controls", painel.id);
-    botao.setAttribute("aria-expanded", "false");
-    botao.setAttribute("aria-label", "Abrir menu");
-
-    const barra = document.createElement("span");
-    barra.className = "menu-toggle__barra";
-    barra.setAttribute("aria-hidden", "true");
-    botao.append(barra);
-
-    header.insertBefore(botao, painel);
-    header.classList.add("menu-pronto");
-
-    function definirAberto(aberto) {
-      header.classList.toggle("menu-aberto", aberto);
-      botao.setAttribute("aria-expanded", String(aberto));
-      botao.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
-    }
-
-    const estaAberto = () => header.classList.contains("menu-aberto");
-
-    botao.addEventListener("click", () => definirAberto(!estaAberto()));
-
-    // Fecha ao escolher um link
-    painel.addEventListener("click", (evento) => {
-      if (evento.target.closest("a")) definirAberto(false);
-    });
-
-    // Fecha com Esc e devolve o foco ao botão
-    header.addEventListener("keydown", (evento) => {
-      if (evento.key === "Escape" && estaAberto()) {
-        definirAberto(false);
-        botao.focus();
-      }
-    });
-
-    // Fecha ao clicar fora do header
-    document.addEventListener("click", (evento) => {
-      if (estaAberto() && !header.contains(evento.target)) definirAberto(false);
-    });
-
-    // Ao chegar no layout de desktop, o menu volta ao estado fechado
-    PONTO_DESKTOP.addEventListener("change", (evento) => {
-      if (evento.matches) definirAberto(false);
-    });
-  });
-}
-
-iniciarMenu();
-
-/* ==========================================================
-   MODAIS: comportamento genérico
-   - Abrir:  <button data-modal-abrir="id-do-dialog">
-   - Fechar: <button data-modal-fechar> dentro do <dialog>
-   - Clique no fundo (backdrop) também fecha
-   ========================================================== */
-
-// Evita fechar o modal quando o usuário seleciona texto num campo
-// e solta o mouse fora da caixa
 let cliqueComecouNoFundo = false;
 
+// Evita fechar o modal se a pessoa selecionou texto dentro dele
+// e soltou o mouse fora da caixa
 document.addEventListener("pointerdown", (evento) => {
   cliqueComecouNoFundo = evento.target instanceof HTMLDialogElement;
 });
 
 document.addEventListener("click", (evento) => {
-  const gatilhoAbrir = evento.target.closest("[data-modal-abrir]");
-  if (gatilhoAbrir) {
-    const modal = document.getElementById(gatilhoAbrir.dataset.modalAbrir);
-    if (modal instanceof HTMLDialogElement) modal.showModal();
+  const abrir = evento.target.closest("[data-modal-abrir]");
+  if (abrir) {
+    document.getElementById(abrir.dataset.modalAbrir)?.showModal();
     return;
   }
 
-  const gatilhoFechar = evento.target.closest("[data-modal-fechar]");
-  if (gatilhoFechar) {
-    gatilhoFechar.closest("dialog")?.close();
+  const fechar = evento.target.closest("[data-modal-fechar]");
+  if (fechar) {
+    fechar.closest("dialog")?.close();
     return;
   }
 
-  if (
-    cliqueComecouNoFundo &&
-    evento.target instanceof HTMLDialogElement &&
-    evento.target.classList.contains("modal")
-  ) {
+  // Clicar no "fundo" = clicar no próprio <dialog>, fora do conteúdo
+  if (cliqueComecouNoFundo && evento.target instanceof HTMLDialogElement) {
     evento.target.close();
   }
 });
 
 /* ==========================================================
-   Revela os cards de valores quando entram na tela (index.html)
+   4. REVELAR CARDS AO ROLAR (index.html)
    ========================================================== */
-const cardsValores = document.querySelectorAll(
-  ".valores__lista .card-caracteristica",
-);
-
 const observador = new IntersectionObserver(
   (entradas) => {
     entradas.forEach((entrada) => {
@@ -229,73 +199,57 @@ const observador = new IntersectionObserver(
   { threshold: 0.2 },
 );
 
-cardsValores.forEach((card) => {
-  card.classList.add("valor--oculto");
+document.querySelectorAll(".valores__lista .card-caracteristica").forEach((card) => {
+  card.classList.add("valor--oculto"); // esconde via JS (sem JS, o card aparece normal)
   observador.observe(card);
 });
 
 /* ==========================================================
-   VALIDAÇÃO COMPARTILHADA (calendário e páginas de contato)
-   Tudo feito em JS, sem regex e sem atributos de validação do
-   HTML: os <form> têm "novalidate".
+   5. VALIDAÇÃO (compartilhada pelo calendário e pelo contato)
    ========================================================== */
 
-// Devolve só os dígitos de um texto: "(31) 98888-7777" -> "31988887777"
+// "(31) 98888-7777" -> "31988887777"
 function apenasNumeros(texto) {
   let numeros = "";
-  for (let posicao = 0; posicao < texto.length; posicao++) {
-    const caractere = texto[posicao];
-    if (caractere >= "0" && caractere <= "9") {
-      numeros = numeros + caractere;
-    }
+  for (const caractere of texto) {
+    if (caractere >= "0" && caractere <= "9") numeros += caractere;
   }
   return numeros;
 }
 
-// Só letras, espaço, hífen e apóstrofo
+// Aceita letras (com acento), espaço, hífen e apóstrofo.
+// Truque: letra muda ao trocar maiúscula/minúscula; número e símbolo não.
 function soTemLetras(texto) {
-  for (let posicao = 0; posicao < texto.length; posicao++) {
-    const caractere = texto[posicao];
-
-    // uma letra muda quando vira maiúscula ou minúscula ("a" e "A"),
-    // já números e símbolos continuam iguais ("1" e "1")
+  for (const caractere of texto) {
     const ehLetra = caractere.toLowerCase() !== caractere.toUpperCase();
-    const ehEspaco = caractere === " ";
-    const ehHifen = caractere === "-";
-    const ehApostrofo = caractere === "'";
-
-    if (!ehLetra && !ehEspaco && !ehHifen && !ehApostrofo) return false;
+    if (!ehLetra && caractere !== " " && caractere !== "-" && caractere !== "'") {
+      return false;
+    }
   }
   return true;
 }
 
-// exigirSobrenome = true no agendamento (campo "Nome completo")
+// exigirSobrenome = true no agendamento ("Nome completo")
 function validarNome(nome, exigirSobrenome) {
   nome = nome.trim();
-
   if (nome === "") return "Preencha o nome.";
   if (nome.length < 3) return "O nome precisa ter pelo menos 3 letras.";
   if (nome.length > 80) return "O nome está muito longo.";
   if (!soTemLetras(nome)) return "O nome só pode ter letras.";
-  if (exigirSobrenome && nome.indexOf(" ") === -1) {
-    return "Informe nome e sobrenome.";
-  }
-
+  if (exigirSobrenome && !nome.includes(" ")) return "Informe nome e sobrenome.";
   return "";
 }
 
 // Sobrenome é opcional: vazio é válido
 function validarSobrenome(sobrenome) {
   sobrenome = sobrenome.trim();
-
   if (sobrenome === "") return "";
   if (sobrenome.length > 80) return "O sobrenome está muito longo.";
   if (!soTemLetras(sobrenome)) return "O sobrenome só pode ter letras.";
-
   return "";
 }
 
-// obrigatorio = false nas páginas de contato (WhatsApp opcional)
+// obrigatorio = false nas páginas de contato
 function validarWhatsapp(whatsapp, obrigatorio = true) {
   const numeros = apenasNumeros(whatsapp);
 
@@ -307,43 +261,32 @@ function validarWhatsapp(whatsapp, obrigatorio = true) {
   if (numeros.length === 11 && numeros[2] !== "9") {
     return "Celular deve começar com 9 depois do DDD.";
   }
-
   return "";
 }
 
-// E-mail é obrigatório
+// Checagem simples: um @, texto antes, um ponto depois do @, sem espaço
 function validarEmail(email) {
   email = email.trim();
-
   if (email === "") return "Preencha o e-mail.";
   if (email.length > 120) return "E-mail muito longo.";
 
-  const posicaoDoArroba = email.indexOf("@");
-  const posicaoDoUltimoPonto = email.lastIndexOf(".");
+  const arroba = email.indexOf("@");
+  const ultimoPonto = email.lastIndexOf(".");
 
-  const temTextoAntesDoArroba = posicaoDoArroba > 0;
-  const temSoUmArroba = email.indexOf("@", posicaoDoArroba + 1) === -1;
-  const temPontoDepoisDoArroba = posicaoDoUltimoPonto > posicaoDoArroba + 1;
-  const naoTerminaComPonto = posicaoDoUltimoPonto < email.length - 1;
-  const naoTemEspaco = email.indexOf(" ") === -1;
+  const valido =
+    arroba > 0 && // tem texto antes do @
+    email.indexOf("@", arroba + 1) === -1 && // só um @
+    ultimoPonto > arroba + 1 && // tem ponto depois do @
+    ultimoPonto < email.length - 1 && // não termina em ponto
+    !email.includes(" "); // sem espaço
 
-  if (
-    !temTextoAntesDoArroba ||
-    !temSoUmArroba ||
-    !temPontoDepoisDoArroba ||
-    !naoTerminaComPonto ||
-    !naoTemEspaco
-  ) {
-    return "E-mail inválido. Exemplo: nome@dominio.com";
-  }
-
-  return "";
+  return valido ? "" : "E-mail inválido. Exemplo: nome@dominio.com";
 }
 
-// Mensagem + borda vermelha: mensagem no <span data-erro-para="campo">
-// e classe "invalido" no campo. Mensagem vazia = campo certo: apaga o erro.
-// Devolve true se o campo está certo. "campo" só precisa ser passado
-// quando a borda não vai em form.elements[nome] (ex.: grupo de radios).
+// Mostra (ou apaga) a mensagem no <span data-erro-para="campo">
+// e liga/desliga a borda vermelha. Devolve true se o campo está certo.
+// "campo" só é passado quando a borda não vai em form.elements[nome]
+// (ex.: grupo de radios).
 function mostrarErro(form, nomeDoCampo, mensagem, campo) {
   const spanDeErro = form.querySelector(`[data-erro-para="${nomeDoCampo}"]`);
   campo = campo || form.elements[nomeDoCampo];
@@ -355,60 +298,52 @@ function mostrarErro(form, nomeDoCampo, mensagem, campo) {
     campo.removeAttribute("aria-invalid");
     return true;
   }
-
   campo.classList.add("invalido");
   campo.setAttribute("aria-invalid", "true");
   return false;
 }
 
-// Máscara do WhatsApp: (00) 00000-0000
+// Máscara: vai formatando "(00) 00000-0000" enquanto a pessoa digita
 function aplicarMascaraWhatsapp(campo) {
   campo.addEventListener("input", (evento) => {
     const n = apenasNumeros(evento.target.value).slice(0, 11);
 
-    if (n.length > 10)
+    if (n.length > 10) {
       evento.target.value = `(${n.slice(0, 2)}) ${n.slice(2, 7)}-${n.slice(7)}`;
-    else if (n.length > 6)
+    } else if (n.length > 6) {
       evento.target.value = `(${n.slice(0, 2)}) ${n.slice(2, 6)}-${n.slice(6)}`;
-    else if (n.length > 2)
+    } else if (n.length > 2) {
       evento.target.value = `(${n.slice(0, 2)}) ${n.slice(2)}`;
-    else evento.target.value = n ? `(${n}` : "";
+    } else {
+      evento.target.value = n ? `(${n}` : "";
+    }
+  });
+}
+
+// Comportamento comum aos dois formulários:
+// valida ao sair do campo (blur); depois do 1º erro, revalida a cada tecla.
+function ligarValidacaoDoCampo(campo, validar) {
+  campo.addEventListener("blur", validar);
+  campo.addEventListener("input", () => {
+    if (campo.classList.contains("invalido")) validar();
   });
 }
 
 /* ==========================================================
-   Calendário de agendamento
-   Só roda em páginas que têm .calendario, #modal-agendamento
-   e #modal-sucesso
+   6. CALENDÁRIO DE AGENDAMENTO
    ========================================================== */
 function iniciarCalendario() {
   const calendario = document.querySelector(".calendario");
   const modal = document.getElementById("modal-agendamento");
   const modalSucesso = document.getElementById("modal-sucesso");
-  if (!calendario || !modal || !modalSucesso) return;
+  if (!calendario || !modal || !modalSucesso) return; // página sem calendário
 
-  /* ---- Configuração ---- */
-  const EMPRESA = calendario.dataset.empresa || "pkz";
-  const CHAVE_STORAGE = `agendamentos:${EMPRESA}`;
-
-  const HORARIOS = [
-    "09:00",
-    "10:00",
-    "11:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-  ];
-  const UM_AGENDAMENTO_POR_DIA = false; // true: reservou um horário, o dia inteiro fica reservado
-  const DIAS_BLOQUEADOS = ["2026-10-15"]; // AAAA-MM-DD, aparecem como "Indisponível"
+  /* ---- Configuração (fácil de alterar) ---- */
+  const CHAVE_STORAGE = `agendamentos:${calendario.dataset.empresa || "pkz"}`;
+  const HORARIOS = ["09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+  const DIAS_BLOQUEADOS = ["2026-10-15"]; // AAAA-MM-DD
   const DIAS_FECHADOS = [0]; // 0 = domingo ... 6 = sábado
-
-  // Feriados locais ou recessos da empresa: "AAAA-MM-DD": "Nome"
-  const FERIADOS_EXTRAS = {};
-
-  const FERIADOS_FIXOS = {
+  const FERIADOS = {
     "01-01": "Confraternização Universal",
     "04-21": "Tiradentes",
     "05-01": "Dia do Trabalho",
@@ -419,30 +354,10 @@ function iniciarCalendario() {
     "11-20": "Consciência Negra",
     "12-25": "Natal",
   };
-
-  const MESES = [
-    "janeiro",
-    "fevereiro",
-    "março",
-    "abril",
-    "maio",
-    "junho",
-    "julho",
-    "agosto",
-    "setembro",
-    "outubro",
-    "novembro",
-    "dezembro",
-  ];
-  const SEMANA = [
-    "Domingo",
-    "Segunda-feira",
-    "Terça-feira",
-    "Quarta-feira",
-    "Quinta-feira",
-    "Sexta-feira",
-    "Sábado",
-  ];
+  const MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
+    "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+  const SEMANA = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira",
+    "Quinta-feira", "Sexta-feira", "Sábado"];
 
   /* ---- Elementos ---- */
   const titulo = calendario.querySelector(".calendario__titulo");
@@ -460,16 +375,18 @@ function iniciarCalendario() {
 
   /* ---- Estado ---- */
   const hoje = new Date();
-  hoje.setHours(0, 0, 0, 0);
+  hoje.setHours(0, 0, 0, 0); // zera a hora para comparar só o dia
   const mesInicial = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
   const mesAtual = new Date(mesInicial);
   let diaSelecionado = null;
 
-  /* ---- Utilitários de data ---- */
-  // Não use toISOString(): ele converte para UTC e pode trocar o dia no fuso do Brasil
+  /* ---- Datas ----
+     chave(): Date -> "2026-10-29". Não uso toISOString() porque ele
+     converte para UTC e pode trocar o dia no fuso do Brasil. */
   const chave = (d) =>
     `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
+  // "2026-10-29" -> Date
   const dataDe = (texto) => {
     const [ano, mes, dia] = texto.split("-").map(Number);
     return new Date(ano, mes - 1, dia);
@@ -478,52 +395,12 @@ function iniciarCalendario() {
   const rotuloData = (d) =>
     `${SEMANA[d.getDay()]}, ${d.getDate()} de ${MESES[d.getMonth()]} de ${d.getFullYear()}`;
 
-  /* ---- Feriados (os móveis são calculados a partir da Páscoa) ---- */
-  const cacheFeriados = {};
+  // "10-12" (mês-dia) é a chave dos feriados fixos
+  const nomeFeriado = (d) => FERIADOS[chave(d).slice(5)];
 
-  function feriadosDoAno(ano) {
-    if (cacheFeriados[ano]) return cacheFeriados[ano];
-
-    const lista = {};
-    for (const [mesDia, nome] of Object.entries(FERIADOS_FIXOS)) {
-      lista[`${ano}-${mesDia}`] = nome;
-    }
-
-    // Páscoa (algoritmo de Meeus/Jones/Butcher)
-    const a = ano % 19;
-    const b = Math.floor(ano / 100);
-    const c = ano % 100;
-    const d = Math.floor(b / 4);
-    const e = b % 4;
-    const f = Math.floor((b + 8) / 25);
-    const g = Math.floor((b - f + 1) / 3);
-    const h = (19 * a + b - d - g + 15) % 30;
-    const i = Math.floor(c / 4);
-    const k = c % 4;
-    const l = (32 + 2 * e + 2 * i - h - k) % 7;
-    const m = Math.floor((a + 11 * h + 22 * l) / 451);
-    const mesPascoa = Math.floor((h + l - 7 * m + 114) / 31);
-    const diaPascoa = ((h + l - 7 * m + 114) % 31) + 1;
-
-    const movel = (deslocamento, nome) => {
-      lista[chave(new Date(ano, mesPascoa - 1, diaPascoa + deslocamento))] =
-        nome;
-    };
-
-    movel(-48, "Segunda-feira de Carnaval"); // ponto facultativo
-    movel(-47, "Terça-feira de Carnaval"); // ponto facultativo
-    movel(-2, "Sexta-feira Santa");
-    movel(60, "Corpus Christi"); // ponto facultativo
-
-    cacheFeriados[ano] = lista;
-    return lista;
-  }
-
-  const nomeFeriado = (data) =>
-    FERIADOS_EXTRAS[chave(data)] ??
-    feriadosDoAno(data.getFullYear())[chave(data)];
-
-  /* ---- Reservas no localStorage ---- */
+  /* ---- Reservas no localStorage ----
+     O localStorage só guarda TEXTO, por isso JSON.stringify/parse.
+     try/catch: pode estar cheio, bloqueado ou com JSON quebrado. */
   function lerReservas() {
     try {
       const lista = JSON.parse(localStorage.getItem(CHAVE_STORAGE));
@@ -538,13 +415,15 @@ function iniciarCalendario() {
       localStorage.setItem(CHAVE_STORAGE, JSON.stringify(lista));
       return true;
     } catch {
-      return false; // armazenamento cheio ou bloqueado pelo navegador
+      return false;
     }
   }
 
-  const idDe = (reserva) => reserva.id ?? reserva.criadoEm;
-
   /* ---- Disponibilidade ---- */
+  const horariosOcupados = (dia, reservas) =>
+    reservas.filter((r) => r.data === dia).map((r) => r.horario);
+
+  // Hoje, um horário que já passou não pode ser escolhido
   function horarioPassou(dia, hora) {
     const agora = new Date();
     if (dia !== chave(agora)) return false;
@@ -552,10 +431,8 @@ function iniciarCalendario() {
     return h * 60 + min <= agora.getHours() * 60 + agora.getMinutes();
   }
 
-  const horariosOcupados = (dia, reservas) =>
-    reservas.filter((r) => r.data === dia).map((r) => r.horario);
-
-  // Retorna null se o dia está livre, ou { tipo, texto } com o motivo do bloqueio
+  // Devolve null se o dia está livre, ou { tipo, texto } com o motivo.
+  // O "tipo" vira data-motivo no botão e o CSS pinta cada caso.
   function motivoBloqueio(data, reservas) {
     const dia = chave(data);
 
@@ -564,28 +441,22 @@ function iniciarCalendario() {
     const feriado = nomeFeriado(data);
     if (feriado) return { tipo: "feriado", texto: `Feriado: ${feriado}` };
 
-    if (
-      DIAS_BLOQUEADOS.includes(dia) ||
-      DIAS_FECHADOS.includes(data.getDay())
-    ) {
+    if (DIAS_BLOQUEADOS.includes(dia) || DIAS_FECHADOS.includes(data.getDay())) {
       return { tipo: "indisponivel", texto: "Indisponível" };
     }
 
     const ocupados = horariosOcupados(dia, reservas);
-    const livres = HORARIOS.filter(
-      (h) => !ocupados.includes(h) && !horarioPassou(dia, h),
-    );
+    const livres = HORARIOS.filter((h) => !ocupados.includes(h) && !horarioPassou(dia, h));
 
-    if (ocupados.length && (UM_AGENDAMENTO_POR_DIA || !livres.length)) {
-      return { tipo: "reservado", texto: "Reservado" };
+    if (livres.length === 0) {
+      return ocupados.length
+        ? { tipo: "reservado", texto: "Reservado" }
+        : { tipo: "indisponivel", texto: "Sem horários disponíveis" };
     }
-    if (!livres.length)
-      return { tipo: "indisponivel", texto: "Sem horários disponíveis" };
-
     return null;
   }
 
-  /* ---- Calendário ---- */
+  /* ---- Desenho do calendário ---- */
   function marcarSelecao() {
     grade.querySelectorAll(".calendario__dia").forEach((botao) => {
       botao.setAttribute("aria-pressed", botao.dataset.data === diaSelecionado);
@@ -595,46 +466,42 @@ function iniciarCalendario() {
   function desenharMes() {
     const ano = mesAtual.getFullYear();
     const mes = mesAtual.getMonth();
-    const reservas = lerReservas(); // lê uma vez por renderização
+    const reservas = lerReservas(); // lê uma vez só por desenho
 
     titulo.textContent = `${MESES[mes][0].toUpperCase()}${MESES[mes].slice(1)} ${ano}`;
-    btnAnterior.disabled = mesAtual <= mesInicial;
+    btnAnterior.disabled = mesAtual <= mesInicial; // não volta para o passado
     grade.innerHTML = "";
 
+    // Espaços vazios até o dia da semana em que o mês começa
     for (let i = 0; i < new Date(ano, mes, 1).getDay(); i++) {
       grade.append(document.createElement("span"));
     }
 
+    // new Date(ano, mes + 1, 0) = último dia do mês atual
     const totalDias = new Date(ano, mes + 1, 0).getDate();
 
     for (let dia = 1; dia <= totalDias; dia++) {
       const data = new Date(ano, mes, dia);
       const bloqueio = motivoBloqueio(data, reservas);
       const rotulo = rotuloData(data);
-      const botao = document.createElement("button");
 
+      const botao = document.createElement("button");
       botao.type = "button";
       botao.className = "calendario__dia";
       botao.textContent = dia;
       botao.dataset.data = chave(data);
       botao.dataset.rotulo = rotulo;
       botao.disabled = Boolean(bloqueio);
-      botao.setAttribute(
-        "aria-label",
-        bloqueio?.texto ? `${rotulo}. ${bloqueio.texto}` : rotulo,
-      );
+      botao.setAttribute("aria-label", bloqueio?.texto ? `${rotulo}. ${bloqueio.texto}` : rotulo);
 
       if (bloqueio) {
         botao.dataset.motivo = bloqueio.tipo;
         if (bloqueio.texto) botao.title = bloqueio.texto;
       }
-
-      if (data.getTime() === hoje.getTime())
-        botao.setAttribute("aria-current", "date");
+      if (data.getTime() === hoje.getTime()) botao.setAttribute("aria-current", "date");
 
       grade.append(botao);
     }
-
     marcarSelecao();
   }
 
@@ -642,13 +509,12 @@ function iniciarCalendario() {
     mesAtual.setMonth(mesAtual.getMonth() - 1);
     desenharMes();
   });
-
   btnProximo.addEventListener("click", () => {
     mesAtual.setMonth(mesAtual.getMonth() + 1);
     desenharMes();
   });
 
-  /* ---- Horários do modal (reservados e passados ficam desabilitados) ---- */
+  // Radios de horário: os ocupados/passados ficam desabilitados
   function desenharHorarios(dia) {
     const ocupados = horariosOcupados(dia, lerReservas());
     listaHorarios.innerHTML = "";
@@ -672,17 +538,19 @@ function iniciarCalendario() {
     });
   }
 
-  /* ---- Painel "Suas reservas" (div abaixo da section.agendamento) ---- */
+  // Atalho para criar elemento com classe e texto
   function criar(tag, classe, texto) {
     const elemento = document.createElement(tag);
     if (classe) elemento.className = classe;
-    if (texto) elemento.textContent = texto;
+    if (texto) elemento.textContent = texto; // textContent (não innerHTML) evita injetar HTML
     return elemento;
   }
 
+  // Painel "Suas reservas"
   function desenharReservas() {
     if (!painelReservas || !listaReservas) return;
 
+    // Ordena por data e hora (texto "AAAA-MM-DD HH:MM" ordena certo)
     const reservas = lerReservas().sort((a, b) =>
       `${a.data} ${a.horario}`.localeCompare(`${b.data} ${b.horario}`),
     );
@@ -706,7 +574,7 @@ function iniciarCalendario() {
         ["E-mail", reserva.email],
         ["Observações", reserva.observacoes],
       ].forEach(([rotulo, valor]) => {
-        if (!valor) return;
+        if (!valor) return; // não mostra campo vazio
         const bloco = criar("div");
         bloco.append(criar("dt", "", rotulo), criar("dd", "", valor));
         dados.append(bloco);
@@ -714,27 +582,24 @@ function iniciarCalendario() {
 
       const cancelar = criar("button", "reserva__cancelar", "Cancelar reserva");
       cancelar.type = "button";
-      cancelar.dataset.cancelar = idDe(reserva);
+      cancelar.dataset.cancelar = reserva.id;
 
       item.append(topo, dados, cancelar);
       listaReservas.append(item);
     });
   }
 
+  // Delegação: um listener na lista serve para todos os botões "Cancelar"
   listaReservas?.addEventListener("click", (evento) => {
     const botao = evento.target.closest("[data-cancelar]");
-    if (!botao) return;
-    if (!confirm("Cancelar esta reserva?")) return;
+    if (!botao || !confirm("Cancelar esta reserva?")) return;
 
-    const restantes = lerReservas().filter(
-      (r) => String(idDe(r)) !== botao.dataset.cancelar,
-    );
-    salvarReservas(restantes);
+    salvarReservas(lerReservas().filter((r) => r.id !== botao.dataset.cancelar));
     desenharMes();
     desenharReservas();
   });
 
-  /* ---- Clique em um dia: seleciona e abre o modal ---- */
+  // Clicar num dia: seleciona e abre o modal
   grade.addEventListener("click", (evento) => {
     const botao = evento.target.closest(".calendario__dia");
     if (!botao) return;
@@ -743,50 +608,24 @@ function iniciarCalendario() {
     marcarSelecao();
     limparErros();
 
-    form.elements.data.value = diaSelecionado;
+    form.elements.data.value = diaSelecionado; // input hidden
     textoData.dateTime = diaSelecionado;
     textoData.textContent = botao.dataset.rotulo;
     desenharHorarios(diaSelecionado);
     modal.showModal();
   });
 
-  /* ==========================================================
-    VALIDAÇÃO DO FORMULÁRIO (feita só em JS, sem regex e sem
-    atributos de validação do HTML: o <form> tem "novalidate")
-     ========================================================== */
+  /* ---- Validação do formulário de agendamento ---- */
+  const validarHorario = (h) => (h === "" ? "Selecione um horário." : HORARIOS.includes(h) ? "" : "Horário inválido.");
+  const validarObservacoes = (t) => (t.length > 300 ? "Máximo de 300 caracteres." : "");
 
-  function validarHorario(horario) {
-    if (horario === "") return "Selecione um horário.";
-    if (!HORARIOS.includes(horario)) return "Horário inválido.";
-    return "";
-  }
-
-  function validarObservacoes(texto) {
-    if (texto.length > 300) return "Máximo de 300 caracteres.";
-    return "";
-  }
-
-  // A data vem de um input hidden: confere se não foi alterada no DevTools
+  // A data vem de um input hidden: confere se não foi mexida no DevTools
   function dataEstaValida() {
-    const texto = form.elements.data.value;
-    const partes = texto.split("-");
-
-    if (partes.length !== 3) return false;
-    if (
-      partes[0].length !== 4 ||
-      partes[1].length !== 2 ||
-      partes[2].length !== 2
-    ) {
-      return false;
-    }
-    if (apenasNumeros(texto).length !== 8) return false;
-
-    const data = dataDe(texto);
-    if (isNaN(data.getTime())) return false;
-
-    return !motivoBloqueio(data, lerReservas());
+    const data = dataDe(form.elements.data.value);
+    return !isNaN(data.getTime()) && !motivoBloqueio(data, lerReservas());
   }
 
+  // Mapa campo -> função validadora (mesmo padrão do contato)
   const VALIDADORES = {
     horario: validarHorario,
     nome: (valor) => validarNome(valor, true),
@@ -795,32 +634,23 @@ function iniciarCalendario() {
     observacoes: validarObservacoes,
   };
 
-  // os radios não são um input só: a borda do horário vai no grupo
-  const mostrarErroDoForm = (nomeDoCampo, mensagem) =>
-    mostrarErro(
-      form,
-      nomeDoCampo,
-      mensagem,
-      nomeDoCampo === "horario" ? listaHorarios : undefined,
-    );
-
+  // Radios não são um input só: a borda vermelha vai no grupo inteiro
   function validarCampo(nomeDoCampo) {
-    // para radio, .value é o valor do marcado ou ""
-    const valor = form.elements[nomeDoCampo].value;
-    return mostrarErroDoForm(nomeDoCampo, VALIDADORES[nomeDoCampo](valor));
+    const valor = form.elements[nomeDoCampo].value; // em radio, é o marcado ou ""
+    const campoVisual = nomeDoCampo === "horario" ? listaHorarios : undefined;
+    return mostrarErro(form, nomeDoCampo, VALIDADORES[nomeDoCampo](valor), campoVisual);
   }
 
   function validarFormulario() {
     erro.textContent = "";
-
-    // sem curto-circuito: valida todos para mostrar todos os erros de uma vez
     let tudoCerto = true;
     let primeiroComErro = null;
 
+    // Sem parar no primeiro erro: mostra todos de uma vez
     for (const nomeDoCampo in VALIDADORES) {
       if (!validarCampo(nomeDoCampo)) {
         tudoCerto = false;
-        if (primeiroComErro === null) primeiroComErro = nomeDoCampo;
+        primeiroComErro ??= nomeDoCampo;
       }
     }
 
@@ -829,33 +659,28 @@ function iniciarCalendario() {
       return false;
     }
 
+    // Leva o foco ao primeiro campo com erro
     if (primeiroComErro === "horario") {
       listaHorarios.querySelector("input:not(:disabled)")?.focus();
     } else if (primeiroComErro) {
       form.elements[primeiroComErro].focus();
     }
-
     return tudoCerto;
   }
 
   function limparErros() {
-    for (const nomeDoCampo in VALIDADORES) mostrarErroDoForm(nomeDoCampo, "");
+    for (const nomeDoCampo in VALIDADORES) {
+      const campoVisual = nomeDoCampo === "horario" ? listaHorarios : undefined;
+      mostrarErro(form, nomeDoCampo, "", campoVisual);
+    }
     erro.textContent = "";
   }
 
-  // Valida ao sair do campo; depois do primeiro erro, revalida a cada tecla
   ["nome", "whatsapp", "email", "observacoes"].forEach((nomeDoCampo) => {
-    const campo = form.elements[nomeDoCampo];
-
-    campo.addEventListener("blur", () => validarCampo(nomeDoCampo));
-    campo.addEventListener("input", () => {
-      if (campo.classList.contains("invalido")) validarCampo(nomeDoCampo);
-    });
+    ligarValidacaoDoCampo(form.elements[nomeDoCampo], () => validarCampo(nomeDoCampo));
   });
-
-  // Os radios são recriados a cada abertura do modal: delegação no container
+  // Radios são recriados a cada abertura: delegação no container
   listaHorarios.addEventListener("change", () => validarCampo("horario"));
-
   aplicarMascaraWhatsapp(form.elements.whatsapp);
 
   /* ---- Envio ---- */
@@ -865,21 +690,17 @@ function iniciarCalendario() {
   }
 
   form.addEventListener("submit", async (evento) => {
-    evento.preventDefault();
-
+    evento.preventDefault(); // impede o recarregamento da página
     if (!validarFormulario()) return;
 
-    const dados = Object.fromEntries(new FormData(form));
+    const dados = Object.fromEntries(new FormData(form)); // form -> objeto
     dados.nome = dados.nome.trim();
     dados.email = dados.email.trim();
     dados.observacoes = dados.observacoes.trim();
-    const reservas = lerReservas(); // lê de novo: outra aba pode ter reservado antes
 
-    const conflito = reservas.some(
-      (r) =>
-        r.data === dados.data &&
-        (UM_AGENDAMENTO_POR_DIA || r.horario === dados.horario),
-    );
+    // Lê de novo: outra aba pode ter reservado o mesmo horário
+    const reservas = lerReservas();
+    const conflito = reservas.some((r) => r.data === dados.data && r.horario === dados.horario);
 
     if (conflito) {
       erro.textContent = "Esse horário acabou de ser reservado. Escolha outro.";
@@ -889,52 +710,41 @@ function iniciarCalendario() {
     }
 
     const reserva = {
-      id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`, // id único
       ...dados,
       criadoEm: new Date().toISOString(),
     };
 
     if (!salvarReservas([...reservas, reserva])) {
-      erro.textContent =
-        "Não foi possível salvar o agendamento. Tente novamente.";
+      erro.textContent = "Não foi possível salvar o agendamento. Tente novamente.";
       return;
     }
 
     await enviarAgendamento(reserva);
 
     const rotulo = textoData.textContent;
-
     modal.close();
     diaSelecionado = null;
     desenharMes();
     desenharReservas();
 
-    // Popup de sucesso
     tituloSucesso.textContent = `Parabéns ${reserva.nome}, visita agendada com sucesso`;
     detalheSucesso.textContent = `${rotulo}, às ${reserva.horario}. Entraremos em contato para confirmar.`;
     modalSucesso.showModal();
   });
 
+  // Ao fechar o modal (por qualquer meio), limpa o formulário
   modal.addEventListener("close", () => {
     form.reset();
     limparErros();
-  });
-
-  // Se o agendamento for feito em outra aba, atualiza esta
-  window.addEventListener("storage", (evento) => {
-    if (evento.key !== CHAVE_STORAGE) return;
-    desenharMes();
-    desenharReservas();
   });
 
   desenharMes();
   desenharReservas();
 }
 
-iniciarCalendario();
-
 /* ==========================================================
-  Formulário de contato (contato-pkz.html e contato-one-to-one.html)
+   7. FORMULÁRIO DE CONTATO
    ========================================================== */
 function iniciarContato() {
   const form = document.querySelector("[data-form-contato]");
@@ -945,11 +755,8 @@ function iniciarContato() {
 
   function validarMensagem(mensagem) {
     mensagem = mensagem.trim();
-
     if (mensagem === "") return "Escreva sua mensagem.";
-    if (mensagem.length < 10) {
-      return "A mensagem precisa ter pelo menos 10 caracteres.";
-    }
+    if (mensagem.length < 10) return "A mensagem precisa ter pelo menos 10 caracteres.";
     if (mensagem.length > 1000) return "Máximo de 1000 caracteres.";
     return "";
   }
@@ -958,7 +765,7 @@ function iniciarContato() {
     nome: (valor) => validarNome(valor, false),
     sobrenome: validarSobrenome,
     email: validarEmail,
-    whatsapp: (valor) => validarWhatsapp(valor, false),
+    whatsapp: (valor) => validarWhatsapp(valor, false), // opcional aqui
     mensagem: validarMensagem,
   };
 
@@ -969,18 +776,15 @@ function iniciarContato() {
 
   function validarFormulario() {
     erro.textContent = "";
-
-    // sem curto-circuito: valida todos para mostrar todos os erros de uma vez
     let tudoCerto = true;
     let primeiroComErro = null;
 
     for (const nomeDoCampo in VALIDADORES) {
       if (!validarCampo(nomeDoCampo)) {
         tudoCerto = false;
-        if (primeiroComErro === null) primeiroComErro = nomeDoCampo;
+        primeiroComErro ??= nomeDoCampo;
       }
     }
-
     if (primeiroComErro) form.elements[primeiroComErro].focus();
     return tudoCerto;
   }
@@ -995,28 +799,20 @@ function iniciarContato() {
     console.log("Contato:", dados);
   }
 
-  // Valida ao sair do campo; depois do primeiro erro, revalida a cada tecla
   for (const nomeDoCampo in VALIDADORES) {
     const campo = form.elements[nomeDoCampo];
-
-    campo.addEventListener("blur", () => validarCampo(nomeDoCampo));
-    campo.addEventListener("input", () => {
-      sucesso.textContent = "";
-      if (campo.classList.contains("invalido")) validarCampo(nomeDoCampo);
-    });
+    ligarValidacaoDoCampo(campo, () => validarCampo(nomeDoCampo));
+    campo.addEventListener("input", () => (sucesso.textContent = "")); // some a msg de sucesso ao digitar
   }
-
   aplicarMascaraWhatsapp(form.elements.whatsapp);
 
   form.addEventListener("submit", async (evento) => {
     evento.preventDefault();
     sucesso.textContent = "";
-
     if (!validarFormulario()) return;
 
     const dados = Object.fromEntries(new FormData(form));
-    for (const nomeDoCampo in dados)
-      dados[nomeDoCampo] = dados[nomeDoCampo].trim();
+    for (const nomeDoCampo in dados) dados[nomeDoCampo] = dados[nomeDoCampo].trim();
 
     try {
       await enviarContato(dados);
@@ -1027,25 +823,22 @@ function iniciarContato() {
 
     form.reset();
     limparErros();
-    sucesso.textContent =
-      "Mensagem enviada com sucesso! Responderemos o mais rápido possível.";
+    sucesso.textContent = "Mensagem enviada com sucesso! Responderemos o mais rápido possível.";
   });
 }
 
-iniciarContato();
-
-// Modelo de Carrossel
+/* ==========================================================
+   8. CARROSSEL DE PLANOS
+   ========================================================== */
 function iniciarCarrossel(secao) {
   const faixa = secao.querySelector(".carrossel__slides");
   const slides = [...faixa.children];
   const dots = [...secao.querySelectorAll(".carrossel__dots button")];
-  const [anterior, proximo] = secao.querySelectorAll(
-    ".carrossel > .carrossel__seta",
-  );
+  const [anterior, proximo] = secao.querySelectorAll(".carrossel > .carrossel__seta");
   if (!slides.length || !anterior || !proximo) return;
-  const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
   let atual = 0;
-  let animacao;
 
   function marcar(i) {
     atual = i;
@@ -1053,28 +846,17 @@ function iniciarCarrossel(secao) {
     dots.forEach((d, n) => d.setAttribute("aria-current", n === i));
   }
 
-  function irPara(i, duracao = 700) {
-    i = (i + slides.length) % slides.length;
+  function irPara(i) {
+    i = (i + slides.length) % slides.length; // dá a volta: do último vai ao primeiro
     marcar(i);
-    const inicio = faixa.scrollLeft;
-    const fim = i * faixa.clientWidth;
-    cancelAnimationFrame(animacao);
-    if (reduzir.matches) {
-      faixa.scrollLeft = fim;
-      return;
-    }
-    faixa.style.scrollSnapType = "none";
-    const t0 = performance.now();
-    function passo(agora) {
-      const p = Math.min((agora - t0) / duracao, 1);
-      const suave = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-      faixa.scrollLeft = inicio + (fim - inicio) * suave;
-      if (p < 1) animacao = requestAnimationFrame(passo);
-      else faixa.style.scrollSnapType = "";
-    }
-    animacao = requestAnimationFrame(passo);
+    faixa.scrollTo({
+      left: i * faixa.clientWidth,
+      behavior: reduzirMovimento.matches ? "auto" : "smooth",
+    });
   }
 
+  // Se a pessoa arrasta com o dedo, descobrimos o slide quando o scroll PARA
+  // (debounce: o timer reinicia a cada evento de scroll)
   let espera;
   faixa.addEventListener("scroll", () => {
     clearTimeout(espera);
@@ -1090,4 +872,13 @@ function iniciarCarrossel(secao) {
   marcar(0);
 }
 
+/* ==========================================================
+   INICIALIZAÇÃO
+   Cada função se protege com "if (!elemento) return", então o
+   mesmo arquivo roda em todas as páginas sem erro.
+   ========================================================== */
+iniciarSubmenus();
+iniciarMenu();
+iniciarCalendario();
+iniciarContato();
 document.querySelectorAll(".planos-one").forEach(iniciarCarrossel);
