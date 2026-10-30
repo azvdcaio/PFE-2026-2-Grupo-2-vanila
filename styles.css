@@ -17,6 +17,9 @@
 
   --gutter: 16px;
   --margem: max(var(--gutter), calc((100% - 1100px) / 2));
+
+  /* Altura do header sticky no mobile (12 + 44 + 12). Usada pelo hero em tela cheia */
+  --altura-header: 68px;
 }
 
 html {
@@ -2726,11 +2729,17 @@ textarea.form-agendamento__input {
   opacity: 0.85;
 }
 
+/* Cor do botão primário: vale em qualquer formulário (modal e contato) */
 .form-agendamento__botao--primario {
-  order: -1;
   border-color: var(--cor-agendamento);
   background: var(--cor-agendamento);
   color: #fff;
+}
+
+/* Só no modal de agendamento: no mobile o primário vem antes do "Cancelar".
+   Restrito a .form-agendamento__acoes para não afetar o formulário de contato. */
+.form-agendamento__acoes .form-agendamento__botao--primario {
+  order: -1;
 }
 
 /* ==========================================================
@@ -2931,7 +2940,8 @@ textarea.form-agendamento__input {
     grid-template-columns: 1fr 1.8fr;
   }
 
-  .form-agendamento__botao--primario {
+  /* No modal, a partir daqui o primário volta à ordem normal (fica à direita) */
+  .form-agendamento__acoes .form-agendamento__botao--primario {
     order: 0;
   }
 
@@ -3034,4 +3044,17 @@ textarea.form-agendamento__input {
 
 .form-agendamento__sucesso:empty {
   display: none;
+}
+
+/* ==========================================================
+   HERO EM TELA CHEIA NO MOBILE
+   - 100vh é o fallback; 100svh desconta a barra de endereço do celular
+   ========================================================== */
+@media (max-width: 767px) {
+  .hero,
+  .pagina-one .hero,
+  .pkz-hero {
+    min-height: calc(100vh - var(--altura-header));
+    min-height: calc(100svh - var(--altura-header));
+  }
 }
